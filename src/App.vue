@@ -29,6 +29,100 @@ const hobbiesRU = [
   "Мне нравится изучать японский язык в свободное время. Я изучаю японский язык 2 года, используя приложение Duolingo.",
   "Мне нравится играть в видеоигры. Я играю в игры на ПК (Terraria, Yakuza, Hades)",
 ];
+
+// ~~~~ PROJECTS ~~~~
+const linkPart = "https://nico-kun123.github.io/";
+const linkGH = "https://github.com/Nico-kun123/";
+const imgURL = "src/assets/images/projects/";
+
+const projectsRU = [
+  {
+    id: "1",
+    category: "No React/Vue",
+    title: "Сборщик данных о товарах с интернет-магазинов",
+    link: linkGH + "EShop-Parser",
+    image: imgURL + "Parser.png",
+  },
+  {
+    id: "2",
+    category: "Vue.js",
+    title: "Простой калькулятор на Vue.js",
+    link: linkPart + "Simple-Vue-Calculator",
+    image: imgURL + "Calculator.png",
+  },
+  {
+    id: "3",
+    category: "Vue.js",
+    title: "Приложение для просмотра погоды",
+    link: linkPart + "Simple-Weather-App",
+    image: imgURL + "Weather.png",
+  },
+  {
+    id: "4",
+    category: "Vue.js",
+    title: "Валидация формы создания клиентов (Vuelidate)",
+    link: linkPart + "Simple-Form-Validation--Vue-Vuelidate-",
+    image: imgURL + "Form.png",
+  },
+  {
+    id: "5",
+    category: "Vue.js",
+    title: "Простая таблица с возможностью сортировки по столбцу",
+    link: linkPart + "Vue-Table",
+    image: imgURL + "Table.png",
+  },
+  {
+    id: "6",
+    category: "Typescript, Jest",
+    title: "Тестирование Typescript кода с помощью Jest (ts-jest)",
+    link: linkGH + "Jest-and-Typescript",
+    image: imgURL + "Typescript Jest.png",
+  },
+];
+const projects = [
+  {
+    id: "1",
+    category: "No React/Vue",
+    title: "Product data parser from online stores",
+    link: linkGH + "EShop-Parser",
+    image: imgURL + "Parser.png",
+  },
+  {
+    id: "2",
+    category: "Vue.js",
+    title: "Simple Calculator (Vue.js)",
+    link: linkPart + "Simple-Vue-Calculator",
+    image: imgURL + "Calculator.png",
+  },
+  {
+    id: "3",
+    category: "Vue.js",
+    title: "Simple Weather App",
+    link: linkPart + "Simple-Weather-App",
+    image: imgURL + "Weather.png",
+  },
+  {
+    id: "4",
+    category: "Vue.js",
+    title: "Client creation form validation (Vuelidate)",
+    link: linkPart + "Simple-Form-Validation--Vue-Vuelidate-",
+    image: imgURL + "Form.png",
+  },
+  {
+    id: "5",
+    category: "Vue.js",
+    title: "Simple table with sorting by column",
+    link: linkPart + "Vue-Table",
+    image: imgURL + "Table.png",
+  },
+  {
+    id: "6",
+    category: "Typescript, Jest",
+    title: "Testing Typescript code with Jest (ts-jest)",
+    link: linkGH + "Jest-and-Typescript",
+    image: imgURL + "Typescript Jest.png",
+  },
+];
 </script>
 
 <template>
@@ -38,6 +132,8 @@ const hobbiesRU = [
     :softSkillsRU="skillsRU"
     :hobbies="hobbies"
     :hobbiesRU="hobbiesRU"
+    :projects="projects"
+    :projectsRU="projectsRU"
   />
 </template>
 
@@ -60,7 +156,6 @@ li {
 }
 
 img,
-ion-icon,
 a,
 button,
 time,
@@ -84,34 +179,40 @@ textarea {
   font: inherit;
 }
 
-::-moz-selection {
+/* ::-moz-selection {
   background: var(--orange-yellow-crayola);
-  color: var(--smoky-black);
+  color: black;
+  font-weight: bold;
 }
 
 ::selection {
   background: var(--orange-yellow-crayola);
-  color: var(--smoky-black);
-}
+  color: black;
+  font-weight: bold;
+} */
 
 :focus {
   outline-color: var(--orange-yellow-crayola);
+  color: black;
+  font-weight: bold;
 }
 
 html {
   font-family: var(--main-font);
-
-  margin-bottom: 5em;
+  /* margin-bottom: 5em; */
+  /* background: var(--border-gradient-onyx); */
+  height: auto;
 }
 
 body {
-  background: var(--smoky-black);
+  /* background: var(--border-gradient-onyx); */
+  background: var(--eerie-black-1);
+  height: auto;
 }
 
 /*-----------------------------------*\
 #REUSED STYLE
 \*-----------------------------------*/
-
 .sidebar,
 article {
   background: var(--eerie-black-2);
@@ -161,10 +262,6 @@ article {
   z-index: -1;
 }
 
-.icon-box ion-icon {
-  --ionicon-stroke-width: 35px;
-}
-
 article {
   display: none;
 }
@@ -198,7 +295,6 @@ article.active {
 .h4,
 .h5 {
   color: var(--white-2);
-  text-transform: capitalize;
 }
 
 .h2 {
@@ -220,7 +316,9 @@ article.active {
 
 .article-title {
   position: relative;
-  padding-bottom: 7px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  /* margin: 0; */
 }
 
 .article-title::after {
@@ -230,61 +328,13 @@ article.active {
   left: 0;
   width: 30px;
   height: 3px;
-  background: var(--text-gradient-yellow);
+  background: var(--vegas-gold);
   border-radius: 3px;
 }
 
-.has-scrollbar::-webkit-scrollbar {
-  width: 5px; /* for vertical scrollbar */
-  height: 5px; /* for horizontal scrollbar */
-}
-
-.has-scrollbar::-webkit-scrollbar-track {
-  background: var(--onyx);
-  border-radius: 5px;
-}
-
-.has-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--orange-yellow-crayola);
-  border-radius: 5px;
-}
-
-.has-scrollbar::-webkit-scrollbar-button {
-  width: 20px;
-}
-
-.content-card {
-  position: relative;
-  background: var(--border-gradient-onyx);
-  padding: 15px;
-  padding-top: 45px;
-  border-radius: 14px;
-  -webkit-box-shadow: var(--shadow-2);
-  box-shadow: var(--shadow-2);
-  cursor: pointer;
-  z-index: 1;
-}
-
-.content-card::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--bg-gradient-jet);
-  border-radius: inherit;
-  z-index: -1;
-}
-
-/*-----------------------------------*\
-#MAIN
-\*-----------------------------------*/
-
-main {
-  margin: 15px 12px;
-  margin-bottom: 75px;
-  min-width: 259px;
-}
-
-p {
-  width: fit-content;
+@media (min-width: 320px) {
+  html {
+    margin-bottom: 60px;
+  }
 }
 </style>

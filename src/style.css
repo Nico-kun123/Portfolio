@@ -41,7 +41,7 @@
 
   --jet: hsl(0, 0%, 22%);
   --onyx: hsl(240, 1%, 17%);
-  --eerie-black-1: hsl(240, 2%, 13%);
+  --eerie-black-1: hsl(240, 2%, 9%);
   --eerie-black-2: hsl(240, 2%, 12%);
   --smoky-black: hsl(0, 0%, 7%);
   --white-1: hsl(0, 0%, 100%);
@@ -93,15 +93,8 @@
   --transition-2: 0.5s ease-in-out;
 }
 
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 body::-webkit-scrollbar {
-  width: 1em;
+  width: 0.7em;
 }
 
 body::-webkit-scrollbar-track {

@@ -1,21 +1,101 @@
 <script setup>
-
 import Blog from "./Blog List Item.vue";
 // import Client from "./Client Logo.vue";
 import Navbar from "./NavBar.vue";
-import Project from "./Portfolio Project.vue";
+// import Project from "./Portfolio Project.vue";
 import EducationExpListElem from "./Resume List Element.vue";
 import Service from "./Service.vue";
 
 import Skill from "./Skill List Item.vue";
 // import TestimonialItem from "./Testimonial Item.vue";
 
-const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
-  "softSkills",
-  "softSkillsRU",
-  "hobbies",
-  "hobbiesRU",
-]);
+const { softSkills, softSkillsRU, hobbies, hobbiesRU, projects, projectsRU } =
+  defineProps([
+    "softSkills",
+    "softSkillsRU",
+    "hobbies",
+    "hobbiesRU",
+    "projects",
+    "projectsRU",
+  ]);
+
+// Setup
+document.addEventListener("DOMContentLoaded", function () {
+  // Выводим все элементы
+  filterSelection("all");
+
+  // Добавляем класс active первой кнопке
+  document.getElementsByClassName("btn")[6].className += " active";
+
+  // Add active class to the current control button (highlight it)
+  const btns = document.getElementsByClassName("btn");
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function () {
+      if (btns[i].classList.length == 1) {
+        let current = document.getElementsByClassName("btn");
+        for (let j = 0; j < current.length; j++) {
+          current[j].className = current[j].className.replace(" active", "");
+        }
+
+        // const drop = document.getElementsByClassName('dropbtn')[0].innerHTML
+        // console.log(drop);
+        // console.log(btns[i].innerHTML);
+
+        document.getElementsByClassName("dropbtn")[0].innerHTML =
+          btns[i].innerHTML;
+        this.className += " active";
+      }
+    });
+  }
+});
+function filterSelection(c) {
+  let x, i;
+  x = document.querySelectorAll(".filterDiv");
+  c = c.toLowerCase()
+  if (c == "all") c = "";
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+function w3AddClass(element, name) {
+  let arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (let i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+function w3RemoveClass(element, name) {
+  let arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (let i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function showDropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+window.onclick = function (event) {
+  if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  }
+};
 </script>
 
 <template>
@@ -29,9 +109,9 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
           v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
           class="h2 article-title"
         >
-          Обо Мне
+          Обо мне
         </h2>
-        <h2 v-else class="h2 article-title">About Me</h2>
+        <h2 v-else class="h2 article-title">About me</h2>
       </header>
 
       <section class="about-text">
@@ -44,7 +124,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
         <ul v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'">
           <li
             style="
-              list-style: circle;
+              list-style: outside;
               list-style-position: inside;
               padding-bottom: 1em;
             "
@@ -57,7 +137,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
         <ul v-else>
           <li
             style="
-              list-style: circle;
+              list-style: outside;
               list-style-position: inside;
               padding-bottom: 1em;
             "
@@ -245,7 +325,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
             v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
             name="Сибирский федеральный университет. Институт космических и информационных технологий"
             years="2019 — 2023"
-            description="Бакалавриат, направление “Информатика и вычислительная техника”. Защитил диплом на тему “Сервис автоматизированного сбора данных для систем электронной коммерции” (ССЫЛКА: https://github.com/Nico-kun123/EShop-Parser)."
+            description="Бакалавриат, направление “Информатика и вычислительная техника”. Защитил диплом на тему “Сервис автоматизированного сбора данных для систем электронной коммерции”."
           />
           <EducationExpListElem
             v-else
@@ -257,7 +337,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
             v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
             name="МБОУ “Лицей № 10” г. Красноярска"
             years="2008 — 2019"
-            description="Школа, в которой я учился с 1 по 11 класс. Я закончил её с золотой медалью."
+            description="Школа, в которой я учился с 1 по 11 класс. Закончил школу с золотой медалью."
           />
           <EducationExpListElem
             v-else
@@ -343,35 +423,89 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
       </header>
 
       <section class="projects">
+        <div id="filter-menu">
+          <button
+            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+            @click="showDropdown()"
+            class="dropbtn"
+          >
+            Выберите фильтр
+          </button>
+          <button v-else @click="showDropdown()" class="dropbtn">
+            Select a filter
+          </button>
+          <div
+            id="myDropdown"
+            class="dropdown-content"
+            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+          >
+            <a class="btn" @click="filterSelection('all')">Все проекты</a>
+            <a class="btn" @click="filterSelection('typescript')">Typescript</a>
+            <a class="btn" @click="filterSelection('react.js')">React.js</a>
+            <a class="btn" @click="filterSelection('vue.js')">Vue.js</a>
+            <a class="btn" @click="filterSelection('no react/vue')"
+              >Без React/Vue</a
+            >
+            <a class="btn" @click="filterSelection('jest')">Jest</a>
+          </div>
+          <div id="myDropdown" class="dropdown-content" v-else>
+            <a class="btn" @click="filterSelection('all')">All Projects</a>
+            <a class="btn" @click="filterSelection('typescript')">Typescript</a>
+            <a class="btn" @click="filterSelection('react.js')">React.js</a>
+            <a class="btn" @click="filterSelection('vue.js')">Vue.js</a>
+            <a class="btn" @click="filterSelection('no react/vue')"
+              >No React/Vue</a
+            >
+            <a class="btn" @click="filterSelection('jest')">Jest</a>
+          </div>
+        </div>
         <ul class="filter-list">
           <li class="filter-item">
             <button
               v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              class="active"
-              data-filter-btn
+              @click="filterSelection('all')"
+              class="btn"
             >
               Все
             </button>
-            <button v-else class="active" data-filter-btn>All</button>
+            <button v-else @click="filterSelection('all')" class="btn">
+              All
+            </button>
           </li>
 
           <li class="filter-item">
-            <button data-filter-btn>React.js</button>
+            <button @click="filterSelection('typescript')" class="btn">
+              Typescript
+            </button>
           </li>
 
           <li class="filter-item">
-            <button data-filter-btn>Vue.js</button>
+            <button @click="filterSelection('react.js')" class="btn">
+              React.js
+            </button>
           </li>
 
           <li class="filter-item">
-            <button data-filter-btn>No React/Vue</button>
-            <!-- <button
+            <button @click="filterSelection('vue.js')" class="btn">
+              Vue.js
+            </button>
+          </li>
+
+          <li class="filter-item">
+            <button
+              class="btn"
               v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              data-filter-btn
+              @click="filterSelection('no react/vue')"
             >
               Без React/Vue
-            </button> -->
-            <!-- <button v-else data-filter-btn>No React/Vue</button> -->
+            </button>
+            <button class="btn" v-else @click="filterSelection('no react/vue')">
+              No React/Vue
+            </button>
+          </li>
+
+          <li class="filter-item">
+            <button @click="filterSelection('Jest')" class="btn">Jest</button>
           </li>
         </ul>
 
@@ -403,99 +537,98 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
             <li class="select-item">
               <button
                 v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-                data-select-item
+                @click="filterSelection('all')"
               >
                 Все
               </button>
-              <button v-else data-select-item>All</button>
+              <button v-else @click="filterSelection('all')">All</button>
             </li>
 
             <li class="select-item">
-              <button data-select-item>React.js</button>
+              <button @click="filterSelection('typescript')">Typescript</button>
             </li>
 
             <li class="select-item">
-              <button data-select-item>Vue.js</button>
+              <button @click="filterSelection('react')">React.js</button>
             </li>
 
             <li class="select-item">
-              <button data-select-item>No React/Vue</button>
+              <button @click="filterSelection('vue')">Vue.js</button>
+            </li>
+
+            <li class="select-item">
+              <button
+                v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+                @click="filterSelection('noreactvue')"
+              >
+                Без React/Vue
+              </button>
+              <button v-else @click="filterSelection('noreactvue')">
+                No React/Vue
+              </button>
             </li>
           </ul>
         </div>
 
+        <!-- САМИ ПРОЕКТЫ -->
         <ul class="project-list">
-          <Project
+          <!-- САМИ ПРОЕКТЫ (RU) -->
+          <li
             v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="1"
-            projectCategory="No React/Vue"
-            projectTitle="Сборщик данных о товарах с интернет-магазинов"
-            projectLink="https://github.com/Nico-kun123/EShop-Parser"
-          />
-          <Project
+            v-for="projectRU in projectsRU"
+            :key="projectRU.id"
+            :class="`filterDiv ${projectRU.category.toLowerCase()}`"
+            :data-category="projectRU.category.toLowerCase()"
+          >
+            <a :href="projectRU.link" target="_blank">
+              <figure class="project-img">
+                <div class="project-item-icon-box">
+                  <img
+                    src="../assets/images/ui/eye.svg"
+                    alt="eye icon"
+                    loading="lazy"
+                  />
+                </div>
+
+                <img
+                  :src="projectRU.image"
+                  :alt="projectRU.title.toLowerCase()"
+                  loading="lazy"
+                />
+              </figure>
+              <h3 class="project-title">{{ projectRU.title }}</h3>
+              <p class="project-category">{{ projectRU.category }}</p>
+            </a>
+          </li>
+
+          <!-- САМИ ПРОЕКТЫ (ENG) -->
+          <li
             v-else
-            id="1"
-            projectCategory="No React/Vue"
-            projectTitle="Product data parser from online stores"
-            projectLink="https://github.com/Nico-kun123/EShop-Parser"
-          />
-          <Project
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="2"
-            projectCategory="Vue.js"
-            projectTitle="Простой калькулятор на Vue.js"
-            projectLink="https://nico-kun123.github.io/Simple-Vue-Calculator/"
-          />
-          <Project
-            v-else
-            id="2"
-            projectCategory="Vue.js"
-            projectTitle="Simple Vue.js Calculator"
-            projectLink="https://nico-kun123.github.io/Simple-Vue-Calculator/"
-          />
-          <Project
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="3"
-            projectCategory="Vue.js"
-            projectTitle="Простое приложение погоды"
-            projectLink="https://nico-kun123.github.io/Simple-Weather-App/"
-          />
-          <Project
-            v-else
-            id="3"
-            projectCategory="Vue.js"
-            projectTitle="Simple Weather App"
-            projectLink="https://nico-kun123.github.io/Simple-Weather-App/"
-          />
-          <Project
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="4"
-            projectCategory="Vue.js"
-            projectTitle="Валидация формы создания клиентов (Vuelidate)"
-            projectLink="https://nico-kun123.github.io/Simple-Form-Validation--Vue-Vuelidate-/"
-          />
-          <Project
-            v-else
-            id="4"
-            projectCategory="Vue.js"
-            projectTitle="Client Form Validation (Vuelidate)"
-            projectLink="https://nico-kun123.github.io/Simple-Form-Validation--Vue-Vuelidate-/"
-          />
-          <Project
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="5"
-            projectCategory="Vue.js"
-            projectTitle="Простая таблица с возможностью сортировки по столбцу"
-            projectLink="https://nico-kun123.github.io/Vue-Table/"
-          />
-          <Project
-            v-else
-            id="5"
-            projectCategory="Vue.js"
-            projectTitle="Simple Table with a Column Sorting"
-            projectLink="https://nico-kun123.github.io/Vue-Table/"
-          />
-          <!-- <Project /> -->
+            v-for="project in projects"
+            :key="project.id"
+            :class="`filterDiv ${project.category.toLowerCase()}`"
+            :data-category="project.category.toLowerCase()"
+          >
+            <a :href="project.link" target="_blank">
+              <figure class="project-img">
+                <div class="project-item-icon-box">
+                  <img
+                    src="../assets/images/ui/eye.svg"
+                    alt="eye icon"
+                    loading="lazy"
+                  />
+                </div>
+
+                <img
+                  :src="project.image"
+                  :alt="project.title.toLowerCase()"
+                  loading="lazy"
+                />
+              </figure>
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-category">{{ project.category }}</p>
+            </a>
+          </li>
         </ul>
       </section>
     </article>
@@ -542,7 +675,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
         <ul v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'">
           <li
             style="
-              list-style: circle;
+              list-style: outside;
               list-style-position: inside;
               padding-bottom: 1em;
             "
@@ -555,7 +688,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
         <ul v-else>
           <li
             style="
-              list-style: circle;
+              list-style: outside;
               list-style-position: inside;
               padding-bottom: 1em;
             "
@@ -584,11 +717,6 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
 /*-----------------------------------*\
 #ABOUT
 \*-----------------------------------*/
-
-.about .article-title {
-  margin-bottom: 15px;
-}
-
 .about-text {
   color: var(--light-gray);
   font-size: var(--fs-4);
@@ -699,7 +827,28 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
     visibility: visible;
   }
 }
+.filterDiv {
+  // float: left;
+  // background-color: #2196f3;
+  // color: #ffffff;
+  // width: 100px;
+  // line-height: 100px;
+  // text-align: center;
+  // margin: 2px;
+  display: none; /* Hidden by default */
 
+  &.show {
+    display: block;
+  }
+  &.active {
+    display: block;
+    -webkit-animation: scaleUp 0.25s ease forwards;
+    animation: scaleUp 0.25s ease forwards;
+  }
+}
+.filterDiv > a.hover {
+  background: hsla(0, 0%, 0%, 0.5);
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -869,66 +1018,12 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
 /*-----------------------------------*\
 #RESUME
 \*-----------------------------------*/
-.article-title {
-  margin-bottom: 30px;
-}
-
 .timeline {
   margin-bottom: 30px;
 }
-
 .timeline-list {
   font-size: var(--fs-4);
   margin-left: 45px;
-}
-
-.timeline-item {
-  position: relative;
-
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
-
-  &-title {
-    font-size: var(--fs-6);
-    line-height: 1.3;
-    margin-bottom: 7px;
-  }
-
-  span {
-    color: var(--vegas-gold);
-    font-weight: var(--fw-400);
-    line-height: 1.6;
-  }
-
-  &:not(:last-child)::before {
-    content: "";
-    position: absolute;
-    top: -25px;
-    left: -30px;
-    width: 1px;
-    height: calc(100% + 50px);
-    background: var(--jet);
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: -33px;
-    height: 6px;
-    width: 6px;
-    background: var(--text-gradient-yellow);
-    border-radius: 50%;
-    -webkit-box-shadow: 0 0 0 4px var(--jet);
-    box-shadow: 0 0 0 4px var(--jet);
-  }
-
-  &-text {
-    color: var(--light-gray);
-    font-weight: var(--fw-300);
-    line-height: 1.6;
-  }
 }
 
 /* Skills */
@@ -955,25 +1050,115 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+
+  flex-wrap: wrap;
   gap: 25px;
   padding-left: 5px;
   margin-bottom: 30px;
 }
-.filter-item button {
-  color: var(--light-gray);
-  font-size: var(--fs-3);
+#filter-menu {
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+.show {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--white-2);
+  // border-style:double;
+  border-top: none;
+  border-radius: 5px;
+  // border-width: 5px;
+
+  // min-width: 165px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  // margin-left: 24px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+  a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+
+    &:hover {
+      background-color: #ddd;
+      z-index: 5;
+      -webkit-transition: var(--transition-1);
+      -o-transition: var(--transition-1);
+      transition: var(--transition-1);
+    }
+    &:hover:last-child {
+      border-radius: inherit;
+    }
+  }
+}
+// .dropdown-content a {
+//   color: black;
+//   padding: 10px;
+//   text-decoration: none;
+//   display: block;
+// }
+// .dropdown-content a:hover {
+//   background-color: #ddd;
+//   z-index: 5;
+//   -webkit-transition: var(--transition-1);
+//   -o-transition: var(--transition-1);
+//   transition: var(--transition-1);
+// }
+.dropbtn {
+  // background-color: var(--eerie-black-2);
+  background: var(--border-gradient-onyx);
+  padding: 10px;
+  -webkit-box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-2);
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);
+
+  color: var(--white-2);
+  padding: 5px 1rem 5px 1rem;
+  font-size: var(--fs-4);
+  border-radius: 20px;
+  border-color: var(--orange-yellow-crayola);
+  border-style: ridge;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  cursor: pointer;
+  // min-width: 178px;
+  text-align: center;
+}
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--jet);
+  -webkit-transition: var(--transition-1);
+  -o-transition: var(--transition-1);
+  transition: var(--transition-1);
+}
+.filter-item button {
+  color: var(--light-gray);
+  font-size: var(--fs-3);
 }
 
 .filter-item button:hover {
   color: var(--light-gray-70);
 }
 
-.filter-item button.active {
+.filter-item button.active,
+.active {
   color: var(--orange-yellow-crayola);
+  // display: block;
 }
+.show {
+  display: block;
+}
+
 .filter-select-box {
   position: relative;
   margin-bottom: 25px;
@@ -1219,20 +1404,33 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
 /*-----------------------------------*\
 #RESPONSIVE
 \*-----------------------------------*/
-
+@media (min-width: 320px) {
+  #filter-menu {
+    display: block;
+  }
+  .filter-list {
+    display: none;
+  }
+  .dropbtn {
+    width: 160px;
+    font-size: var(--fs-7);
+  }
+  .dropdown-content {
+    width: fit-content;
+  }
+}
 /** responsive larger than 450px screen */
 @media (min-width: 450px) {
   /** client */
   .clients-item {
     min-width: calc(33.33% - 10px);
   }
-
-  .icon-box {
-    width: 40px;
-    height: 40px;
-    margin-left: -5px;
-    border-radius: 16px;
-    font-size: 24px;
+  .dropbtn {
+    width: 180px;
+    font-size: var(--fs-6);
+  }
+  .dropdown-content {
+    width: fit-content;
   }
 }
 
@@ -1260,24 +1458,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
     width: 520px;
     margin-inline: auto;
     padding: 30px;
-  }
-
-  .article-title {
-    font-weight: var(--fw-600);
-    padding-bottom: 15px;
-  }
-
-  .article-title::after {
-    width: 40px;
-    height: 5px;
-  }
-
-  .icon-box {
-    width: 50px;
-    height: 50px;
-    margin-left: 0;
-    border-radius: 12px;
-    font-size: 18px;
+    transition: var(--transition-1) 0.2s;
   }
 
   /** MAIN */
@@ -1287,37 +1468,11 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
   }
 
   /** ABOUT */
-  .about .article-title {
-    margin-bottom: 20px;
-  }
-
   .about-text {
     margin-bottom: 40px;
   }
 
   /* service */
-  .service-item {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    gap: 18px;
-    padding: 30px;
-  }
-
-  .service-icon-box {
-    margin-bottom: 0;
-    margin-top: 5px;
-  }
-
-  .service-content-box {
-    text-align: left;
-  }
 
   /* testimonials */
   .testimonials-title {
@@ -1332,10 +1487,24 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
   }
 
   .content-card {
+    position: relative;
+    background: var(--border-gradient-onyx);
     padding: 30px;
     padding-top: 25px;
+    border-radius: 14px;
+    -webkit-box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow-1);
+    // cursor:auto;
+    z-index: 1;
   }
-
+  .content-card::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: var(--bg-gradient-jet);
+    border-radius: inherit;
+    z-index: -1;
+  }
   .testimonials-avatar-box {
     -webkit-transform: translate(30px, -30px);
     -ms-transform: translate(30px, -30px);
@@ -1424,16 +1593,6 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
     margin-left: 65px;
   }
 
-  .timeline-item:not(:last-child)::before {
-    left: -40px;
-  }
-
-  .timeline-item::after {
-    height: 8px;
-    width: 8px;
-    left: -43px;
-  }
-
   /** PORTFOLIO, BLOG */
   .project-img,
   .blog-banner-box {
@@ -1493,6 +1652,12 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
     width: 100px;
   }
 
+  #filter-menu {
+    display: none;
+  }
+  .filter-list {
+    display: block;
+  }
   /** SIDEBAR */
 
   .contacts-list {
@@ -1521,11 +1686,6 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
   }
 
   /** PORTFOLIO */
-
-  .article-title {
-    padding-bottom: 20px;
-  }
-
   .filter-select-box {
     display: none;
   }
@@ -1620,8 +1780,7 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
     margin: auto;
   }
 
-  /** NAVBAR */
-
+  /** NAVBAR (СПРАВА ВВЕРХУ) */
   .navbar {
     position: absolute;
     bottom: auto;
@@ -1635,15 +1794,6 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
     padding: 0 20px;
     -webkit-box-shadow: none;
     box-shadow: none;
-  }
-
-  .navbar-list {
-    gap: 30px;
-    padding: 0 20px;
-  }
-
-  .navbar-link {
-    font-weight: var(--fw-500);
   }
 
   /** ABOUT */
@@ -1681,5 +1831,174 @@ const { softSkills, softSkillsRU, hobbies, hobbiesRU } = defineProps([
   }
 }
 
-/** responsive larger than 1250px screen */
+//!!!!!!!!!!!!!!!!!
+
+.project-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.project-item {
+  display: none;
+
+  &.active {
+    display: block;
+    -webkit-animation: scaleUp 0.25s ease forwards;
+    animation: scaleUp 0.25s ease forwards;
+  }
+}
+
+@-webkit-keyframes scaleUp {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.project-item > a {
+  width: 100%;
+}
+
+.project-img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 15px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    // z-index: 1;
+    -webkit-transition: var(--transition-1);
+    -o-transition: var(--transition-1);
+    transition: var(--transition-1);
+  }
+
+  .project-item > a:hover &::before {
+    background: hsla(0, 0%, 0%, 0.5);
+  }
+}
+
+.project-item-icon-box {
+  --scale: 0.8;
+
+  background: var(--jet);
+  color: var(--orange-yellow-crayola);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) scale(var(--scale));
+  -ms-transform: translate(-50%, -50%) scale(var(--scale));
+  transform: translate(-50%, -50%) scale(var(--scale));
+  font-size: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  opacity: 0;
+  z-index: 1;
+  -webkit-transition: var(--transition-1);
+  -o-transition: var(--transition-1);
+  transition: var(--transition-1);
+}
+
+.project-item > a:hover .project-item-icon-box {
+  --scale: 1;
+  opacity: 1;
+}
+
+.project-img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-transition: var(--transition-1);
+  -o-transition: var(--transition-1);
+  transition: var(--transition-1);
+}
+
+.project-item > a:hover img {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.project-title,
+.project-category {
+  margin-left: 10px;
+}
+
+.project-title {
+  color: var(--white-2);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-400);
+  text-transform: capitalize;
+  line-height: 1.3;
+}
+
+.project-category {
+  color: var(--light-gray-70);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+}
+
+/*-----------------------------------*\
+#RESPONSIVE
+\*-----------------------------------*/
+@media (min-width: 320px) {
+  .project-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 450px) {
+  .project-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 580px) {
+  .project-img {
+    // height: auto;
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-img {
+    height: auto;
+  }
+  .project-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 </style>

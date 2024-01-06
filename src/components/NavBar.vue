@@ -15,9 +15,9 @@
         <button class="navbar__link" data-nav-link>Portfolio</button>
       </li>
 
-      <!-- <li class="navbar__item">
+      <li class="navbar__item">
         <button class="navbar__link" data-nav-link>Blog</button>
-      </li> -->
+      </li>
 
       <li class="navbar__item">
         <button class="navbar__link" data-nav-link>Extra</button>
@@ -26,16 +26,18 @@
   </nav>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 /*-----------------------------------*\
 #NAVBAR
 \*-----------------------------------*/
+
+// NAVBAR (СНИЗУ СТРАНИЦЫ)
 .navbar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: hsla(240, 1%, 17%, 0.75);
+  background: hsla(240, 1%, 17%, 0.5);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--jet);
@@ -57,7 +59,7 @@
     -ms-flex-align: center;
     align-items: center;
     padding: 0 10px;
-    gap: 20px;
+    gap: 10px;
   }
 
   &__link {
@@ -79,34 +81,39 @@
     }
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 320px) {
+    &__list {
+      gap: 5px;
+    }
     &__link {
-      font-size: 13pt;
+      font-size: 9pt;
+    }
+  }
+  @media (min-width: 350px) {
+    &__list {
+      gap: 3px;
+    }
+    &__link {
+      font-size: 11pt;
+    }
+  }
+  @media (min-width: 450px) {
+    &__list {
+      gap: 20px;
+    }
+    &__link {
+      font-size: 11pt;
     }
   }
   @media (min-width: 768px) {
     &__link {
-      font-size: 14pt;
+      font-size: 13pt;
     }
   }
 
   @media (min-width: 1024px) {
-    position: absolute;
-    bottom: auto;
-    top: 0;
-    left: auto;
-    right: 0;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-    border-radius: 0 20px;
-    padding: 0 20px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-
     &__list {
-      gap: 30px;
-      padding: 0 20px;
+      font-size: 15pt;
     }
 
     &__link {

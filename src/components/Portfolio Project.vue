@@ -6,8 +6,9 @@ import img3 from "../assets/images/projects/Weather.png";
 import img4 from "../assets/images/projects/Form.png";
 import img5 from "../assets/images/projects/Table.png";
 
-const { id, projectCategory, projectTitle } = defineProps({
+const { id, className, projectCategory, projectTitle } = defineProps({
   id: String,
+  class: String,
   projectCategory: String,
   projectTitle: String,
   projectLink: String,
@@ -42,13 +43,15 @@ if (!projectCategory && !projectTitle) {
   placeholderCategory = "???";
 } else {
   placeholderTitle = projectTitle;
-  placeholderCategory = projectCategory;
+  placeholderCategory = projectCategory.split(" | ").join(", ");
 }
+
+let ElemClass = className + " active";
 </script>
 
 <template>
   <li
-    class="project-item active"
+    :class="ElemClass"
     data-filter-item
     :data-category="placeholderCategory.toLowerCase()"
   >
@@ -72,7 +75,7 @@ if (!projectCategory && !projectTitle) {
   </li>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .project-list {
   display: -ms-grid;
   display: grid;
