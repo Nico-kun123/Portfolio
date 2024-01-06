@@ -39,7 +39,7 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
   </li>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // .skills-item:not(:last-child) {
 //   margin-bottom: 15px;
 // }
@@ -50,21 +50,30 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
   height: 8px;
   border-radius: 10px;
 }
+.skills-title {
+  margin-bottom: 20px;
+  font-size: var(--fs-1);
+}
 .skill-progress-fill {
   background: var(--text-gradient-yellow);
   height: 100%;
   border-radius: inherit;
 }
-.skill {
-  .title-wrapper {
+.skills-list {
+  padding: 20px;
+}
+.title-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
+    margin-bottom: 10px;
   }
+.skill {
+  
 
   & data {
     color: var(--light-gray);
@@ -73,15 +82,10 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
   }
 }
 
-.title-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 10px;
+@media (min-width: 320px) {
+  .skills-item {
+    margin-bottom: 10px;
+  }
 }
 
 @media (min-width: 450px) {

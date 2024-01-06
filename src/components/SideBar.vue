@@ -2,6 +2,31 @@
 // import { ref } from "vue";
 // import "../style.css"
 import ProfilePic from "../assets/images/ui/profile.png";
+
+function changeText() {
+  const sidebarBtn = document.querySelectorAll("[data-sidebar-btn]")[0];
+  const innerText = sidebarBtn.childNodes[0].textContent;
+
+  if (innerText == "Hide contacts") {
+    document.querySelectorAll(
+      "[data-sidebar-btn]"
+    )[0].childNodes[0].textContent = "Show contacts";
+  } else {
+    document.querySelectorAll(
+      "[data-sidebar-btn]"
+    )[0].childNodes[0].textContent = "Hide contacts";
+  }
+
+  if (innerText == "Скрыть контакты") {
+    document.querySelectorAll(
+      "[data-sidebar-btn]"
+    )[0].childNodes[0].textContent = "Показать контакты";
+  } else {
+    document.querySelectorAll(
+      "[data-sidebar-btn]"
+    )[0].childNodes[0].textContent = "Скрыть контакты";
+  }
+}
 </script>
 
 <template>
@@ -9,7 +34,12 @@ import ProfilePic from "../assets/images/ui/profile.png";
   <aside class="sidebar" data-sidebar>
     <div class="portfolio__title">
       <figure class="avatar__box">
-        <img :src="ProfilePic" alt="Nicolay Kudryavtsev" loading="lazy"/>
+        <img
+          :src="ProfilePic"
+          alt="Nicolay Kudryavtsev"
+          loading="lazy"
+          width="100px"
+        />
       </figure>
 
       <div class="info__content">
@@ -29,7 +59,7 @@ import ProfilePic from "../assets/images/ui/profile.png";
         <p v-else class="title">Frontend-developer</p>
       </div>
 
-      <button class="info__more-btn" data-sidebar-btn>
+      <button class="info__more-btn" data-sidebar-btn @click="changeText()">
         <span v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
           >Показать контакты</span
         >
@@ -215,13 +245,6 @@ import ProfilePic from "../assets/images/ui/profile.png";
 </template>
 
 <style scoped lang="scss">
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 svg {
   fill: #ff5f0c;
 }
@@ -304,6 +327,7 @@ svg {
   img {
     border-radius: 25px;
     width: 100px;
+    height: auto;
   }
 }
 
@@ -357,8 +381,7 @@ svg {
   }
 
   &:hover {
-      background: var(--bg-gradient-yellow-1);
-    
+    background: var(--bg-gradient-yellow-1);
   }
 
   span {
@@ -459,10 +482,75 @@ svg {
 /*-----------------------------------*\
 #RESPONSIVE
 \*-----------------------------------*/
+@media (min-width: 320px) {
+  .sidebar {
+    margin-inline: auto;
+  }
+
+  .icon-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .sidebar {
+    max-height: 112px;
+  }
+
+  .sidebar.active {
+    max-height: 405px;
+  }
+
+  .avatar__box {
+    border-radius: 20px;
+
+    img {
+      width: 80px;
+      height: auto;
+    }
+  }
+
+  .info__content {
+    .name {
+      margin-bottom: 5px;
+      font-size: var(--fs-2);
+    }
+
+    .title {
+      padding: 3px 12px;
+      font-size: var(--fs-8);
+      background-color: var(--orange-yellow-crayola);
+      color: black;
+      font-weight: bold;
+    }
+  }
+
+  .info__more-btn {
+    padding: 7px;
+
+    span {
+      display: block;
+      font-size: var(--fs-8);
+    }
+  }
+
+  .separator {
+    margin: 16px 0;
+  }
+
+  .contacts-list {
+    gap: 10px;
+  }
+
+  .contact-info {
+    max-width: calc(100% - 46px);
+    width: calc(100% - 46px);
+  }
+}
+
 @media (min-width: 450px) {
-  .sidebar,
-  article {
-    width: auto;
+  .sidebar {
+    width: 100%;
     margin-inline: auto;
   }
 
@@ -470,58 +558,43 @@ svg {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    font-size: 16px;
   }
 
-  main {
-    margin-top: 60px;
-    margin-bottom: 100px;
-  }
-
-  /**
- * #SIDEBAR
- */
   .sidebar {
     max-height: 135px;
   }
 
   .sidebar.active {
-    max-height: 584px;
-  }
-
-  .portfolio__title {
-    gap: 20px;
+    max-height: 440px;
   }
 
   .avatar__box {
     border-radius: 25px;
   }
-
-  // .avatar__box img {
-  //   width: 100px;
-  // }
-
-  .info__content .name {
-    margin-bottom: 10px;
-    font-size: var(--fs-2);
+  .avatar__box img {
+    width: 100px;
+    height: auto;
   }
 
-  .info__content .title {
-    padding: 3px 12px;
-    font-size: var(--fs-6);
+  .info__content {
+    .name {
+      margin-bottom: 10px;
+      font-size: var(--fs-1);
+    }
+    .title {
+      padding: 3px 12px;
+      font-size: var(--fs-7);
+    }
   }
 
   .info__more-btn {
-    top: -20px;
-    right: -20px;
     padding: 10px 15px;
-  }
 
-  .info__more-btn span {
-    display: block;
-    font-size: var(--fs-7);
+    span {
+      display: block;
+      font-size: var(--fs-7);
+    }
   }
-
   .separator {
     margin: 16px 0;
   }
@@ -536,36 +609,25 @@ svg {
   }
 }
 
-/** responsive larger than 580px screen */
 @media (min-width: 580px) {
-  .sidebar,
-  article {
+  .sidebar {
     width: 520px;
     margin-inline: auto;
-    padding: 30px;
   }
 
   .icon-box {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 20px;
   }
 
-  main {
-    margin-top: 60px;
-    margin-bottom: 100px;
-  }
-
-  /**
- * #SIDEBAR
- */
   .sidebar {
-    max-height: 180px;
+    max-height: 150px;
   }
 
   .sidebar.active {
-    max-height: 584px;
+    max-height: 505px;
   }
 
   .portfolio__title {
@@ -574,35 +636,35 @@ svg {
 
   .avatar__box {
     border-radius: 30px;
+
+    img {
+      width: 120px;
+      height: auto;
+    }
   }
 
-  .avatar__box img {
-    width: 120px;
-  }
+  .info__content {
+    .name {
+      margin-bottom: 15px;
+      font-size: var(--fs-1);
+    }
 
-  .info__content .name {
-    margin-bottom: 15px;
-    font-size: var(--fs-1);
-  }
-
-  .info__content .title {
-    padding: 5px 18px;
-    font-size: var(--fs-7);
+    .title {
+      font-size: var(--fs-6);
+    }
   }
 
   .info__more-btn {
-    top: -30px;
-    right: -30px;
     padding: 10px 15px;
-  }
 
-  .info__more-btn span {
-    display: block;
-    font-size: var(--fs-8);
+    span {
+      display: block;
+      font-size: var(--fs-8);
+    }
   }
 
   .separator {
-    margin: 32px 0;
+    margin: 16px 0;
   }
 
   .contacts-list {
@@ -615,65 +677,23 @@ svg {
   }
 }
 
-/**
-* responsive larger than 768px screen
-*/
 @media (min-width: 768px) {
-  /**
- * REUSED STYLE
- */
-
-  .sidebar,
-  article {
-    width: 700px;
+  .sidebar {
+    width: 600px;
   }
-
-  /**
- * SIDEBAR
- */
   .contacts-list {
-    -ms-grid-columns: 1fr 15px 1fr;
+    -ms-grid-columns: 1fr 0 1fr;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 15px;
+  }
+  .sidebar.active {
+    max-height: 370px;
   }
 }
 
-/**
-* responsive larger than 1024px screen
-*/
-
 @media (min-width: 1024px) {
-  /**
- * CUSTOM PROPERTY
- */
-
-  :root {
-    /**
-  * shadow
-  */
-
-    --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.125);
-    --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.125);
-    --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.125);
-  }
-
-  /**
- * REUSED STYLE
- */
-
-  .sidebar,
-  article {
-    width: 950px;
+  .sidebar {
     -webkit-box-shadow: var(--shadow-5);
     box-shadow: var(--shadow-5);
-  }
-
-  /**
- * MAIN 
- */
-
-  main {
-    margin-bottom: 60px;
   }
 }
 </style>

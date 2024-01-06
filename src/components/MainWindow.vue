@@ -198,6 +198,18 @@ window.onclick = function (event) {
             name="Vue.js web application development"
             description="Development of single-page applications (SPA) using Vue.js (Vite.js, Vuex, Vue Router, Vue-i18n, Vuelidate)."
           />
+          <Service
+            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+            id="4"
+            name="Ручное тестирование ПО"
+            description="Тестирование программ/приложений без какого-либо дополнительного ПО, написание тестовых сценариев."
+          />
+          <Service
+            v-else
+            id="4"
+            name="Application manual testing"
+            description="Testing various programs/apps without any additional programs, writing test cases."
+          />
         </ul>
       </section>
 

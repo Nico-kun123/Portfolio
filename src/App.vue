@@ -33,7 +33,18 @@ const hobbiesRU = [
 // ~~~~ PROJECTS ~~~~
 const linkPart = "https://nico-kun123.github.io/";
 const linkGH = "https://github.com/Nico-kun123/";
-const imgURL = "src/assets/images/projects/";
+//
+// const imgURL = "@/assets/images/projects/";
+
+//! В "preview" они только так показываться будут ❗❗❗
+const imgURL = [
+  new URL("/src/assets/images/projects/Parser.png", import.meta.url),
+  new URL("/src/assets/images/projects/Calculator.png", import.meta.url),
+  new URL("/src/assets/images/projects/Weather.png", import.meta.url),
+  new URL("/src/assets/images/projects/Form.png", import.meta.url),
+  new URL("/src/assets/images/projects/Table.png", import.meta.url),
+  new URL("/src/assets/images/projects/Typescript Jest.png", import.meta.url),
+];
 
 const projectsRU = [
   {
@@ -41,42 +52,42 @@ const projectsRU = [
     category: "No React/Vue",
     title: "Сборщик данных о товарах с интернет-магазинов",
     link: linkGH + "EShop-Parser",
-    image: imgURL + "Parser.png",
+    image: imgURL[0],
   },
   {
     id: "2",
     category: "Vue.js",
     title: "Простой калькулятор на Vue.js",
     link: linkPart + "Simple-Vue-Calculator",
-    image: imgURL + "Calculator.png",
+    image: imgURL[1],
   },
   {
     id: "3",
     category: "Vue.js",
     title: "Приложение для просмотра погоды",
     link: linkPart + "Simple-Weather-App",
-    image: imgURL + "Weather.png",
+    image: imgURL[2],
   },
   {
     id: "4",
     category: "Vue.js",
     title: "Валидация формы создания клиентов (Vuelidate)",
     link: linkPart + "Simple-Form-Validation--Vue-Vuelidate-",
-    image: imgURL + "Form.png",
+    image: imgURL[3],
   },
   {
     id: "5",
     category: "Vue.js",
     title: "Простая таблица с возможностью сортировки по столбцу",
     link: linkPart + "Vue-Table",
-    image: imgURL + "Table.png",
+    image: imgURL[4],
   },
   {
     id: "6",
     category: "Typescript, Jest",
     title: "Тестирование Typescript кода с помощью Jest (ts-jest)",
     link: linkGH + "Jest-and-Typescript",
-    image: imgURL + "Typescript Jest.png",
+    image: imgURL[5],
   },
 ];
 const projects = [
@@ -85,42 +96,42 @@ const projects = [
     category: "No React/Vue",
     title: "Product data parser from online stores",
     link: linkGH + "EShop-Parser",
-    image: imgURL + "Parser.png",
+    image: imgURL[0],
   },
   {
     id: "2",
     category: "Vue.js",
     title: "Simple Calculator (Vue.js)",
     link: linkPart + "Simple-Vue-Calculator",
-    image: imgURL + "Calculator.png",
+    image: imgURL[1],
   },
   {
     id: "3",
     category: "Vue.js",
     title: "Simple Weather App",
     link: linkPart + "Simple-Weather-App",
-    image: imgURL + "Weather.png",
+    image: imgURL[2],
   },
   {
     id: "4",
     category: "Vue.js",
     title: "Client creation form validation (Vuelidate)",
     link: linkPart + "Simple-Form-Validation--Vue-Vuelidate-",
-    image: imgURL + "Form.png",
+    image: imgURL[3],
   },
   {
     id: "5",
     category: "Vue.js",
     title: "Simple table with sorting by column",
     link: linkPart + "Vue-Table",
-    image: imgURL + "Table.png",
+    image: imgURL[4],
   },
   {
     id: "6",
     category: "Typescript, Jest",
     title: "Testing Typescript code with Jest (ts-jest)",
     link: linkGH + "Jest-and-Typescript",
-    image: imgURL + "Typescript Jest.png",
+    image: imgURL[5],
   },
 ];
 </script>
