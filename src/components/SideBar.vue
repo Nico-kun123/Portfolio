@@ -2,29 +2,32 @@
 // import { ref } from "vue";
 // import "../style.css"
 import ProfilePic from "../assets/images/ui/profile.png";
+import i18n from "../i18n";
 
 function changeText() {
   const sidebarBtn = document.querySelectorAll("[data-sidebar-btn]")[0];
   const innerText = sidebarBtn.childNodes[0].textContent;
 
-  if (innerText == "Hide contacts") {
-    document.querySelectorAll(
-      "[data-sidebar-btn]"
-    )[0].childNodes[0].textContent = "Show contacts";
+  if (i18n.global.locale.value == "ru-RU" || i18n.global.locale.value == "ru") {
+    if (innerText == "Скрыть контакты") {
+      document.querySelectorAll(
+        "[data-sidebar-btn]"
+      )[0].childNodes[0].textContent = "Показать контакты";
+    } else {
+      document.querySelectorAll(
+        "[data-sidebar-btn]"
+      )[0].childNodes[0].textContent = "Скрыть контакты";
+    }
   } else {
-    document.querySelectorAll(
-      "[data-sidebar-btn]"
-    )[0].childNodes[0].textContent = "Hide contacts";
-  }
-
-  if (innerText == "Скрыть контакты") {
-    document.querySelectorAll(
-      "[data-sidebar-btn]"
-    )[0].childNodes[0].textContent = "Показать контакты";
-  } else {
-    document.querySelectorAll(
-      "[data-sidebar-btn]"
-    )[0].childNodes[0].textContent = "Скрыть контакты";
+    if (innerText == "Hide contacts") {
+      document.querySelectorAll(
+        "[data-sidebar-btn]"
+      )[0].childNodes[0].textContent = "Show contacts";
+    } else {
+      document.querySelectorAll(
+        "[data-sidebar-btn]"
+      )[0].childNodes[0].textContent = "Hide contacts";
+    }
   }
 }
 </script>
@@ -361,8 +364,8 @@ svg {
   color: var(--white-2);
   background: var(--border-gradient-onyx);
   padding: 10px;
-  -webkit-box-shadow: var(--shadow-2);
-  box-shadow: var(--shadow-2);
+  -webkit-box-shadow: var(--shadow-1);
+  box-shadow: var(--shadow-1);
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);
@@ -485,16 +488,15 @@ svg {
 @media (min-width: 320px) {
   .sidebar {
     margin-inline: auto;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    max-height: 112px;
   }
 
   .icon-box {
     width: 30px;
     height: 30px;
     border-radius: 8px;
-  }
-
-  .sidebar {
-    max-height: 112px;
   }
 
   .sidebar.active {
@@ -552,16 +554,13 @@ svg {
   .sidebar {
     width: 100%;
     margin-inline: auto;
+    max-height: 135px;
   }
 
   .icon-box {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-  }
-
-  .sidebar {
-    max-height: 135px;
   }
 
   .sidebar.active {
@@ -613,6 +612,8 @@ svg {
   .sidebar {
     width: 520px;
     margin-inline: auto;
+    max-height: 150px;
+    border-radius: 20px;
   }
 
   .icon-box {
@@ -620,10 +621,6 @@ svg {
     height: 48px;
     border-radius: 12px;
     font-size: 20px;
-  }
-
-  .sidebar {
-    max-height: 150px;
   }
 
   .sidebar.active {

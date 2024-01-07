@@ -44,7 +44,7 @@
   border-radius: 12px 12px 0 0;
   -webkit-box-shadow: var(--shadow-2);
   box-shadow: var(--shadow-2);
-  z-index: 5;
+  z-index: 10;
 
   &__list {
     display: -webkit-box;
@@ -78,6 +78,7 @@
     &.active {
       color: var(--orange-yellow-crayola);
       font-weight: bolder;
+      -webkit-tap-highlight-color: transparent;
     }
   }
 

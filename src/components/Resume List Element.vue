@@ -144,7 +144,7 @@ const { name, years, description } = defineProps([
 
 @media (min-width: 1024px) {
   .title-wrapper {
-    margin-left: 0px;
+    margin-left: 2px;
     & h3 {
       margin-left: 4px;
     }

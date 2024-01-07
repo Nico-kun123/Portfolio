@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function filterSelection(c) {
   let x, i;
   x = document.querySelectorAll(".filterDiv");
-  c = c.toLowerCase()
+  c = c.toLowerCase();
   if (c == "all") c = "";
   // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
   for (i = 0; i < x.length; i++) {
@@ -80,21 +80,28 @@ function w3RemoveClass(element, name) {
   }
   element.className = arr1.join(" ");
 }
+function isFocus(event) {
+  return true;
+}
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function showDropdown() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
+
 window.onclick = function (event) {
   if (!event.target.matches(".dropbtn")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
+    let dropdowns = document.getElementsByClassName("dropdown-content");
+    for (let i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i];
       if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
+        openDropdown.classList.remove("show")?.remove(":focus");
       }
     }
   }
+  // if (event.target.matches(".dropbtn")) {
+  //   document.getElementsByClassName("dropbtn")[0].add(":focus");
+  // }
+  // console.log(document.getElementsByClassName("dropdown-content")[0].className.indexOf('show'));
 };
 </script>
 
@@ -435,42 +442,47 @@ window.onclick = function (event) {
       </header>
 
       <section class="projects">
+        <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
         <div id="filter-menu">
           <button
             v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
             @click="showDropdown()"
             class="dropbtn"
+            @focus="isFocus(this.event)"
           >
             Выберите фильтр
           </button>
           <button v-else @click="showDropdown()" class="dropbtn">
             Select a filter
           </button>
-          <div
-            id="myDropdown"
-            class="dropdown-content"
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          >
-            <a class="btn" @click="filterSelection('all')">Все проекты</a>
+          <div id="myDropdown" class="dropdown-content">
+            <a
+              class="btn"
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('all')"
+              >Все проекты</a
+            >
+            <a class="btn" v-else @click="filterSelection('all')"
+              >All Projects</a
+            >
             <a class="btn" @click="filterSelection('typescript')">Typescript</a>
             <a class="btn" @click="filterSelection('react.js')">React.js</a>
             <a class="btn" @click="filterSelection('vue.js')">Vue.js</a>
-            <a class="btn" @click="filterSelection('no react/vue')"
+            <a
+              class="btn"
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('no react/vue')"
               >Без React/Vue</a
             >
-            <a class="btn" @click="filterSelection('jest')">Jest</a>
-          </div>
-          <div id="myDropdown" class="dropdown-content" v-else>
-            <a class="btn" @click="filterSelection('all')">All Projects</a>
-            <a class="btn" @click="filterSelection('typescript')">Typescript</a>
-            <a class="btn" @click="filterSelection('react.js')">React.js</a>
-            <a class="btn" @click="filterSelection('vue.js')">Vue.js</a>
-            <a class="btn" @click="filterSelection('no react/vue')"
+            <a class="btn" v-else @click="filterSelection('no react/vue')"
               >No React/Vue</a
             >
             <a class="btn" @click="filterSelection('jest')">Jest</a>
+            <a class="btn" @click="filterSelection('nuxt.js')">Nuxt.js</a>
           </div>
         </div>
+
+        <!-- ФИЛЬТР ПРОЕКТОВ (ДРУГИЕ УСТРОЙСТВА) -->
         <ul class="filter-list">
           <li class="filter-item">
             <button
@@ -517,70 +529,14 @@ window.onclick = function (event) {
           </li>
 
           <li class="filter-item">
-            <button @click="filterSelection('Jest')" class="btn">Jest</button>
+            <button @click="filterSelection('jest')" class="btn">Jest</button>
+          </li>
+          <li class="filter-item">
+            <button @click="filterSelection('nuxt.js')" class="btn">
+              Nuxt.js
+            </button>
           </li>
         </ul>
-
-        <!-- LIST. Для мобильных устройств -->
-        <div class="filter-select-box">
-          <button class="filter-select" data-select>
-            <div
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              class="select-value"
-              data-selecct-value
-            >
-              Выберите категорию
-            </div>
-            <div v-else class="select-value" data-selecct-value>
-              Select category
-            </div>
-
-            <div class="select-icon">
-              <img
-                src="../assets/images/ui/chevron-down.svg"
-                alt="arrow down"
-                loading="lazy"
-              />
-            </div>
-          </button>
-
-          <!-- LIST. Для других устройств -->
-          <ul class="select-list">
-            <li class="select-item">
-              <button
-                v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-                @click="filterSelection('all')"
-              >
-                Все
-              </button>
-              <button v-else @click="filterSelection('all')">All</button>
-            </li>
-
-            <li class="select-item">
-              <button @click="filterSelection('typescript')">Typescript</button>
-            </li>
-
-            <li class="select-item">
-              <button @click="filterSelection('react')">React.js</button>
-            </li>
-
-            <li class="select-item">
-              <button @click="filterSelection('vue')">Vue.js</button>
-            </li>
-
-            <li class="select-item">
-              <button
-                v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-                @click="filterSelection('noreactvue')"
-              >
-                Без React/Vue
-              </button>
-              <button v-else @click="filterSelection('noreactvue')">
-                No React/Vue
-              </button>
-            </li>
-          </ul>
-        </div>
 
         <!-- САМИ ПРОЕКТЫ -->
         <ul class="project-list">
@@ -598,7 +554,7 @@ window.onclick = function (event) {
                   <img
                     src="../assets/images/ui/eye.svg"
                     alt="eye icon"
-                    loading="lazy"
+                    
                   />
                 </div>
 
@@ -627,7 +583,7 @@ window.onclick = function (event) {
                   <img
                     src="../assets/images/ui/eye.svg"
                     alt="eye icon"
-                    loading="lazy"
+                    
                   />
                 </div>
 
@@ -857,6 +813,7 @@ window.onclick = function (event) {
     -webkit-animation: scaleUp 0.25s ease forwards;
     animation: scaleUp 0.25s ease forwards;
   }
+
 }
 .filterDiv > a.hover {
   background: hsla(0, 0%, 0%, 0.5);
@@ -1039,22 +996,33 @@ window.onclick = function (event) {
 }
 
 /* Skills */
+.skill {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 .skills-title {
-  margin-bottom: 20px;
   font-size: var(--fs-1);
+  text-align: center;
+  -webkit-transition: var(--transition-1);
+  -o-transition: var(--transition-1);
+  transition: var(--transition-1);
 }
 
 .skills-list {
   padding: 20px;
+  width: 100%;
 }
 
 /*-----------------------------------*\
 #PORTFOLIO
 \*-----------------------------------*/
 .filter-list {
-  /* display: none; */
-  display: -webkit-box;
-  display: -ms-flexbox;
+  // display: none;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1070,8 +1038,11 @@ window.onclick = function (event) {
 }
 #filter-menu {
   margin-bottom: 30px;
-  position: relative;
-  display: inline-block;
+  // position: fixed;
+  // top: 0;
+  // left: 50%;
+  // display: inline-block;
+  display: none;
 }
 .show {
   display: block;
@@ -1079,7 +1050,7 @@ window.onclick = function (event) {
 
 .dropdown-content {
   display: none;
-  position: absolute;
+  position: relative;
   background-color: var(--white-2);
   // border-style:double;
   border-top: none;
@@ -1087,21 +1058,28 @@ window.onclick = function (event) {
   // border-width: 5px;
 
   // min-width: 165px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-1);
   z-index: 5;
-  // margin-left: 24px;
+  margin-left: 15px;
+  margin-right: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+
+  // border-style: ridge;
+  // border-top: none;
+  // border-color: var(--orange-yellow-crayola);
+  // outline: var(--orange-yellow-crayola) 5px dashed;
 
   a {
     color: black;
     padding: 10px;
-    text-decoration: none;
+    // text-decoration: none;
     display: block;
+    cursor: pointer;
 
-    &:hover {
-      background-color: #ddd;
-      z-index: 5;
+    & :hover {
+      background-color: var(--bg-gradient-jet);
+      z-index: 9;
       -webkit-transition: var(--transition-1);
       -o-transition: var(--transition-1);
       transition: var(--transition-1);
@@ -1109,7 +1087,24 @@ window.onclick = function (event) {
     &:hover:last-child {
       border-radius: inherit;
     }
+
+    &.btn:first-child {
+      background-color: var(--light-gray-70);
+      font-weight: bolder;
+    }
   }
+
+  .btn {
+    &:hover {
+      color: var(--orange-yellow-crayola);
+    }
+  }
+
+  // .btn {
+    // border: red double 1px;
+    // border-top: none;
+    // border-radius: 5px;
+  // }
 }
 // .dropdown-content a {
 //   color: black;
@@ -1140,18 +1135,26 @@ window.onclick = function (event) {
   border-radius: 20px;
   border-color: var(--orange-yellow-crayola);
   border-style: ridge;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
   cursor: pointer;
   // min-width: 178px;
   text-align: center;
+
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--jet);
+  }
 }
-.dropbtn:hover,
-.dropbtn:focus {
+.dropbtn:hover {
   background-color: var(--jet);
+}
+.dropbtn:focus {
+  // background-color: var(--jet);
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);
+  // border-bottom-left-radius: 0;
+  // border-bottom-right-radius: 0;
 }
 .filter-item button {
   color: var(--light-gray);
@@ -1168,7 +1171,11 @@ window.onclick = function (event) {
   // display: block;
 }
 .show {
-  display: block;
+  display: grid;
+  width: 100%;
+  display: -ms-grid;
+  -ms-grid-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .filter-select-box {
@@ -1413,6 +1420,13 @@ window.onclick = function (event) {
   }
 }
 
+.project-img {
+    & img {
+      // width: 30px;
+      filter: blur();
+    }
+  }
+
 /*-----------------------------------*\
 #RESPONSIVE
 \*-----------------------------------*/
@@ -1424,11 +1438,28 @@ window.onclick = function (event) {
     display: none;
   }
   .dropbtn {
-    width: 160px;
+    width: 100%;
     font-size: var(--fs-7);
   }
   .dropdown-content {
-    width: fit-content;
+    width: inherit;
+    // margin-left: 12px;
+    // margin-right: 12px;
+    text-align: center;
+
+    & .btn {
+      padding: 5px;
+    }
+  }
+  .project-img {
+    & img {
+      width: 30px;
+    }
+  }
+  .skills-title {
+    // margin-left: 20px;
+    font-size: var(--fs-6);
+    margin-bottom: 0;
   }
 }
 /** responsive larger than 450px screen */
@@ -1438,11 +1469,19 @@ window.onclick = function (event) {
     min-width: calc(33.33% - 10px);
   }
   .dropbtn {
-    width: 180px;
+    // width: 180px;
     font-size: var(--fs-6);
   }
   .dropdown-content {
-    width: fit-content;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .project-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skills-title {
+    // margin-left: 20px;
+    font-size: var(--fs-2);
+    margin-bottom: 20px;
   }
 }
 
@@ -1646,6 +1685,17 @@ window.onclick = function (event) {
   .form-btn ion-icon {
     font-size: 18px;
   }
+  .dropdown-content {
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    & .btn {
+      width: 100%;
+      padding: 3px;
+      padding-bottom: 5px;
+      // text-align: center;
+      font-size: var(--fs-5);
+    }
+  }
 }
 
 /** responsive larger than 768px screen */
@@ -1667,9 +1717,9 @@ window.onclick = function (event) {
   #filter-menu {
     display: none;
   }
-  .filter-list {
-    display: block;
-  }
+  // .filter-list {
+    // display: none;
+  // }
   /** SIDEBAR */
 
   .contacts-list {
@@ -1753,6 +1803,11 @@ window.onclick = function (event) {
     width: -moz-max-content;
     width: max-content;
     margin-left: auto;
+  }
+
+  .skills-title {
+    // margin-left: 20px;
+    font-size: var(--fs-1);
   }
 }
 
@@ -1893,7 +1948,7 @@ window.onclick = function (event) {
 .project-img {
   position: relative;
   width: 100%;
-  height: 200px;
+  // height: 200px;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 15px;
@@ -1932,7 +1987,7 @@ window.onclick = function (event) {
   padding: 18px;
   border-radius: 12px;
   opacity: 0;
-  z-index: 1;
+  z-index: 20;
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);
@@ -1945,7 +2000,7 @@ window.onclick = function (event) {
 
 .project-img img {
   width: 100%;
-  height: 100%;
+  height: auto;
   -o-object-fit: cover;
   object-fit: cover;
   -webkit-transition: var(--transition-1);
@@ -1983,12 +2038,16 @@ window.onclick = function (event) {
 \*-----------------------------------*/
 @media (min-width: 320px) {
   .project-list {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .project-img {
+    height: auto;
+    width: 100%;
   }
 }
 @media (min-width: 450px) {
   .project-list {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -2010,7 +2069,7 @@ window.onclick = function (event) {
 
 @media (min-width: 1024px) {
   .project-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>

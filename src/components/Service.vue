@@ -54,7 +54,7 @@ const { id, name, description } = defineProps(["id", "name", "description"]);
 <style lang="scss">
 .service-title {
   margin-bottom: 20px;
-  font-size: var(--fs-1);
+  // font-size: var(--fs-1);
 }
 
 .service-list {
@@ -112,6 +112,12 @@ const { id, name, description } = defineProps(["id", "name", "description"]);
   .service-list {
     text-align: center;
   }
+  .service {
+    h3 {
+      margin-bottom: 20px;
+      font-size: var(--fs-2);
+    }
+  }
   .icon-box {
     width: 40px;
     height: 40px;
@@ -128,6 +134,12 @@ const { id, name, description } = defineProps(["id", "name", "description"]);
     margin-left: -5px;
     border-radius: 16px;
     font-size: 24px;
+  }
+  .service {
+    h3 {
+      margin-bottom: 20px;
+      font-size: var(--fs-1);
+    }
   }
 }
 
