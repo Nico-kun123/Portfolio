@@ -1,7 +1,7 @@
 <script setup>
 // import { ref } from "vue";
 // import "../style.css"
-import ProfilePic from "../assets/images/ui/profile.png";
+import ProfilePic from "../assets/images/ui/profile.jpg";
 import i18n from "../i18n";
 
 function changeText() {
