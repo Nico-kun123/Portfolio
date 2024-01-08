@@ -554,7 +554,7 @@ window.onclick = function (event) {
                   <img
                     src="../assets/images/ui/eye.svg"
                     alt="eye icon"
-                    
+                    loading="lazy"
                   />
                 </div>
 
@@ -1087,17 +1087,17 @@ window.onclick = function (event) {
     &:hover:last-child {
       border-radius: inherit;
     }
-
+ 
     &.btn:first-child {
       background-color: var(--light-gray-70);
       font-weight: bolder;
     }
-  }
+  } 
 
   .btn {
     &:hover {
       color: var(--orange-yellow-crayola);
-    }
+    } 
   }
 
   // .btn {
@@ -2006,6 +2006,9 @@ window.onclick = function (event) {
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);
+
+  border: 1px solid var(--jet);
+  border-radius: 15px;
 }
 
 .project-item > a:hover img {

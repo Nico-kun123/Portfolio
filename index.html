@@ -1,12 +1,20 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Language" content="ru" />
+    <meta http-equiv="refresh" content="N; url=URL" />
+    
+    <!-- <meta name="robots" content="index" /> -->
+    
+    <meta name="Author" content="Кудрявцев Николай" />
+    <meta name="Copyright" content="Кудрявцев Николай" />
+    <meta name="Address" content="Россия, г. Красноярск" />
     
     <link rel="icon" type="image/svg+xml" href="./src/assets/images/ui/coding.svg" />
     <!-- <link rel="icon" type="image/png" href="/favicon.png" /> -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="preload"
       as="style"
@@ -17,10 +25,24 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap"
       media="print"
       onload="this.media='all'"
-    />
+    /> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
+
+    <style>
+      @font-face {
+        font-family: "Open Sans";
+        src: local(
+            "./src/assets/fonts/opensans-variablefont_wdthwght-english.woff2"
+          ),
+          local(
+            "./src/assets/fonts/opensans-variablefont_wdthwght-russian.woff2"
+          );
+
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

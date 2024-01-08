@@ -34,7 +34,13 @@ if (!date) {
   <li class="testimonials-item">
     <div class="content-card" data-testimonials-item>
       <figure class="testimonials-avatar-box">
-        <img :src="icon" alt="Logo" width="60" data-testimonials-avatar loading="lazy"/>
+        <img
+          :src="icon"
+          alt="Logo"
+          width="60"
+          data-testimonials-avatar
+          loading="lazy"
+        />
       </figure>
 
       <h4 class="h4 testimonials-item-title" data-testimonials-title>
@@ -49,7 +55,7 @@ if (!date) {
   </li>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 time {
   color: var(--light-gray-70);
   font-size: var(--fs-7);

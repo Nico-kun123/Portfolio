@@ -124,6 +124,10 @@ const { id, name, description } = defineProps(["id", "name", "description"]);
     margin-left: -5px;
     border-radius: 16px;
     font-size: 24px;
+
+    img {
+      width: 70%;
+    }
   }
 }
 

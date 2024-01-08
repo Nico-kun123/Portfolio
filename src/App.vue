@@ -21,12 +21,12 @@ const skills = [
 ];
 const hobbies = [
   "I like listening to music. I mostly listen to video game soundtracks.",
-  "I like learning Japanese on my free time. I have been learning Japanese for 2 years using the Duolingo app.",
+  "I like learning Japanese on my free time. I have been learning Japanese using the Duolingo app.",
   "I like playing video games.",
 ];
 const hobbiesRU = [
   "Мне нравится слушать музыку. В основном я слушаю саундтреки из видеоигр.",
-  "Мне нравится изучать японский язык в свободное время. Я изучаю японский язык 2 года, используя приложение Duolingo.",
+  `Мне нравится изучать японский язык в свободное время. Я изучаю японский язык, используя приложение Duolingo.`,
   "Мне нравится играть в видеоигры. Я играю в игры на ПК (Terraria, Yakuza, Hades)",
 ];
 
@@ -156,6 +156,7 @@ const projects = [
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: var(--main-font);
 }
 
 a {
@@ -209,7 +210,7 @@ textarea {
 }
 
 html {
-  font-family: var(--main-font);
+  /* font-family: var(--main-font); */
   /* margin-bottom: 5em; */
   /* background: var(--border-gradient-onyx); */
   height: auto;

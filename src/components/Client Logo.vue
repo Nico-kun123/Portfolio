@@ -8,7 +8,11 @@ const { id, name, link } = defineProps(["id", "name", "link"]);
       <img src="../assets/images/ui/profile.png" :alt="name" loading="lazy" />
     </a>
     <a :href="link" v-else>
-      <img src="../assets/images/testimonials/placeholder.png" :alt="name" loading="lazy" />
+      <img
+        src="../assets/images/testimonials/placeholder.png"
+        :alt="name"
+        loading="lazy"
+      />
     </a>
   </li>
 </template>

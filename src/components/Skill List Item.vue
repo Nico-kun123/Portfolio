@@ -40,10 +40,6 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
 </template>
 
 <style lang="scss" scoped>
-// .skills-item:not(:last-child) {
-//   margin-bottom: 15px;
-// }
-
 .skill-progress-bg {
   background: var(--jet);
   width: 100%;
@@ -63,18 +59,16 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
   padding: 20px;
 }
 .title-wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-  }
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
 .skill {
-  
-
   & data {
     color: var(--light-gray);
     font-size: var(--fs-7);

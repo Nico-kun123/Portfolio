@@ -37,12 +37,7 @@ function changeText() {
   <aside class="sidebar" data-sidebar>
     <div class="portfolio__title">
       <figure class="avatar__box">
-        <img
-          :src="ProfilePic"
-          alt="Nicolay Kudryavtsev"
-          loading="lazy"
-          width="100px"
-        />
+        <img :src="ProfilePic" alt="Nicolay Kudryavtsev" width="100px" />
       </figure>
 
       <div class="info__content">
