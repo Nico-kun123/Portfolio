@@ -5,6 +5,9 @@ import img2 from "../assets/images/projects/Calculator.png";
 import img3 from "../assets/images/projects/Weather.png";
 import img4 from "../assets/images/projects/Form.png";
 import img5 from "../assets/images/projects/Table.png";
+import img6 from "../assets/images/projects/User Edit Form.png";
+import img7 from "../assets/images/projects/Connect DB to site.png";
+
 
 const { id, className, projectCategory, projectTitle } = defineProps({
   id: String,
@@ -12,6 +15,7 @@ const { id, className, projectCategory, projectTitle } = defineProps({
   projectCategory: String,
   projectTitle: String,
   projectLink: String,
+  projectType: String,
 });
 
 let projectImage = "";
@@ -32,6 +36,12 @@ switch (id) {
     break;
   case "5":
     projectImage = img5;
+    break;
+  case "6":
+    projectImage = img6;
+    break;
+  case "7":
+    projectImage = img7;
     break;
   default:
     projectImage = pl;

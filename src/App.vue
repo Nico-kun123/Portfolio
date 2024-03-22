@@ -6,28 +6,28 @@ import Sidebar from "./components/SideBar.vue";
 import Main from "./components/MainWindow.vue";
 
 const skillsRU = [
-  "Ответственность. Я вовремя выполняю свои обязанности.",
-  "Возможность сконцентрироваться на выполнении своих задач. Я могу работать в течение длительного времени.",
-  "Способность спокойно воспринимать критику, если она конструктивна. Данную критику я могу использовать для улучшения своей работы.",
-  "Способность не только выслушивать идеи и мнения других людей, но и высказывать свои собственные.",
-  "Способность адаптироваться к новым ситуациям. Могу осваивать новые навыки или изучать новые технологии, если потребуется.",
+  "Ответственность. Я способен брать на себя ответственность и признавать свои ошибки.",
+  "Возможность сосредотачиваться. Я могу концентрироваться на поставленных задачах и доводить их до завершения.",
+  "Принятие критики. Я верю в то, что нужно не только давать конструктивную критику, но и принимать её, чтобы улучшить эффективность работы.",
+  "Навыки коммуникации. Я активно слушаю и стараюсь ясно выражать свои мысли и идеи.",
+  "Адаптивность. Я быстро учусь новым навыкам или изучаю технологии.",
 ];
 const skills = [
-  "Responsibility. I do my duties on time.",
-  "Ability to focus on doing my tasks. I can work for a long time.",
-  "Ability to calmly accept criticism if it is constructive. I can use this criticism to improve my work.",
-  "Ability to not only listen to the ideas and opinions of other people, but also to express my own.",
-  "Ability to adapt to new situations. I can learn new skills or learn new technologies if necessary.",
+  "Responsibility: I consistently strive to take ownership and own up to my failures.",
+  "Ability to Focus: I can concentrate on tasks and take them to completion.",
+  "Accepting Criticism: I believe in both giving and accepting constructive criticism for improvement.",
+  "Communication Skills: I am an active listener and I try to express my thoughts and ideas clearly.",
+  "Adaptability: I am quick to learn new skills or explore technologies.",
 ];
 const hobbies = [
   "I like listening to music. I mostly listen to video game soundtracks.",
-  "I like learning Japanese on my free time. I have been learning Japanese using the Duolingo app.",
-  "I like playing video games.",
+  "I like learning Japanese on my free time using the Duolingo app.",
+  "I like playing video games from time to time.",
 ];
 const hobbiesRU = [
   "Мне нравится слушать музыку. В основном я слушаю саундтреки из видеоигр.",
-  `Мне нравится изучать японский язык в свободное время. Я изучаю японский язык, используя приложение Duolingo.`,
-  "Мне нравится играть в видеоигры. Я играю в игры на ПК (Terraria, Yakuza, Hades)",
+  `Мне нравится изучать японский язык в свободное время, используя приложение "Duolingo".`,
+  "Мне нравится играть в видеоигры время от времени.",
 ];
 
 // ~~~~ PROJECTS ~~~~
@@ -44,94 +44,124 @@ const imgURL = [
   new URL("/src/assets/images/projects/Form.png", import.meta.url),
   new URL("/src/assets/images/projects/Table.png", import.meta.url),
   new URL("/src/assets/images/projects/Typescript Jest.png", import.meta.url),
+  new URL("/src/assets/images/projects/User Edit Form.png", import.meta.url),
+  new URL("/src/assets/images/projects/Connect DB to site.png", import.meta.url),
 ];
 
 const projectsRU = [
   {
     id: "1",
-    category: "No React/Vue",
+    category: "Big project, No React/Vue, PostgreSQL",
     title: "Сборщик данных о товарах с интернет-магазинов",
     link: linkGH + "EShop-Parser",
     image: imgURL[0],
   },
   {
     id: "2",
-    category: "Vue.js",
+    category: "Pet project, Vue.js",
     title: "Простой калькулятор на Vue.js",
     link: linkPart + "Simple-Vue-Calculator",
     image: imgURL[1],
   },
   {
     id: "3",
-    category: "Vue.js",
+    category: "Pet project, Vue.js",
     title: "Приложение для просмотра погоды",
     link: linkPart + "Simple-Weather-App",
     image: imgURL[2],
   },
   {
     id: "4",
-    category: "Vue.js",
+    category: "Test task, Vue.js",
     title: "Валидация формы создания клиентов (Vuelidate)",
     link: linkPart + "Simple-Form-Validation--Vue-Vuelidate-",
     image: imgURL[3],
   },
   {
     id: "5",
-    category: "Vue.js",
+    category: "Test task, Vue.js",
     title: "Простая таблица с возможностью сортировки по столбцу",
     link: linkPart + "Vue-Table",
     image: imgURL[4],
   },
   {
     id: "6",
-    category: "Typescript, Jest",
+    category: "Pet project, Typescript, Jest",
     title: "Тестирование Typescript кода с помощью Jest (ts-jest)",
     link: linkGH + "Jest-and-Typescript",
     image: imgURL[5],
+  },
+  {
+    id: "7",
+    category: "Test task, Vue.js, Typescript",
+    title: "Форма редактирования данных пользователей (Vue + Vuelidate)",
+    link: linkGH + "user-edit-form",
+    image: imgURL[6],
+  },
+  {
+    id: "8",
+    category: "Pet project, Vue.js, PostgreSQL",
+    title: "Сайт для взаимодействия с базой данных через API-запросы",
+    link: linkGH + "vue-pg-database",
+    image: imgURL[7],
   },
 ];
 const projects = [
   {
     id: "1",
-    category: "No React/Vue",
+    category: "Big project, No React/Vue, PostgreSQL",
     title: "Product data parser from online stores",
     link: linkGH + "EShop-Parser",
     image: imgURL[0],
   },
   {
     id: "2",
-    category: "Vue.js",
+    category: "Pet project, Vue.js",
     title: "Simple Calculator (Vue.js)",
     link: linkPart + "Simple-Vue-Calculator",
     image: imgURL[1],
   },
   {
     id: "3",
-    category: "Vue.js",
+    category: "Pet project, Vue.js",
     title: "Simple Weather App",
     link: linkPart + "Simple-Weather-App",
     image: imgURL[2],
   },
   {
     id: "4",
-    category: "Vue.js",
+    category: "Test task, Vue.js",
     title: "Client creation form validation (Vuelidate)",
     link: linkPart + "Simple-Form-Validation--Vue-Vuelidate-",
     image: imgURL[3],
   },
   {
     id: "5",
-    category: "Vue.js",
+    category: "Test task, Vue.js",
     title: "Simple table with sorting by column",
     link: linkPart + "Vue-Table",
     image: imgURL[4],
   },
   {
     id: "6",
-    category: "Typescript, Jest",
+    category: "Pet project, Typescript, Jest",
     title: "Testing Typescript code with Jest (ts-jest)",
     link: linkGH + "Jest-and-Typescript",
     image: imgURL[5],
+  },
+  {
+    id: "7",
+    category: "Test task, Vue.js, Typescript",
+    title: "User data edit form (Vue + Vuelidate)",
+    link: linkGH + "user-edit-form",
+    image: imgURL[6],
+  },
+  {
+    id: "8",
+    category: "Pet project, Vue.js, PostgreSQL",
+    title: "Edit database tables through a website using API-calls",
+    link: linkGH + "vue-pg-database",
+    image: imgURL[7],
   },
 ];
 </script>
@@ -161,10 +191,20 @@ const projects = [
 
 a {
   text-decoration: none;
+  color: var(--orange-yellow-crayola)
+}
+
+p {
+  color: var(--light-gray);
+  font-weight: var(--fw-300);
 }
 
 li {
   list-style: none;
+  padding-left: 1em
+}
+ul {
+  padding: 0;
 }
 
 img,
@@ -205,8 +245,8 @@ textarea {
 
 :focus {
   outline-color: var(--orange-yellow-crayola);
-  color: black;
-  font-weight: bold;
+  /* color: black; */
+  /* font-weight: bold; */
 }
 
 html {

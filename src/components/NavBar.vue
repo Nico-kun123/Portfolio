@@ -65,7 +65,7 @@
   &__link {
     color: var(--light-gray);
     font-size: var(--fs-8);
-    padding: 20px 7px;
+    padding: 0;
     -webkit-transition: color var(--transition-1);
     -o-transition: color var(--transition-1);
     transition: color var(--transition-1);
@@ -88,6 +88,7 @@
     }
     &__link {
       font-size: 9pt;
+      padding: 1.5em 0;
     }
   }
   @media (min-width: 350px) {
@@ -109,6 +110,7 @@
   @media (min-width: 768px) {
     &__link {
       font-size: 13pt;
+      // padding: 1em;
     }
   }
 
@@ -119,6 +121,7 @@
 
     &__link {
       font-weight: var(--fw-500);
+      padding: 0.5em;
     }
   }
 }

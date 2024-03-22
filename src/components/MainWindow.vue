@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Добавляем класс active первой кнопке
   document.getElementsByClassName("btn")[6].className += " active";
 
+  document.getElementsByClassName("filter-list")[0].style += " active";
+
   // Add active class to the current control button (highlight it)
   const btns = document.getElementsByClassName("btn");
   for (let i = 0; i < btns.length; i++) {
@@ -37,10 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
           current[j].className = current[j].className.replace(" active", "");
         }
 
-        // const drop = document.getElementsByClassName('dropbtn')[0].innerHTML
-        // console.log(drop);
-        // console.log(btns[i].innerHTML);
-
         document.getElementsByClassName("dropbtn")[0].innerHTML =
           btns[i].innerHTML;
         this.className += " active";
@@ -48,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
 function filterSelection(c) {
   let x, i;
   x = document.querySelectorAll(".filterDiv");
@@ -124,16 +123,17 @@ window.onclick = function (event) {
       <section class="about-text">
         <p>{{ $t("aboutDesc_1") }}</p>
         <p>{{ $t("aboutDesc_2") }}</p>
+        <p>{{ $t("aboutDesc_3") }}</p>
 
         <div class="separator"></div>
 
-        <p>{{ $t("aboutDesc_3") }}</p>
+        <p>{{ $t("aboutDesc_4") }}</p>
         <ul v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'">
           <li
             style="
               list-style: outside;
               list-style-position: inside;
-              padding-bottom: 1em;
+              padding-bottom: 0.5em;
             "
             v-for="(item, index) in softSkillsRU"
             :key="index"
@@ -156,6 +156,27 @@ window.onclick = function (event) {
         </ul>
       </section>
 
+      <div class="separator"></div>
+
+        <h3
+          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+          class="h3 service-title"
+        >
+          Мои резюме:
+        </h3>
+        <h3 v-else class="h3 service-title">My resume:</h3>
+
+        <ul style="list-style: circle;">
+          <li>
+            <a href="https://hh.ru/resume/62dedceaff0c831a7f0039ed1f3379466d4f53" target="_blank">Frontend Developer;</a>
+          </li>
+          <li>
+            <a href="https://hh.ru/resume/b1d0d068ff0cb9b6c90039ed1f336153683471" target="_blank">Tester (QA/Manual);</a>
+
+          </li>
+        </ul>
+        
+        
       <div class="separator"></div>
 
       <!-- service -->
@@ -197,25 +218,25 @@ window.onclick = function (event) {
             v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
             id="3"
             name="Разработка веб-сайтов на Vue.js"
-            description="Разработка одностраничных приложений (SPA) с использованием Vue.js (Vite.js, Vuex, Vue Router, Vue-i18n, Vuelidate)."
+            description="Разработка одностраничных приложений (SPA) с использованием Vue.js (Vite.js, Vue Router, i18n, Vuelidate)."
           />
           <Service
             v-else
             id="3"
             name="Vue.js web application development"
-            description="Development of single-page applications (SPA) using Vue.js (Vite.js, Vuex, Vue Router, Vue-i18n, Vuelidate)."
+            description="Development of single-page applications (SPA) using Vue.js (Vite.js, Vue Router, i18n, Vuelidate)."
           />
           <Service
             v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
             id="4"
-            name="Ручное тестирование ПО"
-            description="Тестирование программ/приложений без какого-либо дополнительного ПО, написание тестовых сценариев."
+            name="Ручное тестирование, тестирование API, написание тестовых сценариев"
+            description="Тестирование программ/приложений без какого-либо дополнительного ПО, написание тестовых сценариев, тестирование API, используя Insomnia/Postman."
           />
           <Service
             v-else
             id="4"
-            name="Application manual testing"
-            description="Testing various programs/apps without any additional programs, writing test cases."
+            name="Manual testing, API testing, writing test cases"
+            description="Testing various programs/apps, writing test cases, API testing using Insomnia/Postman."
           />
         </ul>
       </section>
@@ -370,6 +391,34 @@ window.onclick = function (event) {
       <section class="timeline">
         <div class="title-wrapper">
           <div class="icon-box">
+            <img src="../assets/images/ui/internship.svg" loading="lazy" />
+          </div>
+
+          <h3 v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'" class="h3">
+            Стажировка:
+          </h3>
+          <h3 v-else class="h3">Internship:</h3>
+        </div>
+
+        <ol class="timeline-list">
+          <EducationExpListElem
+            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+            name=""
+            years="Нет"
+            description=""
+          />
+          <EducationExpListElem
+            v-else
+            name=""
+            years="No"
+            description=""
+          />
+        </ol>
+      </section>
+
+      <section class="timeline">
+        <div class="title-wrapper">
+          <div class="icon-box">
             <img src="../assets/images/ui/experience.svg" loading="lazy" />
           </div>
 
@@ -402,10 +451,10 @@ window.onclick = function (event) {
           v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
           class="h3 skills-title"
         >
-          Мои технические навыки (hard-skills):
+          Мои технические навыки (hard-skills)
         </h3>
         <h3 v-else class="h3 skills-title">
-          My technical skills (hard-skills):
+          My technical skills (hard-skills)
         </h3>
 
         <ul class="skills-list content-card">
@@ -442,6 +491,12 @@ window.onclick = function (event) {
       </header>
 
       <section class="projects">
+        
+        <p>{{ $t("filterInfo") }}</p>
+        <br>
+        <p>{{ $t("filterInfo_2") }}</p>
+        <br><br>
+        
         <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
         <div id="filter-menu">
           <button
@@ -465,8 +520,36 @@ window.onclick = function (event) {
             <a class="btn" v-else @click="filterSelection('all')"
               >All Projects</a
             >
+            <a
+              class="btn"
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('Big project')"
+              >Большие Проекты</a
+            >
+            <a class="btn" v-else @click="filterSelection('Big project')"
+              >Big Projects</a
+            >
+            <a
+              class="btn"
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('Pet project')"
+              >Пет-проекты</a
+            >
+            <a class="btn" v-else @click="filterSelection('Pet project')"
+              >Pet projects</a
+            >
+            <a
+              class="btn"
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('Test task')"
+              >Тестовые задания</a
+            >
+            <a class="btn" v-else @click="filterSelection('Test task')"
+              >Test Tasks</a
+            >
+            
             <a class="btn" @click="filterSelection('typescript')">Typescript</a>
-            <a class="btn" @click="filterSelection('react.js')">React.js</a>
+            <!-- <a class="btn" @click="filterSelection('react.js')">React.js</a> -->
             <a class="btn" @click="filterSelection('vue.js')">Vue.js</a>
             <a
               class="btn"
@@ -478,7 +561,8 @@ window.onclick = function (event) {
               >No React/Vue</a
             >
             <a class="btn" @click="filterSelection('jest')">Jest</a>
-            <a class="btn" @click="filterSelection('nuxt.js')">Nuxt.js</a>
+            <!-- <a class="btn" @click="filterSelection('nuxt.js')">Nuxt.js</a> -->
+            <a class="btn" @click="filterSelection('postgresql')">PostgreSQL</a>
           </div>
         </div>
 
@@ -498,16 +582,55 @@ window.onclick = function (event) {
           </li>
 
           <li class="filter-item">
+            <button
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('Big project')"
+              class="btn"
+            >
+              Большие Проекты
+            </button>
+            <button v-else @click="filterSelection('Big project')" class="btn">
+              Big Projects
+            </button>
+          </li>
+
+          <li class="filter-item">
+            <button
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('Pet project')"
+              class="btn"
+            >
+              Пет-проекты
+            </button>
+            <button v-else @click="filterSelection('Pet project')" class="btn">
+              Pet-projects
+            </button>
+          </li>
+
+          <li class="filter-item">
+            <button
+              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+              @click="filterSelection('Test task')"
+              class="btn"
+            >
+              Тестовые задания
+            </button>
+            <button v-else @click="filterSelection('Test task')" class="btn">
+              Test Tasks
+            </button>
+          </li>
+
+          <li class="filter-item">
             <button @click="filterSelection('typescript')" class="btn">
               Typescript
             </button>
           </li>
 
-          <li class="filter-item">
+          <!-- <li class="filter-item">
             <button @click="filterSelection('react.js')" class="btn">
               React.js
             </button>
-          </li>
+          </li> -->
 
           <li class="filter-item">
             <button @click="filterSelection('vue.js')" class="btn">
@@ -531,9 +654,16 @@ window.onclick = function (event) {
           <li class="filter-item">
             <button @click="filterSelection('jest')" class="btn">Jest</button>
           </li>
-          <li class="filter-item">
+
+          <!-- <li class="filter-item">
             <button @click="filterSelection('nuxt.js')" class="btn">
               Nuxt.js
+            </button>
+          </li> -->
+
+          <li class="filter-item">
+            <button @click="filterSelection('postgresql')" class="btn">
+              PostgreSQL
             </button>
           </li>
         </ul>
@@ -579,13 +709,7 @@ window.onclick = function (event) {
           >
             <a :href="project.link" target="_blank">
               <figure class="project-img">
-                <div class="project-item-icon-box">
-                  <img
-                    src="../assets/images/ui/eye.svg"
-                    alt="eye icon"
-                    
-                  />
-                </div>
+                
 
                 <img
                   :src="project.image"
@@ -645,7 +769,7 @@ window.onclick = function (event) {
             style="
               list-style: outside;
               list-style-position: inside;
-              padding-bottom: 1em;
+              padding-bottom: 0.5em;
             "
             v-for="(item, index) in hobbiesRU"
             :key="index"
@@ -813,7 +937,6 @@ window.onclick = function (event) {
     -webkit-animation: scaleUp 0.25s ease forwards;
     animation: scaleUp 0.25s ease forwards;
   }
-
 }
 .filterDiv > a.hover {
   background: hsla(0, 0%, 0%, 0.5);
@@ -1032,9 +1155,9 @@ window.onclick = function (event) {
   align-items: center;
 
   flex-wrap: wrap;
-  gap: 25px;
-  padding-left: 5px;
-  margin-bottom: 30px;
+  // gap: 25px;
+  // padding-left: 5px;
+  // margin-bottom: 30px;
 }
 #filter-menu {
   margin-bottom: 30px;
@@ -1073,7 +1196,7 @@ window.onclick = function (event) {
   a {
     color: black;
     padding: 10px;
-    // text-decoration: none;
+    text-decoration: none;
     display: block;
     cursor: pointer;
 
@@ -1087,23 +1210,23 @@ window.onclick = function (event) {
     &:hover:last-child {
       border-radius: inherit;
     }
- 
-    &.btn:first-child {
+
+    &.btn:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
       background-color: var(--light-gray-70);
       font-weight: bolder;
     }
-  } 
+  }
 
   .btn {
     &:hover {
       color: var(--orange-yellow-crayola);
-    } 
+    }
   }
 
   // .btn {
-    // border: red double 1px;
-    // border-top: none;
-    // border-radius: 5px;
+  // border: red double 1px;
+  // border-top: none;
+  // border-radius: 5px;
   // }
 }
 // .dropdown-content a {
@@ -1421,11 +1544,11 @@ window.onclick = function (event) {
 }
 
 .project-img {
-    & img {
-      // width: 30px;
-      filter: blur();
-    }
+  & img {
+    // width: 30px;
+    filter: blur();
   }
+}
 
 /*-----------------------------------*\
 #RESPONSIVE
@@ -1458,8 +1581,8 @@ window.onclick = function (event) {
   }
   .skills-title {
     // margin-left: 20px;
-    font-size: var(--fs-6);
-    margin-bottom: 0;
+    font-size: var(--fs-5);
+    margin-bottom: 1em;
   }
 }
 /** responsive larger than 450px screen */
@@ -1718,7 +1841,7 @@ window.onclick = function (event) {
     display: none;
   }
   // .filter-list {
-    // display: none;
+  // display: none;
   // }
   /** SIDEBAR */
 
@@ -1762,7 +1885,7 @@ window.onclick = function (event) {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    gap: 25px;
+    gap: 1em;
     padding-left: 5px;
     margin-bottom: 30px;
   }
@@ -1961,7 +2084,6 @@ window.onclick = function (event) {
     width: 100%;
     height: 100%;
     background: transparent;
-    // z-index: 1;
     -webkit-transition: var(--transition-1);
     -o-transition: var(--transition-1);
     transition: var(--transition-1);
@@ -1987,7 +2109,8 @@ window.onclick = function (event) {
   padding: 18px;
   border-radius: 12px;
   opacity: 0;
-  z-index: 20;
+  z-index: 2;
+  overflow: hidden;
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);

@@ -51,10 +51,12 @@ function changeText() {
         <h1 v-else class="name" title="Nicolay Kudryavtsev">
           Nicolay Kudryavtsev
         </h1>
+
         <p v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'" class="title">
           Frontend-разработчик
         </p>
         <p v-else class="title">Frontend-developer</p>
+        
       </div>
 
       <button class="info__more-btn" data-sidebar-btn @click="changeText()">
@@ -582,7 +584,7 @@ svg {
   }
 
   .info__more-btn {
-    padding: 10px 15px;
+    padding: 5px;
 
     span {
       display: block;
@@ -647,7 +649,7 @@ svg {
   }
 
   .info__more-btn {
-    padding: 10px 15px;
+    padding: 10px;
 
     span {
       display: block;
