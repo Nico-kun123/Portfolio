@@ -1,18 +1,8 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap"); */
-
-/* * {
-  font-family: 'Open Sans';
-} */
-
 :root {
   /** colors */
 
   /* gradient */
-  --bg-gradient-onyx: linear-gradient(
-    to bottom right,
-    hsl(240, 1%, 25%) 3%,
-    hsl(0, 0%, 19%) 97%
-  );
+  --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
   --bg-gradient-jet: linear-gradient(
       to bottom right,
       hsla(240, 1%, 18%, 0.251) 0%,
@@ -35,43 +25,33 @@
     hsl(0, 0%, 25%) 0%,
     hsla(0, 0%, 25%, 0) 50%
   );
-  --text-gradient-yellow: linear-gradient(
-    to right,
-    hsl(45, 100%, 72%),
-    hsl(35, 98%, 59%)
-  );
+  --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 98%, 59%));
 
   /* solid */
-
   --jet: hsl(0, 0%, 25%);
-  --onyx: hsl(240, 1%, 17%);
   --eerie-black-1: hsl(240, 2%, 9%);
   --eerie-black-2: hsl(240, 2%, 12%);
-  --smoky-black: hsl(0, 0%, 7%);
-  --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
   --orange-yellow-crayola: rgb(255, 95, 12);
   --vegas-gold: hsl(41, 85%, 62%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: rgb(255, 197, 88);
-  --bittersweet-shimmer: hsl(0, 43%, 51%);
+  /* --onyx: hsl(240, 1%, 17%); */
 
-  /*
- * typography
- */
+  /* typography */
 
   /* font-family */
-  --main-font: "Open Sans", sans-serif;
+  --main-font: 'Open Sans', sans-serif;
 
   /* font-size */
-  --fs-1: 24px;
-  --fs-2: 18px;
-  --fs-3: 17px;
-  --fs-4: 16px;
-  --fs-5: 15px;
-  --fs-6: 14px;
-  --fs-7: 13px;
-  --fs-8: 11px;
+  --fs-1: 20pt;
+  --fs-2: 16pt;
+  --fs-3: 14pt;
+  --fs-4: 12pt;
+  --fs-5: 11pt;
+  --fs-6: 10pt;
+  --fs-7: 8pt;
+  --fs-8: 6pt;
 
   /* font-weight */
   --fw-300: 300;
@@ -82,7 +62,6 @@
   /**
  * shadow
  */
-
   --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
   --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
   --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
@@ -92,14 +71,13 @@
   /**
  * transition
  */
-
   --transition-1: 0.25s ease;
   --transition-2: 0.5s ease-in-out;
 }
 
 body::-webkit-scrollbar {
   width: 0.7em;
-} 
+}
 
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
