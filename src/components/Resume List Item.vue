@@ -1,14 +1,7 @@
-<script setup>
-const { name, years, description } = defineProps([
-  "name",
-  "years",
-  "description",
-]);
-</script>
-
 <template>
+  <!-- !! TIMELINE ITEM !! -->
   <li class="timeline-item">
-    <h4 class="h4 timeline-item-title">{{ name }}</h4>
+    <h4 class="h3 timeline-item-title">{{ name }}</h4>
 
     <span>{{ years }}</span>
 
@@ -18,6 +11,10 @@ const { name, years, description } = defineProps([
   </li>
 </template>
 
+<script setup>
+const { name, years, description } = defineProps(['name', 'years', 'description'])
+</script>
+
 <style lang="scss">
 .title-wrapper {
   min-width: 300px;
@@ -26,7 +23,6 @@ const { name, years, description } = defineProps([
   display: flex;
   align-items: center;
   & h3 {
-    // text-decoration: underline;
     color: var(--text-gradient-yellow);
   }
   & .icon-box {
@@ -41,26 +37,22 @@ const { name, years, description } = defineProps([
 
 .timeline-item {
   position: relative;
-
+  padding: 0;
   &:not(:last-child) {
     margin-bottom: 20px;
   }
 
-  &-title {
-    font-size: var(--fs-4);
-    margin-bottom: 10px;
-  }
   .timeline-item-title {
     font-weight: bold;
   }
 
   span {
     color: var(--vegas-gold);
-    // font-weight: var(--fw-400);
     line-height: 1.6;
+    font-size: var(--fs-4);
   }
   &:not(:last-child)::before {
-    content: "";
+    content: '';
     position: absolute;
     top: -25px;
     left: -30px;
@@ -70,7 +62,7 @@ const { name, years, description } = defineProps([
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 5px;
     left: -33px;
@@ -82,26 +74,29 @@ const { name, years, description } = defineProps([
     box-shadow: 0 0 0 4px var(--jet);
   }
 
-  &-text {
+  & .timeline-text {
     color: var(--light-gray);
     font-weight: var(--fw-300);
-    line-height: 1.6;
+    line-height: normal;
   }
-}
-
-.timeline-text {
-  color: var(--light-gray);
-  font-weight: var(--fw-300);
-  line-height: 1.5;
+  & .timeline-item-title {
+    font-size: var(--fs-3);
+  }
 }
 
 /** responsive larger than 450px screen */
 @media (min-width: 320px) {
   /** client */
   .timeline-item {
-    &-title {
-      font-size: var(--fs-3);
-      margin-bottom: 10px;
+    & .timeline-text {
+      font-size: var(--fs-5);
+    }
+    & .timeline-item-title {
+      font-size: var(--fs-4);
+    }
+
+    span {
+      font-size: var(--fs-6);
     }
   }
   .title-wrapper {
