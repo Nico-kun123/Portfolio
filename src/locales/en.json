@@ -12,7 +12,8 @@
   ],
   "filterInfo": [
     "TIP: Select a filter to find projects quicker.",
-    "You can filter by programming language, technology stack or by project type (Pet-project, test assignment, big projects or layout development)."
+    "You can filter by programming language, technology stack or by project type (Pet-project, test assignment, big projects or layout development).",
+    "IMPORTANT: Not all projects are published on GitHub Pages. These links are located in the description of the repository (in the «About» section) or in the «Deployments» section."
   ],
   "hobbies": [
     "Listening to music. I mostly listen to video game soundtracks.",

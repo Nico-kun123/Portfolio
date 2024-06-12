@@ -390,6 +390,7 @@ window.onclick = function (event) {
       <section class="about-text">
         <p>{{ t('filterInfo[0]') }}</p>
         <p>{{ t('filterInfo[1]') }}</p>
+        <p>{{ t('filterInfo[2]') }}</p>
         <br />
 
         <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
