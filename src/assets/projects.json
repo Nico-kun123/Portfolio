@@ -11,28 +11,28 @@
       "category": "Pet project, Vue.js",
       "id": "2",
       "image": "/src/assets/images/projects/Calculator.png",
-      "link": "https://nico-kun123.github.io/Simple-Vue-Calculator",
+      "link": "https://github.com/Nico-kun123/Simple-Vue-Calculator",
       "title": "Simple Calculator"
     },
     {
       "category": "Pet project, Vue.js",
       "id": "3",
       "image": "/src/assets/images/projects/Weather.png",
-      "link": "https://nico-kun123.github.io/Simple-Weather-App",
+      "link": "https://github.com/Nico-kun123/Simple-Weather-App",
       "title": "Simple Weather App"
     },
     {
       "category": "Test task, Vue.js",
       "id": "4",
       "image": "/src/assets/images/projects/Form.png",
-      "link": "https://nico-kun123.github.io/Simple-Form-Validation--Vue-Vuelidate-",
+      "link": "https://github.com/Nico-kun123/Simple-Form-Validation--Vue-Vuelidate-",
       "title": "Client data form validation (Vuelidate)"
     },
     {
       "category": "Test task, Vue.js",
       "id": "5",
       "image": "/src/assets/images/projects/Table.png",
-      "link": "https://nico-kun123.github.io/Vue-Table",
+      "link": "https://github.com/Nico-kun123/Vue-Table",
       "title": "Simple table sorting by column"
     },
     {
@@ -90,28 +90,28 @@
       "category": "Pet project, Vue.js",
       "id": "2",
       "image": "/src/assets/images/projects/Calculator.png",
-      "link": "https://nico-kun123.github.io/Simple-Vue-Calculator",
+      "link": "https://github.com/Nico-kun123/Simple-Vue-Calculator",
       "title": "Простой калькулятор"
     },
     {
       "category": "Pet project, Vue.js",
       "id": "3",
       "image": "/src/assets/images/projects/Weather.png",
-      "link": "https://nico-kun123.github.io/Simple-Weather-App",
+      "link": "https://github.com/Nico-kun123/Simple-Weather-App",
       "title": "Простой веб-сайт для просмотра прогноза погоды"
     },
     {
       "category": "Test task, Vue.js",
       "id": "4",
       "image": "/src/assets/images/projects/Form.png",
-      "link": "https://nico-kun123.github.io/Simple-Form-Validation--Vue-Vuelidate-",
+      "link": "https://github.com/Nico-kun123/Simple-Form-Validation--Vue-Vuelidate-",
       "title": "Валидация формы для создания клиентов (Vuelidate)"
     },
     {
       "category": "Test task, Vue.js",
       "id": "5",
       "image": "/src/assets/images/projects/Table.png",
-      "link": "https://nico-kun123.github.io/Vue-Table",
+      "link": "https://github.com/Nico-kun123/Vue-Table",
       "title": "Простая таблица с сортировкой по столбцу"
     },
     {
