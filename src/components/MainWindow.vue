@@ -1,243 +1,189 @@
 <script setup>
-import Blog from "./Blog List Item.vue";
-// import Client from "./Client Logo.vue";
-import Navbar from "./NavBar.vue";
-// import Project from "./Portfolio Project.vue";
-import EducationExpListElem from "./Resume List Element.vue";
-import Service from "./Service.vue";
+import Blog from './Blog List Item.vue'
+import Navbar from './NavBar.vue'
+import ResumeListItem from './Resume List Item.vue'
+import Service from './Service.vue'
+import Skill from './Skill List Item.vue'
 
-import Skill from "./Skill List Item.vue";
+/* UNUSED COMPONENTS */
+// import Project from "./Portfolio Project.vue";
+// import Client from "./Client Logo.vue";
 // import TestimonialItem from "./Testimonial Item.vue";
 
-const { softSkills, softSkillsRU, hobbies, hobbiesRU, projects, projectsRU } =
-  defineProps([
-    "softSkills",
-    "softSkillsRU",
-    "hobbies",
-    "hobbiesRU",
-    "projects",
-    "projectsRU",
-  ]);
+// Импорт i18n (такой подход лучше годится для Composition API)
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
-// Setup
-document.addEventListener("DOMContentLoaded", function () {
-  // Выводим все элементы
-  filterSelection("all");
+// Импорт проектов
+const { projects } = defineProps(['projects'])
 
-  // Добавляем класс active первой кнопке
-  document.getElementsByClassName("btn")[6].className += " active";
+// Изменяем ссылки на изображения, чтобы в production всё корректно отображалось
+projects.forEach((project) => {
+  project.image = new URL(
+    `../assets/images/projects/${project.image.split('/')[5]}`,
+    import.meta.url
+  ).href
+})
 
-  document.getElementsByClassName("filter-list")[0].style += " active";
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ОСНОВНЫЙ ФУНКЦИИ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-  // Add active class to the current control button (highlight it)
-  const btns = document.getElementsByClassName("btn");
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function () {
-      if (btns[i].classList.length == 1) {
-        let current = document.getElementsByClassName("btn");
-        for (let j = 0; j < current.length; j++) {
-          current[j].className = current[j].className.replace(" active", "");
+document.addEventListener('DOMContentLoaded', () => {
+  // Применяет фильтр к проектам: показывает все проекты
+  filterByClassName('all')
+
+  // Подсвечивает нажимаемую кнопку (это НЕ для мобильных устройств)
+  const btns = document.getElementsByClassName('btn')
+  for (const btn of btns) {
+    btn.addEventListener('click', function () {
+      if (btn.classList.length === 1) {
+        for (const current of btns) {
+          current.classList.remove('active')
         }
 
-        document.getElementsByClassName("dropbtn")[0].innerHTML =
-          btns[i].innerHTML;
-        this.className += " active";
+        document.getElementsByClassName('dropbtn')[0].innerHTML = btn.innerHTML
+        btn.classList.add('active')
       }
-    });
+    })
   }
-});
+})
 
-function filterSelection(c) {
-  let x, i;
-  x = document.querySelectorAll(".filterDiv");
-  c = c.toLowerCase();
-  if (c == "all") c = "";
-  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+/**
+ * Применяет фильтр к проектам: показывает все проекты с указанным названием класса.
+ *
+ * @param {string} className - Название класса, по которому производится фильтрация.
+ * @return {void}
+ */
+function filterByClassName(className) {
+  const elements = document.querySelectorAll('.filterDiv')
+  className = className.toLowerCase()
+
+  if (className === 'all') {
+    className = ''
   }
-}
-function w3AddClass(element, name) {
-  let arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (let i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {
-      element.className += " " + arr2[i];
+
+  elements.forEach((element) => {
+    const elementClassName = element.className.toLowerCase()
+    removeClass(element, 'show')
+
+    if (elementClassName.includes(className)) {
+      addClass(element, 'show')
     }
-  }
+  })
 }
-function w3RemoveClass(element, name) {
-  let arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (let i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
+
+/**
+ * Добавляет класс к элементу.
+ * @param {Element} element - Элемент, к которому нужно добавить класс.
+ * @param {string} name - Название класса.
+ * @return {void}
+ */
+function addClass(element, name) {
+  const classList = name.split(' ')
+
+  classList.forEach((className) => {
+    if (!element.classList.contains(className)) {
+      element.classList.add(className)
     }
-  }
-  element.className = arr1.join(" ");
+  })
 }
-function isFocus(event) {
-  return true;
+
+/**
+ * Удаляет класс из элемента.
+ * @param {Element} element - Элемент, у которого нужно удалить класс.
+ * @param {string} name - Название класса.
+ * @return {void}
+ */
+function removeClass(element, name) {
+  const classList = name.split(' ')
+
+  classList.forEach((className) => {
+    element.classList.remove(className)
+  })
 }
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/**
+ * Отображает выпадающее меню.
+ */
 function showDropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
+  document.getElementById('myDropdown').classList.toggle('show')
 }
 
+/**
+ * Закрыть выпадающее меню, если пользователь кликнет за его пределами.
+ */
 window.onclick = function (event) {
-  if (!event.target.matches(".dropbtn")) {
-    let dropdowns = document.getElementsByClassName("dropdown-content");
-    for (let i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show")?.remove(":focus");
-      }
+  const dropdowns = document.getElementsByClassName('dropdown-content')
+  for (let i = 0; i < dropdowns.length; i++) {
+    const openDropdown = dropdowns[i]
+    if (openDropdown.classList.contains('show') && !event.target.matches('.dropbtn')) {
+      openDropdown.classList.remove('show')?.remove(':focus')
     }
   }
-  // if (event.target.matches(".dropbtn")) {
-  //   document.getElementsByClassName("dropbtn")[0].add(":focus");
-  // }
-  // console.log(document.getElementsByClassName("dropdown-content")[0].className.indexOf('show'));
-};
+}
 </script>
 
 <template>
   <div class="main-content">
+    <!-- !! NAVBAR !! -->
     <Navbar />
 
-    <!-- # ABOUT -->
+    <!-- !! ABOUT !! -->
     <article class="about active" data-page="about">
       <header>
-        <h2
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h2 article-title"
-        >
-          Обо мне
-        </h2>
+        <h2 v-if="$isRussian()" class="h2 article-title">Обо мне</h2>
         <h2 v-else class="h2 article-title">About me</h2>
       </header>
 
+      <!-- ОБО МНЕ -->
       <section class="about-text">
-        <p>{{ $t("aboutDesc_1") }}</p>
-        <p>{{ $t("aboutDesc_2") }}</p>
-        <p>{{ $t("aboutDesc_3") }}</p>
+        <p>{{ t('aboutMe[0]') }}</p>
+        <p>{{ t('aboutMe[1]') }}</p>
+        <p>{{ t('aboutMe[2]') }}</p>
 
         <div class="separator"></div>
 
-        <p>{{ $t("aboutDesc_4") }}</p>
-        <ul v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'">
-          <li
-            style="
-              list-style: outside;
-              list-style-position: inside;
-              padding-bottom: 0.5em;
-            "
-            v-for="(item, index) in softSkillsRU"
-            :key="index"
-          >
-            {{ item }}
-          </li>
-        </ul>
-        <ul v-else>
-          <li
-            style="
-              list-style: outside;
-              list-style-position: inside;
-              padding-bottom: 1em;
-            "
-            v-for="(item, index) in softSkills"
-            :key="index"
-          >
-            {{ item }}
-          </li>
+        <p>{{ t('aboutMe[3]') }}</p>
+
+        <ul class="common-list">
+          <li>{{ t('softSkills[0]') }}</li>
+          <li>{{ t('softSkills[1]') }}</li>
+          <li>{{ t('softSkills[2]') }}</li>
+          <li>{{ t('softSkills[3]') }}</li>
+          <li>{{ t('softSkills[4]') }}</li>
         </ul>
       </section>
 
       <div class="separator"></div>
 
-        <h3
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h3 service-title"
-        >
-          Мои резюме:
-        </h3>
-        <h3 v-else class="h3 service-title">My resume:</h3>
+      <!-- ССЫЛКИ НА МОИ РЕЗЮМЕ -->
+      <h3 v-if="$isRussian()" class="h2 service-title">Мои резюме:</h3>
+      <h3 v-else class="h2 service-title">My resume:</h3>
+      <ul style="list-style: circle; width: fit-content">
+        <li>
+          <a href="https://hh.ru/resume/62dedceaff0c831a7f0039ed1f3379466d4f53" target="_blank"
+            >&#10148; {{ t('resumeNames[0]') }}</a
+          >
+        </li>
+        <li><br /></li>
+        <li>
+          <a href="https://hh.ru/resume/b1d0d068ff0cb9b6c90039ed1f336153683471" target="_blank"
+            >&#10148; {{ t('resumeNames[1]') }}</a
+          >
+        </li>
+      </ul>
 
-        <ul style="list-style: circle;">
-          <li>
-            <a href="https://hh.ru/resume/62dedceaff0c831a7f0039ed1f3379466d4f53" target="_blank">Frontend Developer;</a>
-          </li>
-          <li>
-            <a href="https://hh.ru/resume/b1d0d068ff0cb9b6c90039ed1f336153683471" target="_blank">Tester (QA/Manual);</a>
-
-          </li>
-        </ul>
-        
-        
       <div class="separator"></div>
 
-      <!-- service -->
+      <!-- Раздел "Чем я занимаюсь" -->
       <section class="service">
-        <h3
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h3 service-title"
-        >
-          Чем я занимаюсь:
-        </h3>
-        <h3 v-else class="h3 service-title">What do I do:</h3>
-
+        <h4 v-if="$isRussian()" class="h2 service-title">Чем я занимаюсь:</h4>
+        <h4 v-else class="h2 service-title">What do I do:</h4>
         <ul class="service-list">
-          <Service
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="1"
-            name="Адаптивная верстка"
-            description="Разработка сайтов, которые одинаково хорошо отображаются и функционируют на всех современных устройствах."
-          />
-          <Service
-            v-else
-            id="1"
-            name="Adaptive layout"
-            description="Development of websites that are equally well displayed and function in all modern devices."
-          />
-          <Service
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="2"
-            name="Кросс-браузерная верстка"
-            description="Разработка сайтов, которые одинаково хорошо отображаются и функционируют во всех современных браузерах."
-          />
-          <Service
-            v-else
-            id="2"
-            name="Cross-browser layout"
-            description="Development of websites that are equally well displayed and function in all modern browsers."
-          />
-          <Service
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="3"
-            name="Разработка веб-сайтов на Vue.js"
-            description="Разработка одностраничных приложений (SPA) с использованием Vue.js (Vite.js, Vue Router, i18n, Vuelidate)."
-          />
-          <Service
-            v-else
-            id="3"
-            name="Vue.js web application development"
-            description="Development of single-page applications (SPA) using Vue.js (Vite.js, Vue Router, i18n, Vuelidate)."
-          />
-          <Service
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            id="4"
-            name="Ручное тестирование, тестирование API, написание тестовых сценариев"
-            description="Тестирование программ/приложений без какого-либо дополнительного ПО, написание тестовых сценариев, тестирование API, используя Insomnia/Postman."
-          />
-          <Service
-            v-else
-            id="4"
-            name="Manual testing, API testing, writing test cases"
-            description="Testing various programs/apps, writing test cases, API testing using Insomnia/Postman."
-          />
+          <Service id="1" :name="t('serviceName[0]')" :description="t('serviceDesc[0]')" />
+          <Service id="4" :name="t('serviceName[1]')" :description="t('serviceDesc[1]')" />
+          <Service id="3" :name="t('serviceName[2]')" :description="t('serviceDesc[2]')" />
         </ul>
       </section>
 
@@ -246,7 +192,7 @@ window.onclick = function (event) {
       <!-- ОТЗЫВЫ И РЕКОМЕНДАЦИИ -->
       <!-- <section class="testimonials">
         <h3
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+          v-if="$isRussian()"
           class="h3 testimonials-title"
         >
           Отзывы:
@@ -255,7 +201,7 @@ window.onclick = function (event) {
 
         <ul class="testimonials-list has-scrollbar">
           <TestimonialItem
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+            v-if="$isRussian()"
             id="1"
             name="Пример отзыва"
             description="Содержание отзыва"
@@ -310,7 +256,7 @@ window.onclick = function (event) {
       <!-- clients -->
       <!-- <section class="clients">
         <h3
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
+          v-if="$isRussian()"
           class="h3 clients-title"
         >
           Клиенты:
@@ -323,348 +269,264 @@ window.onclick = function (event) {
       </section> -->
     </article>
 
-    <!-- # RESUME -->
+    <!-- !! RESUME !! -->
     <article class="resume" data-page="resume">
       <header>
-        <h2
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h2 article-title"
-        >
-          Резюме
-        </h2>
+        <h2 v-if="$isRussian()" class="h2 article-title">Резюме</h2>
         <h2 v-else class="h2 article-title">Resume</h2>
       </header>
 
+      <!-- ОБРАЗОВАНИЕ (САМЫЕ НОВЫЕ ВВЕРХУ) -->
       <section class="timeline">
         <div class="title-wrapper">
           <div class="icon-box">
-            <img src="../assets/images/ui/education.svg" loading="lazy" />
+            <img
+              src="../assets/images/ui/icons/resume/education.svg"
+              loading="lazy"
+              draggable="false"
+            />
           </div>
 
-          <h3 v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'" class="h3">
-            Образование:
-          </h3>
+          <h3 v-if="$isRussian()" class="h3">Образование:</h3>
           <h3 v-else class="h3">Education:</h3>
         </div>
 
-        <!-- САМЫЕ НОВЫЕ ВВЕРХУ -->
         <ol class="timeline-list">
-          <EducationExpListElem
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            name="Сибирский федеральный университет. Институт космических и информационных технологий"
-            years="2023 — Настоящее время"
-            description="Магистратура, направление “Инженерия искусственного интеллекта”."
+          <ResumeListItem
+            :name="t('timelineItemName[0]')"
+            years="2023 — 2025"
+            :description="t('timelineItemDesc[0]')"
           />
-          <EducationExpListElem
-            v-else
-            name="Siberian Federal University. School of Space and Information Technology"
-            years="2023 — Present"
-            description="Master's degree, majoring in “Artificial Intelligence Engineering”."
-          />
-          <EducationExpListElem
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            name="Сибирский федеральный университет. Институт космических и информационных технологий"
+          <ResumeListItem
+            :name="t('timelineItemName[0]')"
             years="2019 — 2023"
-            description="Бакалавриат, направление “Информатика и вычислительная техника”. Защитил диплом на тему “Сервис автоматизированного сбора данных для систем электронной коммерции”."
+            :description="t('timelineItemDesc[1]')"
           />
-          <EducationExpListElem
-            v-else
-            name="Siberian Federal University. School of Space and Information Technology"
-            years="2019 — 2023"
-            description="Bachelor's degree, majoring in “Informatics and Computer Science”."
-          />
-          <EducationExpListElem
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            name="МБОУ “Лицей № 10” г. Красноярска"
+          <ResumeListItem
+            :name="t('timelineItemName[1]')"
             years="2008 — 2019"
-            description="Школа, в которой я учился с 1 по 11 класс. Закончил школу с золотой медалью."
-          />
-          <EducationExpListElem
-            v-else
-            name="“Lyceum No. 10” of the city of Krasnoyarsk"
-            years="2008 — 2019"
-            description="The school where I studied from 1 to 11 classes. I graduated from it with a gold medal."
+            :description="t('timelineItemDesc[2]')"
           />
         </ol>
       </section>
 
+      <!-- СТАЖИРОВКИ (САМЫЕ НОВЫЕ ВВЕРХУ) -->
       <section class="timeline">
         <div class="title-wrapper">
           <div class="icon-box">
-            <img src="../assets/images/ui/internship.svg" loading="lazy" />
+            <img
+              src="../assets/images/ui/icons/resume/internship.svg"
+              loading="lazy"
+              draggable="false"
+            />
           </div>
 
-          <h3 v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'" class="h3">
-            Стажировка:
-          </h3>
-          <h3 v-else class="h3">Internship:</h3>
+          <h3 v-if="$isRussian()" class="h3">Стажировки:</h3>
+          <h3 v-else class="h3">Internships:</h3>
         </div>
 
         <ol class="timeline-list">
-          <EducationExpListElem
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            name=""
-            years="Нет"
-            description=""
-          />
-          <EducationExpListElem
-            v-else
-            name=""
-            years="No"
-            description=""
-          />
+          <ResumeListItem v-if="$isRussian()" name="" years="Нет стажировок." description="" />
+          <ResumeListItem v-else name="" years="No internships." description="" />
         </ol>
       </section>
 
+      <!-- ОПЫТ РАБОТЫ (САМЫЕ НОВЫЕ ВВЕРХУ) -->
       <section class="timeline">
         <div class="title-wrapper">
           <div class="icon-box">
-            <img src="../assets/images/ui/experience.svg" loading="lazy" />
+            <img
+              src="../assets/images/ui/icons/resume/experience.svg"
+              loading="lazy"
+              draggable="false"
+            />
           </div>
 
-          <h3 v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'" class="h3">
-            Опыт работы:
-          </h3>
-          <h3 v-else class="h3">Experience:</h3>
+          <h3 v-if="$isRussian()" class="h3">Опыт работы:</h3>
+          <h3 v-else class="h3">Work experience:</h3>
         </div>
 
         <ol class="timeline-list">
-          <EducationExpListElem
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            name=""
-            years="Нет опыта работы"
-            description=""
-          />
-          <EducationExpListElem
-            v-else
-            name=""
-            years="No work experience"
-            description=""
-          />
+          <ResumeListItem v-if="$isRussian()" name="" years="Нет опыта работы." description="" />
+          <ResumeListItem v-else name="" years="No work experience." description="" />
         </ol>
       </section>
 
       <div class="separator"></div>
 
+      <!-- ТЕХНИЧЕСКИЕ НАВЫКИ + ШКАЛА -->
       <section class="skill">
-        <h3
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h3 skills-title"
-        >
-          Мои технические навыки (hard-skills)
-        </h3>
-        <h3 v-else class="h3 skills-title">
-          My technical skills (hard-skills)
-        </h3>
+        <h3 v-if="$isRussian()" class="h3 skills-title">Мои технические навыки (hard-skills)</h3>
+        <h3 v-else class="h3 skills-title">My technical skills (hard-skills)</h3>
 
         <ul class="skills-list content-card">
-          <Skill
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            skill-name="Английский язык (C1)"
-            skill-value="78"
-          />
+          <Skill v-if="$isRussian()" skill-name="Английский язык (C1)" skill-value="78" />
           <Skill v-else skill-name="English (C1)" skill-value="78" />
           <div class="separator"></div>
-          <Skill skillName="HTML5, CSS3, JS" skillValue="73" />
-          <Skill skillName="Git" skillValue="65" />
-          <Skill skillName="Vue.js" skillValue="60" />
-          <Skill skillName="React.js" skillValue="46" />
+          <Skill skillName="HTML5, CSS3, JS" skillValue="75" />
+          <Skill skillName="PostgreSQL" skillValue="70" />
+          <Skill skillName="Vue.js" skillValue="65" />
+          <Skill skillName="Git" skillValue="60" />
           <div class="separator"></div>
           <Skill skillName="SCSS" skillValue="80" />
-          <Skill skillName="Vite.js" skillValue="60" />
-          <Skill skillName="Typescript" skillValue="56" />
-          <Skill skillName="JQuery" skillValue="50" />
+          <Skill skillName="Vite.js" skillValue="75" />
+          <Skill skillName="Typescript" skillValue="70" />
+          <Skill skillName="JQuery" skillValue="40" />
+          <Skill skillName="React.js" skillValue="26" />
         </ul>
       </section>
     </article>
 
-    <!-- # PORTFOLIO -->
+    <!-- !! PORTFOLIO !! -->
     <article class="portfolio" data-page="portfolio">
       <header>
-        <h2
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h2 article-title"
-        >
-          Портфолио
-        </h2>
+        <h2 v-if="$isRussian()" class="h2 article-title">Портфолио</h2>
         <h2 v-else class="h2 article-title">Portfolio</h2>
       </header>
 
-      <section class="projects">
-        
-        <p>{{ $t("filterInfo") }}</p>
-        <br>
-        <p>{{ $t("filterInfo_2") }}</p>
-        <br><br>
-        
+      <section class="about-text">
+        <p>{{ t('filterInfo[0]') }}</p>
+        <p>{{ t('filterInfo[1]') }}</p>
+        <br />
+
         <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
         <div id="filter-menu">
-          <button
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            @click="showDropdown()"
-            class="dropbtn"
-            @focus="isFocus(this.event)"
-          >
+          <button v-if="$isRussian()" @click="showDropdown()" class="dropbtn">
             Выберите фильтр
           </button>
-          <button v-else @click="showDropdown()" class="dropbtn">
-            Select a filter
-          </button>
+          <button v-else @click="showDropdown()" class="dropbtn">Select a filter</button>
           <div id="myDropdown" class="dropdown-content">
-            <a
-              class="btn"
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('all')"
-              >Все проекты</a
-            >
-            <a class="btn" v-else @click="filterSelection('all')"
-              >All Projects</a
-            >
-            <a
-              class="btn"
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('Big project')"
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('all')">Все проекты</a>
+            <a class="btn" v-else @click="filterByClassName('all')">All Projects</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('Big project')"
               >Большие Проекты</a
             >
-            <a class="btn" v-else @click="filterSelection('Big project')"
-              >Big Projects</a
-            >
-            <a
-              class="btn"
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('Pet project')"
+            <a class="btn" v-else @click="filterByClassName('Big project')">Big Projects</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('Pet project')"
               >Пет-проекты</a
             >
-            <a class="btn" v-else @click="filterSelection('Pet project')"
-              >Pet projects</a
-            >
-            <a
-              class="btn"
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('Test task')"
+            <a class="btn" v-else @click="filterByClassName('Pet project')">Pet projects</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('Test task')"
               >Тестовые задания</a
             >
-            <a class="btn" v-else @click="filterSelection('Test task')"
-              >Test Tasks</a
+            <a class="btn" v-else @click="filterByClassName('Test task')">Test Tasks</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('layout')"
+              >Вёрстка из Figma</a
             >
-            
-            <a class="btn" @click="filterSelection('typescript')">Typescript</a>
-            <!-- <a class="btn" @click="filterSelection('react.js')">React.js</a> -->
-            <a class="btn" @click="filterSelection('vue.js')">Vue.js</a>
-            <a
-              class="btn"
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('no react/vue')"
+            <a class="btn" v-else @click="filterByClassName('layout')">Layouts from Figma</a>
+
+            <a class="btn" @click="filterByClassName('typescript')">Typescript</a>
+            <!-- <a class="btn" @click="filterByClassName('react.js')">React.js</a> -->
+            <a class="btn" @click="filterByClassName('vue.js')">Vue.js</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('no react/vue')"
               >Без React/Vue</a
             >
-            <a class="btn" v-else @click="filterSelection('no react/vue')"
-              >No React/Vue</a
+            <a class="btn" v-else @click="filterByClassName('no react/vue')">No React/Vue</a>
+            <a class="btn" @click="filterByClassName('jest')">Jest</a>
+            <!-- <a class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</a> -->
+            <a class="btn" @click="filterByClassName('postgresql')">PostgreSQL</a>
+            <a class="btn" @click="filterByClassName('python')">Python</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('neural network')"
+              >Нейросеть</a
             >
-            <a class="btn" @click="filterSelection('jest')">Jest</a>
-            <!-- <a class="btn" @click="filterSelection('nuxt.js')">Nuxt.js</a> -->
-            <a class="btn" @click="filterSelection('postgresql')">PostgreSQL</a>
+            <a class="btn" v-else @click="filterByClassName('neural network')">Neural Network</a>
+            <a class="btn" @click="filterByClassName('firebase')">Firebase</a>
           </div>
+
+          <div class="separator"></div>
         </div>
 
         <!-- ФИЛЬТР ПРОЕКТОВ (ДРУГИЕ УСТРОЙСТВА) -->
         <ul class="filter-list">
           <li class="filter-item">
-            <button
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('all')"
-              class="btn"
-            >
-              Все
-            </button>
-            <button v-else @click="filterSelection('all')" class="btn">
-              All
-            </button>
+            <button v-if="$isRussian()" @click="filterByClassName('all')" class="btn">Все</button>
+            <button v-else @click="filterByClassName('all')" class="btn">All</button>
           </li>
 
           <li class="filter-item">
-            <button
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('Big project')"
-              class="btn"
-            >
+            <button v-if="$isRussian()" @click="filterByClassName('Big project')" class="btn">
               Большие Проекты
             </button>
-            <button v-else @click="filterSelection('Big project')" class="btn">
+            <button v-else @click="filterByClassName('Big project')" class="btn">
               Big Projects
             </button>
           </li>
 
           <li class="filter-item">
-            <button
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('Pet project')"
-              class="btn"
-            >
+            <button v-if="$isRussian()" @click="filterByClassName('Pet project')" class="btn">
               Пет-проекты
             </button>
-            <button v-else @click="filterSelection('Pet project')" class="btn">
+            <button v-else @click="filterByClassName('Pet project')" class="btn">
               Pet-projects
             </button>
           </li>
 
           <li class="filter-item">
-            <button
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('Test task')"
-              class="btn"
-            >
+            <button v-if="$isRussian()" @click="filterByClassName('Test task')" class="btn">
               Тестовые задания
             </button>
-            <button v-else @click="filterSelection('Test task')" class="btn">
-              Test Tasks
-            </button>
+            <button v-else @click="filterByClassName('Test task')" class="btn">Test Tasks</button>
           </li>
 
           <li class="filter-item">
-            <button @click="filterSelection('typescript')" class="btn">
-              Typescript
+            <button v-if="$isRussian()" @click="filterByClassName('layout')" class="btn">
+              Вёрстка из Figma
             </button>
-          </li>
-
-          <!-- <li class="filter-item">
-            <button @click="filterSelection('react.js')" class="btn">
-              React.js
-            </button>
-          </li> -->
-
-          <li class="filter-item">
-            <button @click="filterSelection('vue.js')" class="btn">
-              Vue.js
-            </button>
+            <button v-else @click="filterByClassName('layout')" class="btn">Figma Layouts</button>
           </li>
 
           <li class="filter-item">
-            <button
-              class="btn"
-              v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-              @click="filterSelection('no react/vue')"
-            >
+            <button @click="filterByClassName('typescript')" class="btn">Typescript</button>
+          </li>
+
+          <li class="filter-item">
+            <button @click="filterByClassName('vue.js')" class="btn">Vue.js</button>
+          </li>
+
+          <li class="filter-item">
+            <button class="btn" v-if="$isRussian()" @click="filterByClassName('no react/vue')">
               Без React/Vue
             </button>
-            <button class="btn" v-else @click="filterSelection('no react/vue')">
+            <button class="btn" v-else @click="filterByClassName('no react/vue')">
               No React/Vue
             </button>
           </li>
 
           <li class="filter-item">
-            <button @click="filterSelection('jest')" class="btn">Jest</button>
+            <button @click="filterByClassName('jest')" class="btn">Jest</button>
           </li>
 
           <!-- <li class="filter-item">
-            <button @click="filterSelection('nuxt.js')" class="btn">
+            <button @click="filterByClassName('react.js')" class="btn">
+              React.js
+            </button>
+          </li> -->
+
+          <!-- <li class="filter-item">
+            <button @click="filterByClassName('nuxt.js')" class="btn">
               Nuxt.js
             </button>
           </li> -->
 
           <li class="filter-item">
-            <button @click="filterSelection('postgresql')" class="btn">
-              PostgreSQL
+            <button @click="filterByClassName('postgresql')" class="btn">PostgreSQL</button>
+          </li>
+
+          <li class="filter-item">
+            <button @click="filterByClassName('python')" class="btn">Python</button>
+          </li>
+
+          <li class="filter-item">
+            <button class="btn" v-if="$isRussian()" @click="filterByClassName('neural network')">
+              Нейросеть
             </button>
+            <button class="btn" v-else @click="filterByClassName('neural network')">
+              Neural Network
+            </button>
+          </li>
+
+          <li class="filter-item">
+            <button @click="filterByClassName('firebase')" class="btn">Firebase</button>
           </li>
         </ul>
 
@@ -672,30 +534,23 @@ window.onclick = function (event) {
         <ul class="project-list">
           <!-- САМИ ПРОЕКТЫ (RU) -->
           <li
-            v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-            v-for="projectRU in projectsRU"
+            v-if="$isRussian()"
+            v-for="projectRU in projects"
             :key="projectRU.id"
             :class="`filterDiv ${projectRU.category.toLowerCase()}`"
             :data-category="projectRU.category.toLowerCase()"
           >
             <a :href="projectRU.link" target="_blank">
               <figure class="project-img">
-                <div class="project-item-icon-box">
-                  <img
-                    src="../assets/images/ui/eye.svg"
-                    alt="eye icon"
-                    loading="lazy"
-                  />
-                </div>
-
                 <img
                   :src="projectRU.image"
                   :alt="projectRU.title.toLowerCase()"
                   loading="lazy"
+                  draggable="false"
                 />
               </figure>
               <h3 class="project-title">{{ projectRU.title }}</h3>
-              <p class="project-category">{{ projectRU.category }}</p>
+              <label class="project-category">{{ projectRU.category }}</label>
             </a>
           </li>
 
@@ -709,86 +564,67 @@ window.onclick = function (event) {
           >
             <a :href="project.link" target="_blank">
               <figure class="project-img">
-                
-
                 <img
                   :src="project.image"
                   :alt="project.title.toLowerCase()"
                   loading="lazy"
+                  draggable="false"
                 />
               </figure>
               <h3 class="project-title">{{ project.title }}</h3>
-              <p class="project-category">{{ project.category }}</p>
+              <label class="project-category">{{ project.category }}</label>
             </a>
           </li>
         </ul>
       </section>
     </article>
 
-    <!-- # BLOG -->
+    <!-- !! BLOG !! -->
     <article class="blog" data-page="blog">
       <header>
-        <h2
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h2 article-title"
-        >
-          Блог
-        </h2>
+        <h2 v-if="$isRussian()" class="h2 article-title">Блог</h2>
         <h2 v-else class="h2 article-title">Blog</h2>
       </header>
 
+      <!-- ЭЛЕМЕНТЫ МОЕГО (несуществующего) БЛОГА -->
       <section class="blog-posts">
         <ul class="blog-posts-list">
-          <!-- <Blog category="Some Category" name="Some Name" description="Some Description" date="Some Date"/> -->
+          <!-- <Blog
+            id="1"
+            category="Some Category"
+            name="Some Name"
+            description="Some Description"
+            date="Some Date"
+          /> -->
           <Blog />
         </ul>
       </section>
     </article>
 
-    <!-- # EXTRA -->
+    <!-- !! EXTRA !! -->
     <article class="extra" data-page="extra">
       <header>
-        <h2
-          v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'"
-          class="h2 article-title"
-        >
-          Доп. информация
-        </h2>
+        <h2 v-if="$isRussian()" class="h2 article-title">Доп. информация</h2>
         <h2 v-else class="h2 article-title">Extra info</h2>
       </header>
 
       <section class="about-text">
-        <p>{{ $t("extra1[0]") }}</p>
-        <p>{{ $t("extra1[1]") }}</p>
+        <p>{{ t('extra[0]') }}</p>
+        <p>{{ t('extra[1]') }}</p>
+        <p>{{ t('extra[2]') }}</p>
 
         <div class="separator"></div>
 
-        <p>{{ $t("extra1[2]") }}</p>
-        <ul v-if="$i18n.locale == 'ru-RU' || $i18n.locale == 'ru'">
-          <li
-            style="
-              list-style: outside;
-              list-style-position: inside;
-              padding-bottom: 0.5em;
-            "
-            v-for="(item, index) in hobbiesRU"
-            :key="index"
-          >
-            {{ item }}
-          </li>
-        </ul>
-        <ul v-else>
-          <li
-            style="
-              list-style: outside;
-              list-style-position: inside;
-              padding-bottom: 1em;
-            "
-            v-for="(item, index) in hobbies"
-            :key="index"
-          >
-            {{ item }}
-          </li>
+        <p v-if="$isRussian()">Мои увлечения и хобби:</p>
+        <p v-else>My hobbies and interests:</p>
+
+        <ul class="common-list">
+          <li>{{ t('hobbies[0]') }}</li>
+          <li>{{ t('hobbies[1]') }}</li>
+          <li>{{ t('hobbies[2]') }}</li>
+          <li>{{ t('hobbies[3]') }}</li>
+          <li>{{ t('hobbies[4]') }}</li>
+          <li>{{ t('hobbies[5]') }}</li>
         </ul>
       </section>
     </article>
@@ -797,32 +633,41 @@ window.onclick = function (event) {
 
 <style lang="scss" scoped>
 /*-----------------------------------*\
-#SIDEBAR
+# SIDEBAR
 \*-----------------------------------*/
-/* В SideBar.vue */
+/* В SideBar.vue 👀 */
 
 /*-----------------------------------*\
-#NAVBAR
+# NAVBAR
 \*-----------------------------------*/
-/* В NavBar.vue */
+/* В NavBar.vue 👀 */
 
 /*-----------------------------------*\
-#ABOUT
+# ABOUT
 \*-----------------------------------*/
 .about-text {
   color: var(--light-gray);
   font-size: var(--fs-4);
   font-weight: var(--fw-300);
   line-height: 1.6;
+
+  p {
+    margin-bottom: 15px;
+
+    &:first-letter {
+      margin-left: 1em;
+    }
+  }
 }
 
-.about-text p {
-  margin-bottom: 15px;
+.common-list {
+  li {
+    list-style: outside;
+    list-style-position: inside;
+    padding-bottom: 0.5em;
+  }
 }
 
-/* Service */
-
-/* Отзывы и рекомендации */
 .testimonials {
   margin-bottom: 30px;
 
@@ -832,14 +677,8 @@ window.onclick = function (event) {
   }
 
   .testimonials-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: flex-start;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
     align-items: flex-start;
     gap: 15px;
     margin: 0 -15px;
@@ -848,7 +687,6 @@ window.onclick = function (event) {
     overflow-x: auto;
     scroll-behavior: smooth;
     overscroll-behavior-inline: contain;
-    -ms-scroll-snap-type: inline mandatory;
     scroll-snap-type: inline mandatory;
 
     .testimonials-item {
@@ -859,12 +697,9 @@ window.onclick = function (event) {
         position: absolute;
         top: 0;
         left: 0;
-        -webkit-transform: translate(15px, -25px);
-        -ms-transform: translate(15px, -25px);
         transform: translate(15px, -25px);
         background: var(--bg-gradient-onyx);
         border-radius: 14px;
-        -webkit-box-shadow: var(--shadow-1);
         box-shadow: var(--shadow-1);
       }
 
@@ -887,24 +722,17 @@ window.onclick = function (event) {
   }
 }
 
-/* testimonials-modal */
 .modal-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   overflow-y: auto;
-  -ms-scroll-chaining: none;
+  scroll-chaining: none;
   overscroll-behavior: contain;
   z-index: 20;
   pointer-events: none;
@@ -919,28 +747,22 @@ window.onclick = function (event) {
     visibility: visible;
   }
 }
-.filterDiv {
-  // float: left;
-  // background-color: #2196f3;
-  // color: #ffffff;
-  // width: 100px;
-  // line-height: 100px;
-  // text-align: center;
-  // margin: 2px;
-  display: none; /* Hidden by default */
 
-  &.show {
-    display: block;
-  }
+.filterDiv {
+  padding: 0;
+  display: none;
+
+  &.show,
   &.active {
     display: block;
-    -webkit-animation: scaleUp 0.25s ease forwards;
     animation: scaleUp 0.25s ease forwards;
   }
 }
+
 .filterDiv > a.hover {
   background: hsla(0, 0%, 0%, 0.5);
 }
+
 .overlay {
   position: fixed;
   top: 0;
@@ -952,8 +774,6 @@ window.onclick = function (event) {
   visibility: hidden;
   pointer-events: none;
   z-index: 1;
-  -webkit-transition: var(--transition-1);
-  -o-transition: var(--transition-1);
   transition: var(--transition-1);
 
   &.active {
@@ -968,31 +788,17 @@ window.onclick = function (event) {
   position: relative;
   padding: 15px;
   margin: 15px 12px;
-
   width: 30rem;
-  min-width: -webkit-fit-content;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-  max-width: -webkit-max-content;
-  max-width: -moz-max-content;
+  min-width: max-content;
   max-width: max-content;
-
   border: 1px solid var(--jet);
   border-radius: 14px;
-  -webkit-box-shadow: var(--shadow-5);
   box-shadow: var(--shadow-5);
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
   opacity: 0;
-  -webkit-transition: var(--transition-1);
-  -o-transition: var(--transition-1);
   transition: var(--transition-1);
   z-index: 2;
 
   &.active {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     transform: scale(1);
     opacity: 1;
   }
@@ -1005,15 +811,9 @@ window.onclick = function (event) {
     border-radius: 8px;
     width: 32px;
     height: 32px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
+    justify-content: center;
     color: var(--white-2);
     font-size: 18px;
     opacity: 0.7;
@@ -1023,14 +823,11 @@ window.onclick = function (event) {
       opacity: 1;
     }
   }
+
   .modal-avatar-box {
     background: var(--bg-gradient-onyx);
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
     border-radius: 14px;
     margin-bottom: 15px;
-    -webkit-box-shadow: var(--shadow-2);
     box-shadow: var(--shadow-2);
   }
 
@@ -1057,7 +854,6 @@ window.onclick = function (event) {
   }
 }
 
-/* Клиенты */
 .clients {
   margin-bottom: 15px;
 
@@ -1066,14 +862,8 @@ window.onclick = function (event) {
   }
 
   .clients-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: flex-start;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
     align-items: flex-start;
     gap: 15px;
     margin: 0 -15px;
@@ -1082,7 +872,6 @@ window.onclick = function (event) {
     overflow-x: auto;
     scroll-behavior: smooth;
     overscroll-behavior-inline: contain;
-    -ms-scroll-snap-type: inline mandatory;
     scroll-snap-type: inline mandatory;
     scroll-padding-inline: 25px;
 
@@ -1092,14 +881,10 @@ window.onclick = function (event) {
 
       img {
         width: 100%;
-        -webkit-filter: grayscale(1);
         filter: grayscale(1);
-        -webkit-transition: var(--transition-1);
-        -o-transition: var(--transition-1);
-        transition: var(--transition-1);
+        transition: filter var(--transition-1);
 
         &:hover {
-          -webkit-filter: grayscale(0);
           filter: grayscale(0);
         }
       }
@@ -1108,90 +893,57 @@ window.onclick = function (event) {
 }
 
 /*-----------------------------------*\
-#RESUME
+# RESUME
 \*-----------------------------------*/
 .timeline {
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
 }
 .timeline-list {
-  font-size: var(--fs-4);
-  margin-left: 45px;
+  font-size: var(--fs-3);
+  margin-left: 3rem;
 }
 
 /* Skills */
 .skill {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
-  width: 100%;
 }
 .skills-title {
-  font-size: var(--fs-1);
+  // font-size: var(--fs-1);
   text-align: center;
-  -webkit-transition: var(--transition-1);
-  -o-transition: var(--transition-1);
   transition: var(--transition-1);
 }
 
 .skills-list {
-  padding: 20px;
+  padding: 1.5rem;
   width: 100%;
 }
 
 /*-----------------------------------*\
-#PORTFOLIO
+# PORTFOLIO
 \*-----------------------------------*/
 .filter-list {
-  // display: none;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-
   flex-wrap: wrap;
-  // gap: 25px;
-  // padding-left: 5px;
-  // margin-bottom: 30px;
+
+  &.show {
+    display: block;
+  }
 }
+
 #filter-menu {
-  margin-bottom: 30px;
-  // position: fixed;
-  // top: 0;
-  // left: 50%;
-  // display: inline-block;
   display: none;
-}
-.show {
-  display: block;
 }
 
 .dropdown-content {
   display: none;
-  position: relative;
   background-color: var(--white-2);
-  // border-style:double;
-  border-top: none;
   border-radius: 5px;
-  // border-width: 5px;
-
-  // min-width: 165px;
   box-shadow: var(--shadow-1);
   z-index: 5;
-  margin-left: 15px;
-  margin-right: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-
-  // border-style: ridge;
-  // border-top: none;
-  // border-color: var(--orange-yellow-crayola);
-  // outline: var(--orange-yellow-crayola) 5px dashed;
+  margin: 0 15px;
+  border-radius: 0 0 15px 15px;
 
   a {
     color: black;
@@ -1200,92 +952,67 @@ window.onclick = function (event) {
     display: block;
     cursor: pointer;
 
-    & :hover {
+    &:hover {
       background-color: var(--bg-gradient-jet);
       z-index: 9;
-      -webkit-transition: var(--transition-1);
-      -o-transition: var(--transition-1);
       transition: var(--transition-1);
     }
+
     &:hover:last-child {
       border-radius: inherit;
     }
 
-    &.btn:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+    &.btn:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5) {
       background-color: var(--light-gray-70);
-      font-weight: bolder;
+      font-weight: bold;
     }
   }
 
-  .btn {
-    &:hover {
-      color: var(--orange-yellow-crayola);
-    }
+  .btn:hover {
+    color: var(--orange-yellow-crayola);
   }
-
-  // .btn {
-  // border: red double 1px;
-  // border-top: none;
-  // border-radius: 5px;
-  // }
 }
-// .dropdown-content a {
-//   color: black;
-//   padding: 10px;
-//   text-decoration: none;
-//   display: block;
-// }
-// .dropdown-content a:hover {
-//   background-color: #ddd;
-//   z-index: 5;
-//   -webkit-transition: var(--transition-1);
-//   -o-transition: var(--transition-1);
-//   transition: var(--transition-1);
-// }
+
 .dropbtn {
-  // background-color: var(--eerie-black-2);
   background: var(--border-gradient-onyx);
   padding: 10px;
-  -webkit-box-shadow: var(--shadow-2);
   box-shadow: var(--shadow-2);
-  -webkit-transition: var(--transition-1);
-  -o-transition: var(--transition-1);
   transition: var(--transition-1);
 
   color: var(--white-2);
-  padding: 5px 1rem 5px 1rem;
+  padding: 5px 1rem;
   font-size: var(--fs-4);
   border-radius: 20px;
   border-color: var(--orange-yellow-crayola);
   border-style: ridge;
+  border-width: 2px;
   cursor: pointer;
-  // min-width: 178px;
   text-align: center;
-
-  -webkit-tap-highlight-color: transparent;
 
   &:active {
     background-color: var(--jet);
   }
+
+  &:hover {
+    background-color: var(--jet);
+  }
+
+  &:focus {
+    transition: var(--transition-1);
+  }
 }
-.dropbtn:hover {
-  background-color: var(--jet);
-}
-.dropbtn:focus {
-  // background-color: var(--jet);
-  -webkit-transition: var(--transition-1);
-  -o-transition: var(--transition-1);
-  transition: var(--transition-1);
-  // border-bottom-left-radius: 0;
-  // border-bottom-right-radius: 0;
-}
+
 .filter-item button {
   color: var(--light-gray);
   font-size: var(--fs-3);
-}
 
-.filter-item button:hover {
-  color: var(--light-gray-70);
+  &:hover {
+    color: var(--light-gray-70);
+  }
 }
 
 .filter-item button.active,
@@ -1345,8 +1072,6 @@ window.onclick = function (event) {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  -webkit-transition: 0.15s ease-in-out;
-  -o-transition: 0.15s ease-in-out;
   transition: 0.15s ease-in-out;
 
   .filter-select.active & {
@@ -1360,19 +1085,17 @@ window.onclick = function (event) {
   background: var(--eerie-black-2);
   color: var(--light-gray);
   font-size: var(--fs-6);
-  font-weight: var(--fw-300);
   text-transform: capitalize;
-  width: 100%;
   padding: 8px 10px;
   border-radius: 8px;
 
   &:hover {
-    --eerie-black-2: hsl(240, 2%, 20%);
+    background-color: hsl(240, 2%, 20%);
   }
 }
 
 /*-----------------------------------*\
-#BLOG
+# BLOG
 \*-----------------------------------*/
 .blog-posts {
   margin-bottom: 10px;
@@ -1383,12 +1106,17 @@ window.onclick = function (event) {
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 15px;
+
+  li {
+    padding-left: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
-/* Остальное в "Blog List Item.vue" */
+/* Остальное в "Blog List Item.vue" 👀 */
 
 /*-----------------------------------*\
-#CONTACT
+# CONTACT
 \*-----------------------------------*/
 .mapbox {
   position: relative;
@@ -1505,7 +1233,7 @@ window.onclick = function (event) {
     transition: var(--transition-1);
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       inset: 1px;
       background: var(--bg-gradient-jet);
@@ -1514,10 +1242,6 @@ window.onclick = function (event) {
       -webkit-transition: var(--transition-1);
       -o-transition: var(--transition-1);
       transition: var(--transition-1);
-    }
-
-    ion-icon {
-      font-size: 16px;
     }
 
     &:hover {
@@ -1543,16 +1267,19 @@ window.onclick = function (event) {
   }
 }
 
-.project-img {
-  & img {
-    // width: 30px;
-    filter: blur();
-  }
+/*-----------------------------------*\
+# EXTRA + PORTFOLIO
+\*-----------------------------------*/
+.extra,
+.portfolio {
+  padding-bottom: 0;
 }
 
 /*-----------------------------------*\
-#RESPONSIVE
+# RESPONSIVE
 \*-----------------------------------*/
+
+/** responsive smaller than 320px screen */
 @media (min-width: 320px) {
   #filter-menu {
     display: block;
@@ -1566,12 +1293,12 @@ window.onclick = function (event) {
   }
   .dropdown-content {
     width: inherit;
-    // margin-left: 12px;
-    // margin-right: 12px;
+
     text-align: center;
 
     & .btn {
       padding: 5px;
+      font-weight: bolder;
     }
   }
   .project-img {
@@ -1580,11 +1307,11 @@ window.onclick = function (event) {
     }
   }
   .skills-title {
-    // margin-left: 20px;
     font-size: var(--fs-5);
     margin-bottom: 1em;
   }
 }
+
 /** responsive larger than 450px screen */
 @media (min-width: 450px) {
   /** client */
@@ -1592,7 +1319,6 @@ window.onclick = function (event) {
     min-width: calc(33.33% - 10px);
   }
   .dropbtn {
-    // width: 180px;
     font-size: var(--fs-6);
   }
   .dropdown-content {
@@ -1602,8 +1328,7 @@ window.onclick = function (event) {
     grid-template-columns: repeat(2, 1fr);
   }
   .skills-title {
-    // margin-left: 20px;
-    font-size: var(--fs-2);
+    font-size: var(--fs-3);
     margin-bottom: 20px;
   }
 }
@@ -1668,11 +1393,10 @@ window.onclick = function (event) {
     border-radius: 14px;
     -webkit-box-shadow: var(--shadow-2);
     box-shadow: var(--shadow-1);
-    // cursor:auto;
     z-index: 1;
   }
   .content-card::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 1px;
     background: var(--bg-gradient-jet);
@@ -1805,9 +1529,6 @@ window.onclick = function (event) {
     padding: 16px 20px;
   }
 
-  .form-btn ion-icon {
-    font-size: 18px;
-  }
   .dropdown-content {
     grid-template-columns: repeat(4, 1fr);
     text-align: center;
@@ -1815,7 +1536,6 @@ window.onclick = function (event) {
       width: 100%;
       padding: 3px;
       padding-bottom: 5px;
-      // text-align: center;
       font-size: var(--fs-5);
     }
   }
@@ -1823,11 +1543,6 @@ window.onclick = function (event) {
 
 /** responsive larger than 768px screen */
 @media (min-width: 768px) {
-  /** REUSED STYLE */
-
-  html {
-    margin-bottom: 5em;
-  }
   .sidebar,
   article {
     width: 700px;
@@ -1840,26 +1555,19 @@ window.onclick = function (event) {
   #filter-menu {
     display: none;
   }
-  // .filter-list {
-  // display: none;
-  // }
-  /** SIDEBAR */
-
-  .contacts-list {
-    -ms-grid-columns: 1fr 15px 1fr;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 15px;
+  .filter-list {
+    display: none;
   }
 
-  /** NAVBAR */
+  /** SIDEBAR */
+  .contacts-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 15px;
+  }
 
   .navbar-link {
     --fs-8: 15px;
   }
-
-  /** ABOUT */
-
-  /* testimonials modal */
 
   .testimonials-modal {
     gap: 35px;
@@ -1876,25 +1584,16 @@ window.onclick = function (event) {
   }
 
   .filter-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: flex-start;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    gap: 1em;
-    padding-left: 5px;
+    gap: 0.75em;
     margin-bottom: 30px;
   }
 
   .filter-item button {
     color: var(--light-gray);
     font-size: var(--fs-5);
-    -webkit-transition: var(--transition-1);
-    -o-transition: var(--transition-1);
     transition: var(--transition-1);
   }
 
@@ -1906,57 +1605,38 @@ window.onclick = function (event) {
     color: var(--orange-yellow-crayola);
   }
 
-  /* portfolio and blog grid */
-
   .project-list,
   .blog-posts-list {
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  /** CONTACT */
-
   .input-wrapper {
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .form-btn {
-    width: -webkit-max-content;
-    width: -moz-max-content;
     width: max-content;
     margin-left: auto;
   }
 
   .skills-title {
-    // margin-left: 20px;
-    font-size: var(--fs-1);
+    font-size: var(--fs-2);
   }
 }
 
 /** responsive larger than 1024px screen */
-
 @media (min-width: 1024px) {
-  /** CUSTOM PROPERTY */
-
   :root {
-    /** shadow */
-
     --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.125);
     --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.125);
     --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.125);
   }
 
-  /** REUSED STYLE */
-
   .sidebar,
   article {
     width: 950px;
-    -webkit-box-shadow: var(--shadow-5);
     box-shadow: var(--shadow-5);
   }
-
-  /** MAIN */
 
   main {
     margin-bottom: 60px;
@@ -1964,72 +1644,81 @@ window.onclick = function (event) {
 
   .main-content {
     position: relative;
-    width: -webkit-max-content;
-    width: -moz-max-content;
     width: max-content;
     margin: auto;
   }
 
-  /** NAVBAR (СПРАВА ВВЕРХУ) */
   .navbar {
     position: absolute;
     bottom: auto;
     top: 0;
     left: auto;
     right: 0;
-    width: -webkit-max-content;
-    width: -moz-max-content;
     width: max-content;
     border-radius: 0 20px;
     padding: 0 20px;
-    -webkit-box-shadow: none;
     box-shadow: none;
   }
 
-  /** ABOUT */
-
-  /* service */
-
   .service-list {
-    -ms-grid-columns: 1fr 25px 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px 25px;
   }
-
-  /* testimonials */
 
   .testimonials-item {
     min-width: calc(50% - 15px);
   }
 
-  /* clients */
-
   .clients-item {
     min-width: calc(25% - 38px);
   }
-
-  /** PORTFOLIO */
 
   .project-list {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /** BLOG */
-
   .blog-banner-box {
     height: 230px;
   }
+
+  .skills-title {
+    font-size: var(--fs-1);
+  }
 }
 
-//!!!!!!!!!!!!!!!!!
-
+/*-----------------------------------*\
+# Карточки с проектами
+\*-----------------------------------*/
 .project-list {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
   gap: 30px;
   margin-bottom: 10px;
+
+  @media (min-width: 320px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 580px) {
+    .project-img {
+      border-radius: 16px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    .project-img {
+      height: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .project-item {
@@ -2040,6 +1729,13 @@ window.onclick = function (event) {
     -webkit-animation: scaleUp 0.25s ease forwards;
     animation: scaleUp 0.25s ease forwards;
   }
+}
+
+/* Hover для карточек проектов */
+.project-list > li:hover img {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 @-webkit-keyframes scaleUp {
@@ -2071,13 +1767,12 @@ window.onclick = function (event) {
 .project-img {
   position: relative;
   width: 100%;
-  // height: 200px;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 15px;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -2091,6 +1786,11 @@ window.onclick = function (event) {
 
   .project-item > a:hover &::before {
     background: hsla(0, 0%, 0%, 0.5);
+  }
+
+  @media (min-width: 320px) {
+    height: auto;
+    width: 100%;
   }
 }
 
@@ -2114,11 +1814,11 @@ window.onclick = function (event) {
   -webkit-transition: var(--transition-1);
   -o-transition: var(--transition-1);
   transition: var(--transition-1);
-}
 
-.project-item > a:hover .project-item-icon-box {
-  --scale: 1;
-  opacity: 1;
+  .project-item > a:hover & {
+    --scale: 1;
+    opacity: 1;
+  }
 }
 
 .project-img img {
@@ -2140,62 +1840,20 @@ window.onclick = function (event) {
   transform: scale(1.1);
 }
 
-.project-title,
-.project-category {
-  margin-left: 10px;
-}
-
 .project-title {
   color: var(--white-2);
   font-size: var(--fs-5);
   font-weight: var(--fw-400);
   text-transform: capitalize;
-  line-height: 1.3;
+  line-height: normal;
 }
 
 .project-category {
   color: var(--light-gray-70);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
-}
+  line-height: normal;
 
-/*-----------------------------------*\
-#RESPONSIVE
-\*-----------------------------------*/
-@media (min-width: 320px) {
-  .project-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .project-img {
-    height: auto;
-    width: 100%;
-  }
-}
-@media (min-width: 450px) {
-  .project-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 580px) {
-  .project-img {
-    // height: auto;
-    border-radius: 16px;
-  }
-}
-
-@media (min-width: 768px) {
-  .project-img {
-    height: auto;
-  }
-  .project-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .project-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  text-transform: capitalize;
 }
 </style>

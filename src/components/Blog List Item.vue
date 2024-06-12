@@ -1,67 +1,14 @@
-<script setup>
-import placeholder from "../assets/images/blogs/placeholder.svg";
-const { id, link, category, name, description, date } = defineProps([
-  "id",
-  "link",
-  "category",
-  "name",
-  "description",
-  "date",
-]);
-
-let projectImage = "";
-switch (id) {
-  case "1":
-    projectImage = img1;
-    break;
-  default:
-    projectImage = placeholder;
-    break;
-}
-
-let placeholderName = "";
-let placeholderDescription = "";
-let placeholderCategory = "";
-let placeholderDate = "";
-let placeholderLink = "";
-
-if (!description || !name || !category || !date || !link) {
-  if (!description) {
-    placeholderDescription = "???";
-  } else placeholderDescription = description;
-  if (!name) {
-    placeholderName = "PLACEHOLDER TITLE";
-  } else placeholderName = name;
-  if (!category) {
-    placeholderCategory = "Fluff";
-  } else placeholderCategory = category;
-  if (!date) {
-    placeholderDate = "NO DATE";
-  } else placeholderDate = date;
-  if (!link) {
-    placeholderLink = "#";
-  } else placeholderLink = link;
-} else {
-  placeholderName = name;
-  placeholderDescription = description;
-  placeholderCategory = category;
-  placeholderDate = date;
-  placeholderLink = link;
-}
-</script>
-
 <template>
+  <!-- !! BLOG POST !! -->
   <li class="blog-post-item">
     <a :href="placeholderLink">
-      <figure
-        class="blog-banner-box"
-        style="display: flex; justify-content: center"
-      >
+      <figure class="blog-banner-box" style="display: flex; justify-content: center">
         <img
           :src="projectImage"
           style="width: fit-content"
           alt="Design conferences in 2022"
           loading="lazy"
+          draggable="false"
         />
       </figure>
 
@@ -84,18 +31,51 @@ if (!description || !name || !category || !date || !link) {
   </li>
 </template>
 
+<script setup>
+// TODO: Добавлять ссылки на картинки для блогов, чтобы потом их использовать
+import PlaceholderImg from '../assets/images/blogs/placeholder.svg'
+
+const { id, link, category, name, description, date } = defineProps([
+  'id',
+  'link',
+  'category',
+  'name',
+  'description',
+  'date'
+])
+
+const placeholderImage = PlaceholderImg
+
+/**
+ * Получает значение из props. Если какое-то значение не передано, возвращает значение по умолчанию.
+ * @param {String} value
+ * @param {String} defaultValue
+ * @return {String}
+ */
+const getValue = (value, defaultValue) => (value ? value : defaultValue)
+
+// Обработка значений, переданных из props
+const placeholderName = getValue(name, 'PLACEHOLDER TITLE')
+const placeholderDescription = getValue(description, 'PLACEHOLDER DESCRIPTION')
+const placeholderCategory = getValue(category, 'NO CATEGORY')
+const placeholderDate = getValue(date, 'NO DATE')
+const placeholderLink = getValue(link, '/')
+
+// TODO: Добавить картинки для блогов, если такие есть. Условие нужно будет изменить.
+const projectImage = id === '1' ? '../assets/images/blogs/1.png' : placeholderImage
+</script>
+
 <style lang="scss" scoped>
 .blog-post-item > a {
   position: relative;
   background: var(--border-gradient-onyx);
   height: 100%;
-  -webkit-box-shadow: var(--shadow-4);
   box-shadow: var(--shadow-4);
   border-radius: 16px;
   z-index: 1;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 1px;
     border-radius: inherit;
@@ -112,17 +92,12 @@ if (!description || !name || !category || !date || !link) {
     img {
       width: 100%;
       height: 100%;
-      -o-object-fit: cover;
       object-fit: cover;
-      -webkit-transition: var(--transition-1);
-      -o-transition: var(--transition-1);
       transition: var(--transition-1);
     }
   }
 
   &:hover .blog-banner-box img {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
     transform: scale(1.1);
   }
 
@@ -130,14 +105,8 @@ if (!description || !name || !category || !date || !link) {
     padding: 15px;
 
     .blog-meta {
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: start;
-      -ms-flex-pack: start;
       justify-content: flex-start;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
       align-items: center;
       gap: 7px;
       margin-bottom: 10px;
@@ -160,13 +129,7 @@ if (!description || !name || !category || !date || !link) {
     .blog-item-title {
       margin-bottom: 10px;
       line-height: 1.3;
-      -webkit-transition: var(--transition-1);
-      -o-transition: var(--transition-1);
-      transition: var(--transition-1);
-    }
-
-    &:hover .blog-item-title {
-      color: var(--orange-yellow-crayola);
+      transition: color var(--transition-1);
     }
 
     .blog-text {
@@ -175,6 +138,10 @@ if (!description || !name || !category || !date || !link) {
       font-weight: var(--fw-300);
       line-height: 1.6;
     }
+  }
+
+  &:hover .blog-item-title {
+    color: var(--orange-yellow-crayola);
   }
 }
 </style>

@@ -1,52 +1,42 @@
-import { createApp } from "vue";
-import "./style.css";
-import App from "./App.vue";
+'use strict'
 
-import i18n from "./i18n";
+import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+import i18n from './i18n'
+
+// PLUGINS
+import checkLocale from './plugins/checkLocale'
 
 const app = createApp(App)
-
 app.use(i18n)
-
+app.use(checkLocale, { i18n })
 app.mount('#app')
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Меняем язык названия страницы
+document.title = i18n.global.t('title')
 
-// Изменяем название вкладки в зависимости от языка
-document.title = i18n.global.t("title");
+// NAVIGATION
+const toggleElement = (elem) => elem.classList.toggle('active')
 
-// element toggle function
-const elementToggleFunc = function (elem) {
-  elem.classList.toggle("active");
-};
+const sidebar = document.querySelector('[data-sidebar]')
+const sidebarBtn = document.querySelector('[data-sidebar-btn]')
+sidebarBtn.addEventListener('click', () => toggleElement(sidebar))
 
-// sidebar variables
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+const navigationLinks = document.querySelectorAll('[data-nav-link]')
+const pages = document.querySelectorAll('[data-page]')
 
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () {
-  elementToggleFunc(sidebar);
-});
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ПОЛЕ НАВИГАЦИИ
-
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-// console.log(navigationLinks, pages);
-
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
+navigationLinks.forEach((link, index) => {
+  link.addEventListener('click', () => {
+    pages.forEach((page, pageIndex) => {
+      if (link.innerHTML.toLowerCase() === page.dataset.page) {
+        page.classList.add('active')
+        link.classList.add('active')
+        window.scrollTo(0, 0)
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        page.classList.remove('active')
+        navigationLinks[pageIndex].classList.remove('active')
       }
-    }
-  });
-}
+    })
+  })
+})

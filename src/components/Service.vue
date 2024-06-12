@@ -1,43 +1,44 @@
-<script setup>
-const { id, name, description } = defineProps(["id", "name", "description"]);
-</script>
-
 <template>
+  <!-- !! SERVICE !! -->
   <li class="service-item">
     <div class="service-icon-box" v-if="id == 1">
       <img
-        src="../assets/images/ui/coding.svg"
+        src="../assets/images/ui/icons/about/coding.svg"
         alt="design icon"
         width="40"
         height="40"
         loading="lazy"
+        draggable="false"
       />
     </div>
     <div class="service-icon-box" v-else-if="id == 2">
       <img
-        src="../assets/images/ui/layout.svg"
+        src="../assets/images/ui/icons/about/layout.svg"
         alt="design icon"
         width="40"
         height="40"
         loading="lazy"
+        draggable="false"
       />
     </div>
     <div class="service-icon-box" v-else-if="id == 3">
       <img
-        src="../assets/images/ui/vue.svg"
+        src="../assets/images/ui/icons/about/vue.svg"
         alt="design icon"
         width="40"
         height="40"
         loading="lazy"
+        draggable="false"
       />
     </div>
     <div class="service-icon-box" v-else-if="id == 4">
       <img
-        src="../assets/images/ui/folder-project-placeholder.svg"
+        src="../assets/images/ui/icons/about/folder-project-placeholder.svg"
         alt="design icon"
         width="40"
         height="40"
         loading="lazy"
+        draggable="false"
       />
     </div>
 
@@ -51,10 +52,13 @@ const { id, name, description } = defineProps(["id", "name", "description"]);
   </li>
 </template>
 
+<script setup>
+const { id, name, description } = defineProps(['id', 'name', 'description'])
+</script>
+
 <style lang="scss">
 .service-title {
   margin-bottom: 20px;
-  // font-size: var(--fs-1);
 }
 
 .service-list {
@@ -74,7 +78,7 @@ const { id, name, description } = defineProps(["id", "name", "description"]);
     z-index: 1;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       inset: 1px;
       background: var(--bg-gradient-jet);

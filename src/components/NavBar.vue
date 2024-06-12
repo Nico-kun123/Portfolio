@@ -1,6 +1,5 @@
-<script setup></script>
-
 <template>
+  <!-- !! NAVBAR !! -->
   <nav class="navbar">
     <ul class="navbar__list">
       <li class="navbar__item">
@@ -31,43 +30,35 @@
 #NAVBAR
 \*-----------------------------------*/
 
-// NAVBAR (СНИЗУ СТРАНИЦЫ)
 .navbar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   background: hsla(240, 1%, 17%, 0.5);
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--jet);
   border-radius: 12px 12px 0 0;
-  -webkit-box-shadow: var(--shadow-2);
   box-shadow: var(--shadow-2);
   z-index: 10;
 
   &__list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     padding: 0 10px;
     gap: 10px;
   }
 
+  &__item {
+    padding: 0 10px;
+  }
+
   &__link {
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
     color: var(--light-gray);
-    font-size: var(--fs-8);
-    padding: 0;
-    -webkit-transition: color var(--transition-1);
-    -o-transition: color var(--transition-1);
+    // font-size: var(--fs-4);
     transition: color var(--transition-1);
 
     &:hover,
@@ -86,40 +77,31 @@
     &__list {
       gap: 5px;
     }
+
     &__link {
-      font-size: 9pt;
-      padding: 1.5em 0;
+      font-size: var(--fs-7);
+      padding: 1.1em 0;
     }
   }
-  @media (min-width: 350px) {
-    &__list {
-      gap: 3px;
-    }
-    &__link {
-      font-size: 11pt;
-    }
-  }
+
   @media (min-width: 450px) {
     &__list {
       gap: 20px;
     }
     &__link {
-      font-size: 11pt;
+      font-size: var(--fs-6);
     }
   }
+
   @media (min-width: 768px) {
     &__link {
-      font-size: 13pt;
-      // padding: 1em;
+      font-size: var(--fs-4);
     }
   }
 
   @media (min-width: 1024px) {
-    &__list {
-      font-size: 15pt;
-    }
-
     &__link {
+      font-size: var(--fs-3);
       font-weight: var(--fw-500);
       padding: 0.5em;
     }

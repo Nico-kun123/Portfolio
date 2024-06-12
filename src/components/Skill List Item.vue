@@ -1,8 +1,18 @@
 <script setup>
-const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
+import { computed } from 'vue'
+const { skillName, skillValue } = defineProps(['skillName', 'skillValue'])
+
+const progressColor = computed(() => {
+  if (skillValue >= 80) return '#ff6600' // orange
+  if (skillValue >= 60) return '#00c000' // green
+  if (skillValue >= 40) return '#ffd700' // yellow
+  if (skillValue >= 20) return '#ff2323' // red
+  return 'silver'
+})
 </script>
 
 <template>
+  <!-- !! HARD SKILL + PROGRESS BAR !! -->
   <li class="skills-item">
     <div class="title-wrapper">
       <h5 class="h4">{{ skillName }}</h5>
@@ -11,29 +21,8 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
 
     <div class="skill-progress-bg">
       <div
-        v-if="skillValue >= 80"
         class="skill-progress-fill"
-        :style="{ width: skillValue + '%', background: 'orange' }"
-      ></div>
-      <div
-        v-else-if="skillValue >= 60"
-        class="skill-progress-fill"
-        :style="{ width: skillValue + '%', background: 'lime' }"
-      ></div>
-      <div
-        v-else-if="skillValue >= 40"
-        class="skill-progress-fill"
-        :style="{ width: skillValue + '%', background: 'yellow' }"
-      ></div>
-      <div
-        v-else-if="skillValue >= 20"
-        class="skill-progress-fill"
-        :style="{ width: skillValue + '%', background: 'red' }"
-      ></div>
-      <div
-        v-else
-        class="skill-progress-fill"
-        :style="{ width: skillValue + '%', background: 'silver' }"
+        :style="{ width: `${skillValue}%`, background: progressColor }"
       ></div>
     </div>
   </li>
@@ -42,30 +31,24 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
 <style lang="scss" scoped>
 .skill-progress-bg {
   background: var(--jet);
-  width: 100%;
   height: 8px;
-  border-radius: 10px;
+  border-radius: 5px;
+  overflow: hidden;
 }
-.skills-title {
-  margin-bottom: 20px;
-  font-size: var(--fs-1);
-}
+
 .skill-progress-fill {
-  background: var(--text-gradient-yellow);
   height: 100%;
-  border-radius: inherit;
+  transition: width 0.3s ease;
 }
-.skills-list {
-  padding: 20px;
+
+.skills-item {
+  margin-bottom: 15px;
 }
+
 .title-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   margin-bottom: 10px;
 }
 .skill {
@@ -83,8 +66,8 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
 }
 
 @media (min-width: 450px) {
-  .skills-item:not(:last-child) {
-    margin-bottom: 15px;
+  .skills-item {
+    margin-bottom: 20px;
   }
 
   .icon-box {
@@ -95,11 +78,8 @@ const { skillName, skillValue } = defineProps(["skillName", "skillValue"]);
     font-size: 24px;
   }
 }
-@media (min-width: 580px) {
-  .skills-item:not(:last-child) {
-    margin-bottom: 20px;
-  }
 
+@media (min-width: 580px) {
   .icon-box {
     width: 50px;
     height: 50px;
