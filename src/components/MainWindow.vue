@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Применяет фильтр к проектам: показывает все проекты с указанным названием класса.
  *
- * @param {string} className - Название класса, по которому производится фильтрация.
+ * @param {string} className — Название класса, по которому производится фильтрация.
  * @return {void}
  */
 function filterByClassName(className) {
@@ -75,8 +75,8 @@ function filterByClassName(className) {
 
 /**
  * Добавляет класс к элементу.
- * @param {Element} element - Элемент, к которому нужно добавить класс.
- * @param {string} name - Название класса.
+ * @param {Element} element — Элемент, к которому нужно добавить класс.
+ * @param {string} name — Название класса.
  * @return {void}
  */
 function addClass(element, name) {
@@ -91,8 +91,8 @@ function addClass(element, name) {
 
 /**
  * Удаляет класс из элемента.
- * @param {Element} element - Элемент, у которого нужно удалить класс.
- * @param {string} name - Название класса.
+ * @param {Element} element — Элемент, у которого нужно удалить класс.
+ * @param {string} name — Название класса.
  * @return {void}
  */
 function removeClass(element, name) {
@@ -355,11 +355,14 @@ window.onclick = function (event) {
       <div class="separator"></div>
 
       <!-- ТЕХНИЧЕСКИЕ НАВЫКИ + ШКАЛА -->
+      <!-- TODO: Можно попытаться как-то оценить свои знания в этих технологиях в процентах (хз как)-->
       <section class="skill">
         <h3 v-if="$isRussian()" class="h3 skills-title">Мои технические навыки (hard-skills)</h3>
         <h3 v-else class="h3 skills-title">My technical skills (hard-skills)</h3>
 
-        <ul class="skills-list content-card">
+        <p>{{ t('extra[2]') }}</p>
+
+        <div class="skills-list content-card">
           <Skill v-if="$isRussian()" skill-name="Английский язык (C1)" skill-value="78" />
           <Skill v-else skill-name="English (C1)" skill-value="78" />
           <div class="separator"></div>
@@ -373,7 +376,7 @@ window.onclick = function (event) {
           <Skill skillName="Typescript" skillValue="70" />
           <Skill skillName="JQuery" skillValue="40" />
           <Skill skillName="React.js" skillValue="26" />
-        </ul>
+        </div>
       </section>
     </article>
 
@@ -390,6 +393,7 @@ window.onclick = function (event) {
         <br />
 
         <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
+        <!-- TODO: Если нужно добавить новые фильтры, то нужно добавить их здесь (Desktop) -->
         <div id="filter-menu">
           <button v-if="$isRussian()" @click="showDropdown()" class="dropbtn">
             Выберите фильтр
@@ -410,10 +414,8 @@ window.onclick = function (event) {
               >Тестовые задания</a
             >
             <a class="btn" v-else @click="filterByClassName('Test task')">Test Tasks</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('layout')"
-              >Вёрстка из Figma</a
-            >
-            <a class="btn" v-else @click="filterByClassName('layout')">Layouts from Figma</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('layout')">Вёрстка</a>
+            <a class="btn" v-else @click="filterByClassName('layout')">Layouts</a>
 
             <a class="btn" @click="filterByClassName('typescript')">Typescript</a>
             <!-- <a class="btn" @click="filterByClassName('react.js')">React.js</a> -->
@@ -425,18 +427,19 @@ window.onclick = function (event) {
             <a class="btn" @click="filterByClassName('jest')">Jest</a>
             <!-- <a class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</a> -->
             <a class="btn" @click="filterByClassName('postgresql')">PostgreSQL</a>
+            <a class="btn" @click="filterByClassName('firebase')">Firebase</a>
             <a class="btn" @click="filterByClassName('python')">Python</a>
             <a class="btn" v-if="$isRussian()" @click="filterByClassName('neural network')"
               >Нейросеть</a
             >
             <a class="btn" v-else @click="filterByClassName('neural network')">Neural Network</a>
-            <a class="btn" @click="filterByClassName('firebase')">Firebase</a>
           </div>
 
           <div class="separator"></div>
         </div>
 
         <!-- ФИЛЬТР ПРОЕКТОВ (ДРУГИЕ УСТРОЙСТВА) -->
+        <!-- TODO: Если нужно добавить новые фильтры, то нужно добавить их здесь (Mobile) -->
         <ul class="filter-list">
           <li class="filter-item">
             <button v-if="$isRussian()" @click="filterByClassName('all')" class="btn">Все</button>
@@ -513,6 +516,10 @@ window.onclick = function (event) {
           </li>
 
           <li class="filter-item">
+            <button @click="filterByClassName('firebase')" class="btn">Firebase</button>
+          </li>
+
+          <li class="filter-item">
             <button @click="filterByClassName('python')" class="btn">Python</button>
           </li>
 
@@ -524,39 +531,11 @@ window.onclick = function (event) {
               Neural Network
             </button>
           </li>
-
-          <li class="filter-item">
-            <button @click="filterByClassName('firebase')" class="btn">Firebase</button>
-          </li>
         </ul>
 
         <!-- САМИ ПРОЕКТЫ -->
         <ul class="project-list">
-          <!-- САМИ ПРОЕКТЫ (RU) -->
           <li
-            v-if="$isRussian()"
-            v-for="projectRU in projects"
-            :key="projectRU.id"
-            :class="`filterDiv ${projectRU.category.toLowerCase()}`"
-            :data-category="projectRU.category.toLowerCase()"
-          >
-            <a :href="projectRU.link" target="_blank">
-              <figure class="project-img">
-                <img
-                  :src="projectRU.image"
-                  :alt="projectRU.title.toLowerCase()"
-                  loading="lazy"
-                  draggable="false"
-                />
-              </figure>
-              <h3 class="project-title">{{ projectRU.title }}</h3>
-              <label class="project-category">{{ projectRU.category }}</label>
-            </a>
-          </li>
-
-          <!-- САМИ ПРОЕКТЫ (ENG) -->
-          <li
-            v-else
             v-for="project in projects"
             :key="project.id"
             :class="`filterDiv ${project.category.toLowerCase()}`"
@@ -587,6 +566,7 @@ window.onclick = function (event) {
       </header>
 
       <!-- ЭЛЕМЕНТЫ МОЕГО (несуществующего) БЛОГА -->
+      <!-- TODO: Сюда можно будет потом добавить инфу про мои блоги/посты (если это вообще случится) -->
       <section class="blog-posts">
         <ul class="blog-posts-list">
           <!-- <Blog
@@ -611,7 +591,6 @@ window.onclick = function (event) {
       <section class="about-text">
         <p>{{ t('extra[0]') }}</p>
         <p>{{ t('extra[1]') }}</p>
-        <p>{{ t('extra[2]') }}</p>
 
         <div class="separator"></div>
 
@@ -625,6 +604,7 @@ window.onclick = function (event) {
           <li>{{ t('hobbies[3]') }}</li>
           <li>{{ t('hobbies[4]') }}</li>
           <li>{{ t('hobbies[5]') }}</li>
+          <li>{{ t('hobbies[6]') }}</li>
         </ul>
       </section>
     </article>
@@ -632,6 +612,17 @@ window.onclick = function (event) {
 </template>
 
 <style lang="scss" scoped>
+header {
+  & .article-title {
+    @media (min-width: 320px) {
+      font-size: var(--fs-2);
+    }
+
+    @media (min-width: 580px) {
+      font-size: var(--fs-1);
+    }
+  }
+}
 /*-----------------------------------*\
 # SIDEBAR
 \*-----------------------------------*/
@@ -732,7 +723,7 @@ window.onclick = function (event) {
   justify-content: center;
   align-items: center;
   overflow-y: auto;
-  scroll-chaining: none;
+  // scroll-chaining: none;
   overscroll-behavior: contain;
   z-index: 20;
   pointer-events: none;
@@ -751,6 +742,7 @@ window.onclick = function (event) {
 .filterDiv {
   padding: 0;
   display: none;
+  -webkit-tap-highlight-color: transparent;
 
   &.show,
   &.active {
@@ -908,6 +900,12 @@ window.onclick = function (event) {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & p {
+    &:first-letter {
+      margin-left: 1em;
+    }
+  }
 }
 .skills-title {
   // font-size: var(--fs-1);
@@ -918,6 +916,7 @@ window.onclick = function (event) {
 .skills-list {
   padding: 1.5rem;
   width: 100%;
+  margin-top: 1.5em;
 }
 
 /*-----------------------------------*\
@@ -951,6 +950,7 @@ window.onclick = function (event) {
     text-decoration: none;
     display: block;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
       background-color: var(--bg-gradient-jet);
@@ -982,7 +982,7 @@ window.onclick = function (event) {
   padding: 10px;
   box-shadow: var(--shadow-2);
   transition: var(--transition-1);
-
+  -webkit-tap-highlight-color: transparent;
   color: var(--white-2);
   padding: 5px 1rem;
   font-size: var(--fs-4);
@@ -1289,7 +1289,7 @@ window.onclick = function (event) {
   }
   .dropbtn {
     width: 100%;
-    font-size: var(--fs-7);
+    font-size: var(--fs-6);
   }
   .dropdown-content {
     width: inherit;
@@ -1299,6 +1299,7 @@ window.onclick = function (event) {
     & .btn {
       padding: 5px;
       font-weight: bolder;
+      font-size: var(--fs-5);
     }
   }
   .project-img {

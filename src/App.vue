@@ -14,6 +14,11 @@ import Main from './components/MainWindow.vue'
 // import isRussian from './plugins/checkLocale'
 
 // Информация о проектах
+/*
+  TODO: Если нужно добавить новые проекты, то нужно их добавить в assets/projects.json.
+  Только делай так, чтобы category у проекта соответствовал добавленному фильтру (в "MainWindow.vue").
+  И сами фильтры тоже надо добавить в тот же vue-файл.
+*/
 import MyProjects from './assets/projects.json'
 const { projects, projectsRU } = MyProjects
 </script>

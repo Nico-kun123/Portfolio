@@ -1,5 +1,4 @@
 <template>
-  <!-- !! NAVBAR !! -->
   <nav class="navbar">
     <ul class="navbar__list">
       <li class="navbar__item">
@@ -76,11 +75,12 @@
   @media (min-width: 320px) {
     &__list {
       gap: 5px;
+      width: 100%;
     }
 
     &__link {
-      font-size: var(--fs-7);
-      padding: 1.1em 0;
+      font-size: var(--fs-6);
+      padding: 1.3em 0;
     }
   }
 
@@ -103,7 +103,7 @@
     &__link {
       font-size: var(--fs-3);
       font-weight: var(--fw-500);
-      padding: 0.5em;
+      padding: 0.5em 0;
     }
   }
 }

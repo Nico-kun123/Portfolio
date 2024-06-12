@@ -210,7 +210,6 @@ svg {
 
 .sidebar {
   margin-bottom: 15px;
-  // max-height: 112px;
   overflow: hidden;
   -webkit-transition: var(--transition-2);
   -o-transition: var(--transition-2);
@@ -236,8 +235,6 @@ svg {
 }
 
 .avatar__box {
-  // background: var(--bg-gradient-onyx);
-
   img {
     border-radius: 25px;
     width: 100px;
@@ -248,7 +245,7 @@ svg {
 .info__content {
   .name {
     color: var(--white-2);
-    font-size: var(--fs-4);
+    // font-size: var(--fs-4);
     font-weight: var(--fw-500);
     letter-spacing: -0.25px;
     margin-bottom: 10px;
@@ -257,7 +254,7 @@ svg {
   .title {
     color: var(--white-1);
     background: var(--onyx);
-    font-size: var(--fs-8);
+    // font-size: var(--fs-8);
     font-weight: var(--fw-300);
     width: -webkit-max-content;
     width: -moz-max-content;
@@ -271,12 +268,6 @@ svg {
     display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    // justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    // align-items: center;
     gap: 0.5em;
   }
 }
@@ -382,7 +373,6 @@ svg {
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
-  // padding-bottom: 4px;
   padding-left: 8px;
   -webkit-tap-highlight-color: transparent;
 }
@@ -434,9 +424,8 @@ svg {
   }
 
   .avatar__box {
-    border-radius: 20px;
-
-    img {
+    & img {
+      border-radius: 50%;
       width: 80px;
       height: auto;
     }
@@ -449,11 +438,20 @@ svg {
     }
 
     .title {
-      padding: 3px 12px;
+      padding: 1px 12px;
       font-size: var(--fs-6);
       background-color: var(--orange-yellow-crayola);
       color: black;
       font-weight: bold;
+    }
+
+    & .title-box {
+      gap: 0.25em;
+      padding: 0;
+
+      & label {
+        font-size: var(--fs-5);
+      }
     }
   }
 
@@ -518,6 +516,10 @@ svg {
       padding: 3px 12px;
       font-size: var(--fs-6);
     }
+
+    & .title-box {
+      gap: 0.5em;
+    }
   }
 
   .info__more-btn {
@@ -565,9 +567,8 @@ svg {
   }
 
   .avatar__box {
-    border-radius: 30px;
-
     img {
+      border-radius: 50%;
       width: 120px;
       height: auto;
     }
