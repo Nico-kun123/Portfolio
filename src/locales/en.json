@@ -1,0 +1,53 @@
+{
+  "aboutMe": [
+    "Dynamic and motivated Frontend Developer and Tester seeking internship or full-time job opportunities to apply and enhance my skills in creating modern, responsive, and interactive websites.",
+    "Currently pursuing a Bachelor's degree in Artificial Intelligence Engineering, with a passion for AI and Machine Learning. Proficient in HTML, CSS, JavaScript, TypeScript, Vue.js, Vite.js, scss/sass, PostgreSQL, Jest. Familiar with utilizing AI tools, including ChatGPT, to enhance productivity and problem-solving.",
+    "Eager to collaborate within a team and contribute to exciting projects! I am confident in my ability to bring technical expertise, dedication, and a strong work ethic to any organization. Open to challenges, I am excited about the opportunity to grow and excel in a professional environment!",
+    "I can attribute the following to my qualities (soft-skills):"
+  ],
+  "extra": [
+    "NOTE: This website supports 2 languages: English and Russian. If your browser's primary language is Russian, then the website will be in Russian. Otherwise, the website will be in English.",
+    "To see my contact details (email, phone, social media links), click on the 'Show contacts' button in the top right corner of the page.",
+    "Link to the certificate for knowledge of the English language: https://efset.org/cert/1pK56j"
+  ],
+  "filterInfo": [
+    "TIP: Select a filter to find projects quicker.",
+    "You can filter by programming language, technology stack or by project type (Pet-project, test assignment, big projects or layout development)."
+  ],
+  "hobbies": [
+    "Listening to music. I mostly listen to video game soundtracks.",
+    "Learning Japanese on my free time using the Duolingo app.",
+    "Playing video games from time to time.",
+    "Creating UI for my projects. I like this 'creative aspect' of Frontend development.",
+    "Making videos on YouTube.",
+    "Walking, if the weather allows and if I have the time and motivation."
+  ],
+  "resumeNames": ["Frontend Developer;", "Tester (QA/Manual)."],
+  "serviceDesc": [
+    "Creating websites that are visually appealing and function well on all devices and browsers.",
+    "Manual testing, writing test scenarios. API testing using Insomnia/Postman. Writing unit tests with Jest.",
+    "Creating SPA web applications, using Vue.js (Vite.js, Vue Router, i18n)."
+  ],
+  "serviceName": [
+    "Adaptive & cross-browser web design",
+    "Manual testing, API testing, writing test scenarios and unit tests",
+    "Web development on Vue.js"
+  ],
+  "softSkills": [
+    "Responsibility: I consistently strive to take ownership and own up to my failures. I try to complete tasks before deadline.",
+    "Ability to Focus: I can concentrate on tasks and take them to completion.",
+    "Accepting Criticism: I believe in both giving and accepting constructive criticism for improvement.",
+    "Communication Skills: I am an active listener and I try to express my thoughts and ideas clearly.",
+    "Adaptability: I am willing to learn new skills or explore technologies."
+  ],
+  "timelineItemDesc": [
+    "Master's degree, majoring in «Artificial Intelligence Engineering».",
+    "Bachelor's degree, majoring in «Informatics and Computer Science». My Bachelor's project was an E-Shop Parser for product data collection",
+    "The school where I studied for 11 years. I graduated with a gold medal."
+  ],
+  "timelineItemName": [
+    "Siberian Federal University. School of Space and Information Technology",
+    "«Lyceum No. 10» of the city of Krasnoyarsk"
+  ],
+  "title": "My Portfolio"
+}
