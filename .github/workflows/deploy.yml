@@ -1,0 +1,27 @@
+name: Сборка проекта в production и его публикация на GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Загрузка репозитория
+        uses: actions/checkout@v2
+
+      - name: Установка Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Сборка и публикация 😎
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run deploy:build
