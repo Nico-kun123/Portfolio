@@ -21,10 +21,10 @@ jobs:
       actions: 'write'
       checks: 'write'
       deployments: 'write'
+
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v3
@@ -36,13 +36,12 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        # Using npm ci is generally faster than running npm i because it caches dependencies
         run: |
           npm ci
+          npm audit fix
 
       - name: Build the app
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Configure Git
         run: |
@@ -51,17 +50,6 @@ jobs:
           git config --global credential.helper "store --file=~/.git-credentials"
           echo "https://${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload build directory content
-          path: 'dist/'
-
       - name: Deploy to GitHub Pages 😎
-        id: deployment
-        uses: actions/deploy-pages@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx gh-pages -d dist -r https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Nico-kun123/Portfolio.git
