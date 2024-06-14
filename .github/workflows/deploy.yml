@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Загрузка репозитория
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Установка Node.js
         uses: actions/setup-node@v3
@@ -25,7 +27,8 @@ jobs:
         run: |
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
-          git remote set-url origin https://github.com/Nico-kun123/Portfolio.git
 
       - name: Сборка и публикация 😎
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run deploy:build
