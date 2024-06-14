@@ -28,6 +28,4 @@ jobs:
           git remote set-url origin https://github.com/Nico-kun123/Portfolio.git
 
       - name: Сборка и публикация 😎
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run deploy:build
