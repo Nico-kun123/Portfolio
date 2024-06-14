@@ -914,12 +914,6 @@ header {
   transition: var(--transition-1);
 }
 
-.skills-list {
-  padding: 1.5rem;
-  width: 100%;
-  margin-top: 1.5em;
-}
-
 /*-----------------------------------*\
 # PORTFOLIO
 \*-----------------------------------*/
@@ -1311,6 +1305,12 @@ header {
   .skills-title {
     font-size: var(--fs-5);
     margin-bottom: 1em;
+  }
+  .skills-list {
+    padding: 1rem;
+    padding-left: 0;
+    width: 100%;
+    margin-top: 1.5em;
   }
 }
 

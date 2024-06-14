@@ -41,10 +41,6 @@ const progressColor = computed(() => {
   transition: width 0.3s ease;
 }
 
-.skills-item {
-  margin-bottom: 15px;
-}
-
 .title-wrapper {
   display: flex;
   align-items: center;
@@ -80,6 +76,9 @@ const progressColor = computed(() => {
 }
 
 @media (min-width: 580px) {
+  .skills-item {
+    padding: 0;
+  }
   .icon-box {
     width: 50px;
     height: 50px;
