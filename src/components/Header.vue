@@ -1,5 +1,5 @@
 <script setup>
-import ProfilePic from '../assets/images/profile.jpg'
+import ProfilePic from '../assets/images/profile.jpeg'
 
 // Проверка языка браузера (i18n.locale)
 import { getCurrentInstance } from 'vue'
