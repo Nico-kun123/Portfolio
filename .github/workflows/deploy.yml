@@ -8,27 +8,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Загрузка репозитория
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 0
 
-      - name: Установка Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Установка зависимостей
+      - name: Install dependencies
         run: npm install
 
-      - name: Настройка пользователя Git
+      - name: Configure Git
         run: |
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
+          git config --global credential.helper "store --file=~/.git-credentials"
+          echo "https://${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      - name: Сборка и публикация 😎
+      - name: Build and publish 😎
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run deploy:build
