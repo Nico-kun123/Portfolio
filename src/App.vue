@@ -30,7 +30,6 @@ const { projects, projectsRU } = MyProjects
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--main-font);
 }
 
 a {

@@ -101,7 +101,7 @@ const { id, name, description } = defineProps(['id', 'name', 'description'])
 
       .service-item-text {
         color: var(--light-gray);
-        font-size: var(--fs-6);
+        font-size: var(--fs-5);
         font-weight: var(--fw-3);
         line-height: 1.6;
       }

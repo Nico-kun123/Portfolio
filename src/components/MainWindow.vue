@@ -901,15 +901,8 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  & p {
-    &:first-letter {
-      margin-left: 1em;
-    }
-  }
 }
 .skills-title {
-  // font-size: var(--fs-1);
   text-align: center;
   transition: var(--transition-1);
 }
@@ -1303,7 +1296,7 @@ header {
     }
   }
   .skills-title {
-    font-size: var(--fs-5);
+    font-size: var(--fs-3);
     margin-bottom: 1em;
   }
   .skills-list {
