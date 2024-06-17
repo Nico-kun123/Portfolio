@@ -182,8 +182,8 @@ window.onclick = function (event) {
         <h4 v-else class="h2 service-title">What do I do:</h4>
         <ul class="service-list">
           <Service id="1" :name="t('serviceName[0]')" :description="t('serviceDesc[0]')" />
-          <Service id="4" :name="t('serviceName[1]')" :description="t('serviceDesc[1]')" />
           <Service id="3" :name="t('serviceName[2]')" :description="t('serviceDesc[2]')" />
+          <Service id="4" :name="t('serviceName[1]')" :description="t('serviceDesc[1]')" />
         </ul>
       </section>
 
@@ -425,7 +425,10 @@ window.onclick = function (event) {
               >Без React/Vue</a
             >
             <a class="btn" v-else @click="filterByClassName('no react/vue')">No React/Vue</a>
-            <a class="btn" @click="filterByClassName('jest')">Jest</a>
+            <a class="btn" v-if="$isRussian()" @click="filterByClassName('tests')"
+              >Написание тестов</a
+            >
+            <a class="btn" v-else @click="filterByClassName('tests')">Tests</a>
             <!-- <a class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</a> -->
             <a class="btn" @click="filterByClassName('postgresql')">PostgreSQL</a>
             <a class="btn" @click="filterByClassName('firebase')">Firebase</a>
@@ -497,7 +500,10 @@ window.onclick = function (event) {
           </li>
 
           <li class="filter-item">
-            <button @click="filterByClassName('jest')" class="btn">Jest</button>
+            <button class="btn" v-if="$isRussian()" @click="filterByClassName('tests')">
+              Написание тестов
+            </button>
+            <button v-else @click="filterByClassName('tests')" class="btn">Tests</button>
           </li>
 
           <!-- <li class="filter-item">
@@ -901,6 +907,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & p {
+    text-align: center;
+  }
 }
 .skills-title {
   text-align: center;
@@ -1305,6 +1315,14 @@ header {
     width: 100%;
     margin-top: 1.5em;
   }
+
+  .title-wrapper {
+    margin-left: 0.25em;
+
+    & h3 {
+      font-size: var(--fs-2);
+    }
+  }
 }
 
 /** responsive larger than 450px screen */
@@ -1534,6 +1552,10 @@ header {
       font-size: var(--fs-5);
     }
   }
+
+  .title-wrapper {
+    margin-left: 0.4em;
+  }
 }
 
 /** responsive larger than 768px screen */
@@ -1678,6 +1700,10 @@ header {
 
   .skills-title {
     font-size: var(--fs-1);
+  }
+
+  .title-wrapper {
+    margin-left: 0.15em;
   }
 }
 
