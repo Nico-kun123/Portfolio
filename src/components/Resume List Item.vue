@@ -39,7 +39,7 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
   position: relative;
   padding: 0;
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 1.5em;
   }
 
   .timeline-item-title {
@@ -56,7 +56,7 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
     position: absolute;
     top: -25px;
     left: -30px;
-    width: 1px;
+    width: 2px;
     height: calc(100% + 50px);
     background: var(--jet);
   }
@@ -89,14 +89,14 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
   /** client */
   .timeline-item {
     & .timeline-text {
-      font-size: var(--fs-5);
+      font-size: var(--fs-4);
     }
     & .timeline-item-title {
-      font-size: var(--fs-4);
+      font-size: var(--fs-3);
     }
 
     span {
-      font-size: var(--fs-6);
+      font-size: var(--fs-5);
     }
   }
   .title-wrapper {
@@ -110,6 +110,7 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
 @media (min-width: 580px) {
   .timeline-item:not(:last-child)::before {
     left: -40px;
+    // height: 220px;
   }
 
   .timeline-item::after {
@@ -129,7 +130,7 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
   .timeline-item {
     &-title {
       font-size: var(--fs-2);
-      margin-bottom: 10px;
+      // margin-bottom: 10px;
     }
   }
   .title-wrapper {

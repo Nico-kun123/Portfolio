@@ -50,7 +50,7 @@ const progressColor = computed(() => {
 .skill {
   & data {
     color: var(--light-gray);
-    font-size: var(--fs-7);
+    font-size: var(--fs-5);
     font-weight: var(--fw-300);
   }
 }
