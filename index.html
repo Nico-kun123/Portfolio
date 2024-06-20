@@ -65,6 +65,10 @@
     />
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 
+    <!-- Load CSS Styles from CDN (asynchronously) -->
+    <link rel="preload" href="/src/style.css" as="style" />
+    <link rel="stylesheet" href="/src/style.css" media="print" onload="this.media='all'" />
+
     <style>
       /* Импортируем шрифты из файлов */
       @font-face {
