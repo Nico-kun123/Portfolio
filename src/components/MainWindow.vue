@@ -1,9 +1,24 @@
 <script setup>
-import Blog from './Blog List Item.vue'
+// Импорт проектов
+const props = defineProps({
+    /**
+     * Список проектов.
+     * @type {Array}
+     * @default []
+     */
+    projects: {
+      default: () => [],
+      type: Array,
+    },
+  }),
+  { projects } = props
+
+/* COMPONENTS */
+import Blog from './Blog-List-Item.vue'
 import Navbar from './NavBar.vue'
-import ResumeListItem from './Resume List Item.vue'
-import Service from './Service.vue'
-import Skill from './Skill List Item.vue'
+import ResumeListItem from './Resume-List-Item.vue'
+import Service from './Service-Component.vue'
+import Skill from './Skill-List-Item.vue'
 
 /* UNUSED COMPONENTS */
 // import Project from "./Portfolio Project.vue";
@@ -14,20 +29,78 @@ import Skill from './Skill List Item.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
-// Импорт проектов
-const { projects } = defineProps(['projects'])
-
 // Изменяем ссылки на изображения, чтобы в production всё корректно отображалось
-projects.forEach((project) => {
+projects.forEach(project => {
   project.image = new URL(
     `../assets/images/projects/${project.image.split('/')[5]}`,
-    import.meta.url
+    import.meta.url,
   ).href
 })
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ОСНОВНЫЙ ФУНКЦИИ */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/**
+ * Перемешивает проекты в случайном порядке.
+ *
+ */
+const shuffleProjects = () => {
+  projects.sort(() => Math.random() - 0.5)
+}
+shuffleProjects()
+
+/**
+ * Добавляет класс к элементу.
+ * @param {Element} element Элемент, к которому нужно добавить класс.
+ * @param {string} name Название класса.
+ * @return {void}
+ */
+const addClass = (element, name) => {
+    const classList = name.split(' ')
+
+    classList.forEach(className => {
+      if (!element.classList.contains(className)) {
+        element.classList.add(className)
+      }
+    })
+  },
+  /**
+   * Удаляет класс из элемента.
+   * @param {Element} element Элемент, у которого нужно удалить класс.
+   * @param {string} name Название класса.
+   * @return {void}
+   */
+  removeClass = (element, name) => {
+    const classList = name.split(' ')
+
+    classList.forEach(className => {
+      element.classList.remove(className)
+    })
+  },
+  /**
+   * Применяет фильтр к проектам: показывает все проекты с указанным названием класса.
+   *
+   * @param {string} className Название класса, по которому производится фильтрация.
+   * @return {void}
+   */
+  filterByClassName = className => {
+    const elements = document.querySelectorAll('.filterDiv')
+    className = className.toLowerCase()
+
+    if (className === 'all') {
+      className = ''
+    }
+
+    elements.forEach(element => {
+      const elementClassName = element.className.toLowerCase()
+      removeClass(element, 'show')
+
+      if (elementClassName.includes(className)) {
+        addClass(element, 'show')
+      }
+    })
+  }
 
 document.addEventListener('DOMContentLoaded', () => {
   // Применяет фильтр к проектам: показывает все проекты
@@ -36,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Подсвечивает нажимаемую кнопку (это НЕ для мобильных устройств)
   const btns = document.getElementsByClassName('btn')
   for (const btn of btns) {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', () => {
       if (btn.classList.length === 1) {
         for (const current of btns) {
           current.classList.remove('active')
@@ -50,70 +123,16 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 /**
- * Применяет фильтр к проектам: показывает все проекты с указанным названием класса.
- *
- * @param {string} className — Название класса, по которому производится фильтрация.
- * @return {void}
- */
-function filterByClassName(className) {
-  const elements = document.querySelectorAll('.filterDiv')
-  className = className.toLowerCase()
-
-  if (className === 'all') {
-    className = ''
-  }
-
-  elements.forEach((element) => {
-    const elementClassName = element.className.toLowerCase()
-    removeClass(element, 'show')
-
-    if (elementClassName.includes(className)) {
-      addClass(element, 'show')
-    }
-  })
-}
-
-/**
- * Добавляет класс к элементу.
- * @param {Element} element — Элемент, к которому нужно добавить класс.
- * @param {string} name — Название класса.
- * @return {void}
- */
-function addClass(element, name) {
-  const classList = name.split(' ')
-
-  classList.forEach((className) => {
-    if (!element.classList.contains(className)) {
-      element.classList.add(className)
-    }
-  })
-}
-
-/**
- * Удаляет класс из элемента.
- * @param {Element} element — Элемент, у которого нужно удалить класс.
- * @param {string} name — Название класса.
- * @return {void}
- */
-function removeClass(element, name) {
-  const classList = name.split(' ')
-
-  classList.forEach((className) => {
-    element.classList.remove(className)
-  })
-}
-
-/**
  * Отображает выпадающее меню.
  */
-function showDropdown() {
+const showDropdown = () => {
   document.getElementById('myDropdown').classList.toggle('show')
 }
 
 /**
  * Закрыть выпадающее меню, если пользователь кликнет за его пределами.
  */
-window.onclick = function (event) {
+window.onclick = event => {
   const dropdowns = document.getElementsByClassName('dropdown-content')
   for (let i = 0; i < dropdowns.length; i++) {
     const openDropdown = dropdowns[i]
@@ -132,148 +151,179 @@ window.onclick = function (event) {
     <!-- !! ABOUT !! -->
     <article class="about active" data-page="about">
       <header>
-        <h2 v-if="$isRussian()" class="h2 article-title">Обо мне</h2>
-        <h2 v-else class="h2 article-title">About me</h2>
+        <h2 v-if="$isRussian()" class="article-title h2">Обо мне</h2>
+
+        <h2 v-else class="article-title h2">About me</h2>
       </header>
 
       <!-- ОБО МНЕ -->
       <section class="about-text">
         <p>{{ t('aboutMe[0]') }}</p>
+
         <p>{{ t('aboutMe[1]') }}</p>
+
         <p>{{ t('aboutMe[2]') }}</p>
 
-        <div class="separator"></div>
+        <div class="separator" />
 
         <p>{{ t('aboutMe[3]') }}</p>
 
         <ul class="common-list">
           <li>{{ t('softSkills[0]') }}</li>
+
           <li>{{ t('softSkills[1]') }}</li>
+
           <li>{{ t('softSkills[2]') }}</li>
+
           <li>{{ t('softSkills[3]') }}</li>
+
           <li>{{ t('softSkills[4]') }}</li>
+          <li>{{ t('softSkills[5]') }}</li>
         </ul>
       </section>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <!-- ССЫЛКИ НА МОИ РЕЗЮМЕ -->
       <h3 v-if="$isRussian()" class="h2 service-title">Мои резюме:</h3>
+
       <h3 v-else class="h2 service-title">My resume:</h3>
-      <ul style="list-style: circle; width: fit-content">
+
+      <ul class="resume-list">
         <li>
-          <a href="https://hh.ru/resume/62dedceaff0c831a7f0039ed1f3379466d4f53" target="_blank"
+          <a
+            href="https://hh.ru/resume/62dedceaff0c831a7f0039ed1f3379466d4f53"
+            target="_blank"
+            rel="noopener noreferrer"
             >&#10148; {{ t('resumeNames[0]') }}</a
           >
         </li>
-        <li><br /></li>
+
         <li>
-          <a href="https://hh.ru/resume/b1d0d068ff0cb9b6c90039ed1f336153683471" target="_blank"
+          <br />
+        </li>
+
+        <li>
+          <a
+            href="https://hh.ru/resume/b1d0d068ff0cb9b6c90039ed1f336153683471"
+            target="_blank"
+            rel="noopener noreferrer"
             >&#10148; {{ t('resumeNames[1]') }}</a
           >
         </li>
       </ul>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <!-- Раздел "Чем я занимаюсь" -->
       <section class="service">
         <h4 v-if="$isRussian()" class="h2 service-title">Чем я занимаюсь:</h4>
+
         <h4 v-else class="h2 service-title">What do I do:</h4>
+
         <ul class="service-list">
-          <Service id="1" :name="t('serviceName[0]')" :description="t('serviceDesc[0]')" />
-          <Service id="3" :name="t('serviceName[2]')" :description="t('serviceDesc[2]')" />
-          <Service id="4" :name="t('serviceName[1]')" :description="t('serviceDesc[1]')" />
+          <Service :id="1" :name="t('serviceName[0]')" :description="t('serviceDesc[0]')" />
+
+          <Service :id="3" :name="t('serviceName[2]')" :description="t('serviceDesc[2]')" />
+
+          <Service :id="4" :name="t('serviceName[1]')" :description="t('serviceDesc[1]')" />
         </ul>
       </section>
 
       <!-- <div class="separator"></div> -->
 
       <!-- ОТЗЫВЫ И РЕКОМЕНДАЦИИ -->
-      <!-- <section class="testimonials">
+      <!--
+        <section class="testimonials">
         <h3
-          v-if="$isRussian()"
-          class="h3 testimonials-title"
+        v-if="$isRussian()"
+        class="h3 testimonials-title"
         >
-          Отзывы:
+        Отзывы:
         </h3>
         <h3 v-else class="h3 testimonials-title">Testimonials:</h3>
 
         <ul class="testimonials-list has-scrollbar">
-          <TestimonialItem
-            v-if="$isRussian()"
-            id="1"
-            name="Пример отзыва"
-            description="Содержание отзыва"
-            date="16 Октября 2021 г."
-          />
-          <TestimonialItem
-            v-else
-            id="1"
-            name="Feedback Example"
-            description="Some description"
-            date="October 16, 2021"
-          />
-          <TestimonialItem />
+        <TestimonialItem
+        v-if="$isRussian()"
+        id="1"
+        name="Пример отзыва"
+        description="Содержание отзыва"
+        date="16 Октября 2021 г."
+        />
+        <TestimonialItem
+        v-else
+        id="1"
+        name="Feedback Example"
+        description="Some description"
+        date="October 16, 2021"
+        />
+        <TestimonialItem />
         </ul>
-      </section> -->
+        </section> 
+      -->
 
       <!-- Popup с полным описанием -->
-      <!-- <div class="modal-container" data-modal-container>
+      <!--
+        <div class="modal-container" data-modal-container>
         <div class="overlay" data-overlay></div>
 
         <section class="testimonials-modal">
-          <button
-            class="modal-close-btn"
-            data-modal-close-btn
-            style="padding: fit-content; margin: auto"
-          >
-            <img src="../assets/images/ui/cross.svg" width="20" loading="lazy" />
-          </button>
+        <button
+        class="modal-close-btn"
+        data-modal-close-btn
+        style="padding: fit-content; margin: auto"
+        >
+        <img src="../assets/images/ui/cross.svg" width="20" loading="lazy" />
+        </button>
 
-          <div class="modal-img-wrapper">
-            <figure class="modal-avatar-box">
-              <img alt="logo" width="80" data-modal-img loading="lazy" />
-            </figure>
+        <div class="modal-img-wrapper">
+        <figure class="modal-avatar-box">
+        <img alt="logo" width="80" data-modal-img loading="lazy" />
+        </figure>
 
-            <img src="../assets/images/ui/quote.svg" alt="quote icon" loading="lazy" />
-          </div>
+        <img src="../assets/images/ui/quote.svg" alt="quote icon" loading="lazy" />
+        </div>
 
-          <div class="modal-content">
-            <h4 class="h3 modal-title" data-modal-title>name</h4>
+        <div class="modal-content">
+        <h4 class="h3 modal-title" data-modal-title>name</h4>
 
-            <time datetime="2021-06-14" data-modal-date>date</time>
+        <time datetime="2021-06-14" data-modal-date>date</time>
 
-            <div data-modal-text style="color: aliceblue">
-              <p>Some Inner Text</p>
-            </div>
-          </div>
+        <div data-modal-text style="color: aliceblue">
+        <p>Some Inner Text</p>
+        </div>
+        </div>
         </section>
-      </div> -->
+        </div> 
+      -->
 
       <!-- <div class="separator"></div> -->
 
       <!-- clients -->
-      <!-- <section class="clients">
+      <!--
+        <section class="clients">
         <h3
-          v-if="$isRussian()"
-          class="h3 clients-title"
+        v-if="$isRussian()"
+        class="h3 clients-title"
         >
-          Клиенты:
+        Клиенты:
         </h3>
         <h3 v-else class="h3 clients-title">Clients:</h3>
 
         <ul class="clients-list has-scrollbar">
-          <Client id="2" name="Client 2" link="Link 2" />
+        <Client id="2" name="Client 2" link="Link 2" />
         </ul>
-      </section> -->
+        </section> 
+      -->
     </article>
 
     <!-- !! RESUME !! -->
     <article class="resume" data-page="resume">
       <header>
-        <h2 v-if="$isRussian()" class="h2 article-title">Резюме</h2>
-        <h2 v-else class="h2 article-title">Resume</h2>
+        <h2 v-if="$isRussian()" class="article-title h2">Резюме</h2>
+
+        <h2 v-else class="article-title h2">Resume</h2>
       </header>
 
       <!-- ОБРАЗОВАНИЕ (САМЫЕ НОВЫЕ ВВЕРХУ) -->
@@ -288,6 +338,7 @@ window.onclick = function (event) {
           </div>
 
           <h3 v-if="$isRussian()" class="h3">Образование:</h3>
+
           <h3 v-else class="h3">Education:</h3>
         </div>
 
@@ -297,11 +348,13 @@ window.onclick = function (event) {
             years="2023 — 2025"
             :description="t('timelineItemDesc[0]')"
           />
+
           <ResumeListItem
             :name="t('timelineItemName[0]')"
             years="2019 — 2023"
             :description="t('timelineItemDesc[1]')"
           />
+
           <ResumeListItem
             :name="t('timelineItemName[1]')"
             years="2008 — 2019"
@@ -322,12 +375,26 @@ window.onclick = function (event) {
           </div>
 
           <h3 v-if="$isRussian()" class="h3">Стажировки:</h3>
+
           <h3 v-else class="h3">Internships:</h3>
         </div>
 
         <ol class="timeline-list">
-          <ResumeListItem v-if="$isRussian()" name="" years="Нет стажировок." description="" />
-          <ResumeListItem v-else name="" years="No internships." description="" />
+          <ResumeListItem
+            v-if="$isRussian()"
+            key="resume-list-item-1"
+            name=""
+            years="Нет стажировок."
+            description=""
+          />
+
+          <ResumeListItem
+            v-else
+            key="resume-list-item-2"
+            name=""
+            years="No internships."
+            description=""
+          />
         </ol>
       </section>
 
@@ -343,39 +410,65 @@ window.onclick = function (event) {
           </div>
 
           <h3 v-if="$isRussian()" class="h3">Опыт работы:</h3>
+
           <h3 v-else class="h3">Work experience:</h3>
         </div>
 
         <ol class="timeline-list">
           <ResumeListItem v-if="$isRussian()" name="" years="Нет опыта работы." description="" />
-          <ResumeListItem v-else name="" years="No work experience." description="" />
+
+          <ResumeListItem
+            v-else
+            key="resume-list-item-4"
+            name=""
+            years="No work experience."
+            description=""
+          />
         </ol>
       </section>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <!-- ТЕХНИЧЕСКИЕ НАВЫКИ + ШКАЛА -->
-      <!-- TODO: Можно попытаться как-то оценить свои знания в этих технологиях в процентах (хз как)-->
+      <!-- TODO: Можно попытаться как-то оценить свои знания в этих технологиях в процентах (хз как) -->
       <section class="skill">
         <h3 v-if="$isRussian()" class="h3 skills-title">Мои технические навыки (hard-skills)</h3>
+
         <h3 v-else class="h3 skills-title">My technical skills (hard-skills)</h3>
 
         <p>{{ t('extra[2]') }}</p>
 
-        <div class="skills-list content-card">
-          <Skill v-if="$isRussian()" skill-name="Английский язык (C1)" skill-value="78" />
-          <Skill v-else skill-name="English (C1)" skill-value="78" />
-          <div class="separator"></div>
-          <Skill skillName="HTML5, CSS3, JS" skillValue="75" />
-          <Skill skillName="PostgreSQL" skillValue="70" />
-          <Skill skillName="Vue.js" skillValue="65" />
-          <Skill skillName="Git" skillValue="60" />
-          <div class="separator"></div>
-          <Skill skillName="SCSS" skillValue="80" />
-          <Skill skillName="Vite.js" skillValue="75" />
-          <Skill skillName="Typescript" skillValue="70" />
-          <Skill skillName="JQuery" skillValue="40" />
-          <Skill skillName="React.js" skillValue="26" />
+        <div class="content-card skills-list">
+          <Skill
+            v-if="$isRussian()"
+            key="skill-ru"
+            skill-name="Английский язык (C1)"
+            :skill-value="78"
+          />
+
+          <Skill v-else key="skill-en" skill-name="English (C1)" :skill-value="78" />
+
+          <div class="separator" />
+
+          <Skill skill-name="HTML5, CSS3, JavaScript" :skill-value="75" />
+
+          <Skill skill-name="PostgreSQL" :skill-value="70" />
+
+          <Skill skill-name="Vue.js" :skill-value="65" />
+
+          <Skill skill-name="Git" :skill-value="60" />
+
+          <div class="separator" />
+
+          <Skill skill-name="SCSS/SASS" :skill-value="80" />
+
+          <Skill skill-name="Vite.js" :skill-value="75" />
+
+          <Skill skill-name="Typescript" :skill-value="70" />
+
+          <Skill skill-name="JQuery" :skill-value="40" />
+
+          <Skill skill-name="React.js" :skill-value="26" />
         </div>
       </section>
     </article>
@@ -383,158 +476,230 @@ window.onclick = function (event) {
     <!-- !! PORTFOLIO !! -->
     <article class="portfolio" data-page="portfolio">
       <header>
-        <h2 v-if="$isRussian()" class="h2 article-title">Портфолио</h2>
-        <h2 v-else class="h2 article-title">Portfolio</h2>
+        <h2 v-if="$isRussian()" class="article-title h2">Портфолио</h2>
+
+        <h2 v-else class="article-title h2">Portfolio</h2>
       </header>
 
       <section class="about-text">
         <p>{{ t('filterInfo[0]') }}</p>
+
         <p>{{ t('filterInfo[1]') }}</p>
+
         <p>{{ t('filterInfo[2]') }}</p>
+
         <br />
 
         <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
         <!-- TODO: Если нужно добавить новые фильтры, то нужно добавить их здесь (Desktop) -->
         <div id="filter-menu">
-          <button v-if="$isRussian()" @click="showDropdown()" class="dropbtn">
+          <button v-if="$isRussian()" class="dropbtn" type="button" @click="showDropdown">
             Выберите фильтр
           </button>
-          <button v-else @click="showDropdown()" class="dropbtn">Select a filter</button>
+
+          <button v-else class="dropbtn" type="button" @click="showDropdown">
+            Select a filter
+          </button>
+
           <div id="myDropdown" class="dropdown-content">
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('all')">Все проекты</a>
-            <a class="btn" v-else @click="filterByClassName('all')">All Projects</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('Big project')"
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('all')">Все проекты</a>
+
+            <a v-else class="btn" @click="filterByClassName('all')">All Projects</a>
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('Big project')"
               >Большие Проекты</a
             >
-            <a class="btn" v-else @click="filterByClassName('Big project')">Big Projects</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('Pet project')"
+
+            <a v-else class="btn" @click="filterByClassName('Big project')">Big Projects</a>
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('Pet project')"
               >Пет-проекты</a
             >
-            <a class="btn" v-else @click="filterByClassName('Pet project')">Pet projects</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('Test task')"
+
+            <a v-else class="btn" @click="filterByClassName('Pet project')">Pet projects</a>
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('Test task')"
               >Тестовые задания</a
             >
-            <a class="btn" v-else @click="filterByClassName('Test task')">Test Tasks</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('layout')">Вёрстка</a>
-            <a class="btn" v-else @click="filterByClassName('layout')">Layouts</a>
+
+            <a v-else class="btn" @click="filterByClassName('Test task')">Test Tasks</a>
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('layout')">Вёрстка</a>
+
+            <a v-else class="btn" @click="filterByClassName('layout')">Layouts</a>
 
             <a class="btn" @click="filterByClassName('typescript')">Typescript</a>
             <!-- <a class="btn" @click="filterByClassName('react.js')">React.js</a> -->
             <a class="btn" @click="filterByClassName('vue.js')">Vue.js</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('no react/vue')"
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('no react/vue')"
               >Без React/Vue</a
             >
-            <a class="btn" v-else @click="filterByClassName('no react/vue')">No React/Vue</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('tests')"
+
+            <a v-else class="btn" @click="filterByClassName('no react/vue')">No React/Vue</a>
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('tests')"
               >Написание тестов</a
             >
-            <a class="btn" v-else @click="filterByClassName('tests')">Tests</a>
+
+            <a v-else class="btn" @click="filterByClassName('tests')">Tests</a>
             <!-- <a class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</a> -->
             <a class="btn" @click="filterByClassName('postgresql')">PostgreSQL</a>
+
             <a class="btn" @click="filterByClassName('firebase')">Firebase</a>
+
             <a class="btn" @click="filterByClassName('python')">Python</a>
-            <a class="btn" v-if="$isRussian()" @click="filterByClassName('neural network')"
+
+            <a v-if="$isRussian()" class="btn" @click="filterByClassName('neural network')"
               >Нейросеть</a
             >
-            <a class="btn" v-else @click="filterByClassName('neural network')">Neural Network</a>
+
+            <a v-else class="btn" @click="filterByClassName('neural network')">Neural Network</a>
           </div>
 
-          <div class="separator"></div>
+          <div class="separator" />
         </div>
 
         <!-- ФИЛЬТР ПРОЕКТОВ (ДРУГИЕ УСТРОЙСТВА) -->
         <!-- TODO: Если нужно добавить новые фильтры, то нужно добавить их здесь (Mobile) -->
         <ul class="filter-list">
           <li class="filter-item">
-            <button v-if="$isRussian()" @click="filterByClassName('all')" class="btn">Все</button>
-            <button v-else @click="filterByClassName('all')" class="btn">All</button>
+            <button v-if="$isRussian()" class="btn" @click="filterByClassName('all')">Все</button>
+
+            <button v-else class="btn" @click="filterByClassName('all')">All</button>
           </li>
 
           <li class="filter-item">
-            <button v-if="$isRussian()" @click="filterByClassName('Big project')" class="btn">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('Big project')"
+            >
               Большие Проекты
             </button>
-            <button v-else @click="filterByClassName('Big project')" class="btn">
+
+            <button v-else class="btn" @click="filterByClassName('Big project')">
               Big Projects
             </button>
           </li>
 
           <li class="filter-item">
-            <button v-if="$isRussian()" @click="filterByClassName('Pet project')" class="btn">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('Pet project')"
+            >
               Пет-проекты
             </button>
-            <button v-else @click="filterByClassName('Pet project')" class="btn">
+
+            <button v-else class="btn" @click="filterByClassName('Pet project')">
               Pet-projects
             </button>
           </li>
 
           <li class="filter-item">
-            <button v-if="$isRussian()" @click="filterByClassName('Test task')" class="btn">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('Test task')"
+            >
               Тестовые задания
             </button>
-            <button v-else @click="filterByClassName('Test task')" class="btn">Test Tasks</button>
+
+            <button v-else class="btn" @click="filterByClassName('Test task')">Test Tasks</button>
           </li>
 
           <li class="filter-item">
-            <button v-if="$isRussian()" @click="filterByClassName('layout')" class="btn">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('layout')"
+            >
               Вёрстка из Figma
             </button>
-            <button v-else @click="filterByClassName('layout')" class="btn">Figma Layouts</button>
+
+            <button v-else class="btn" @click="filterByClassName('layout')">Figma Layouts</button>
           </li>
 
           <li class="filter-item">
-            <button @click="filterByClassName('typescript')" class="btn">Typescript</button>
+            <button class="btn" @click="filterByClassName('typescript')">Typescript</button>
           </li>
 
           <li class="filter-item">
-            <button @click="filterByClassName('vue.js')" class="btn">Vue.js</button>
+            <button class="btn" @click="filterByClassName('vue.js')">Vue.js</button>
           </li>
 
           <li class="filter-item">
-            <button class="btn" v-if="$isRussian()" @click="filterByClassName('no react/vue')">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('no react/vue')"
+            >
               Без React/Vue
             </button>
-            <button class="btn" v-else @click="filterByClassName('no react/vue')">
+
+            <button v-else class="btn" @click="filterByClassName('no react/vue')">
               No React/Vue
             </button>
           </li>
 
           <li class="filter-item">
-            <button class="btn" v-if="$isRussian()" @click="filterByClassName('tests')">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('tests')"
+            >
               Написание тестов
             </button>
-            <button v-else @click="filterByClassName('tests')" class="btn">Tests</button>
+
+            <button v-else class="btn" @click="filterByClassName('tests')">Tests</button>
           </li>
 
-          <!-- <li class="filter-item">
+          <!--
+            <li class="filter-item">
             <button @click="filterByClassName('react.js')" class="btn">
-              React.js
+            React.js
             </button>
-          </li> -->
+            </li> 
+          -->
 
-          <!-- <li class="filter-item">
+          <!--
+            <li class="filter-item">
             <button @click="filterByClassName('nuxt.js')" class="btn">
-              Nuxt.js
+            Nuxt.js
             </button>
-          </li> -->
+            </li> 
+          -->
 
           <li class="filter-item">
-            <button @click="filterByClassName('postgresql')" class="btn">PostgreSQL</button>
+            <button class="btn" @click="filterByClassName('postgresql')">PostgreSQL</button>
           </li>
 
           <li class="filter-item">
-            <button @click="filterByClassName('firebase')" class="btn">Firebase</button>
+            <button class="btn" @click="filterByClassName('firebase')">Firebase</button>
           </li>
 
           <li class="filter-item">
-            <button @click="filterByClassName('python')" class="btn">Python</button>
+            <button class="btn" @click="filterByClassName('python')">Python</button>
           </li>
 
           <li class="filter-item">
-            <button class="btn" v-if="$isRussian()" @click="filterByClassName('neural network')">
+            <button
+              v-if="$isRussian()"
+              class="btn"
+              type="button"
+              @click="filterByClassName('neural network')"
+            >
               Нейросеть
             </button>
-            <button class="btn" v-else @click="filterByClassName('neural network')">
+
+            <button v-else class="btn" @click="filterByClassName('neural network')">
               Neural Network
             </button>
           </li>
@@ -548,7 +713,7 @@ window.onclick = function (event) {
             :class="`filterDiv ${project.category.toLowerCase()}`"
             :data-category="project.category.toLowerCase()"
           >
-            <a :href="project.link" target="_blank">
+            <a :href="project.link" target="_blank" rel="noopener noreferrer">
               <figure class="project-img">
                 <img
                   :src="project.image"
@@ -557,7 +722,9 @@ window.onclick = function (event) {
                   draggable="false"
                 />
               </figure>
+
               <h3 class="project-title">{{ project.title }}</h3>
+
               <label class="project-category">{{ project.category }}</label>
             </a>
           </li>
@@ -568,22 +735,25 @@ window.onclick = function (event) {
     <!-- !! BLOG !! -->
     <article class="blog" data-page="blog">
       <header>
-        <h2 v-if="$isRussian()" class="h2 article-title">Блог</h2>
-        <h2 v-else class="h2 article-title">Blog</h2>
+        <h2 v-if="$isRussian()" class="article-title h2">Блог</h2>
+
+        <h2 v-else class="article-title h2">Blog</h2>
       </header>
 
       <!-- ЭЛЕМЕНТЫ МОЕГО (несуществующего) БЛОГА -->
       <!-- TODO: Сюда можно будет потом добавить инфу про мои блоги/посты (если это вообще случится) -->
       <section class="blog-posts">
         <ul class="blog-posts-list">
-          <!-- <Blog
-            id="1"
+          <Blog
+            :id="1"
             category="Some Category"
             name="Some Name"
             description="Some Description"
+            link="/"
             date="Some Date"
-          /> -->
-          <Blog />
+          />
+
+          <!-- <Blog /> -->
         </ul>
       </section>
     </article>
@@ -591,26 +761,35 @@ window.onclick = function (event) {
     <!-- !! EXTRA !! -->
     <article class="extra" data-page="extra">
       <header>
-        <h2 v-if="$isRussian()" class="h2 article-title">Доп. информация</h2>
-        <h2 v-else class="h2 article-title">Extra info</h2>
+        <h2 v-if="$isRussian()" class="article-title h2">Доп. информация</h2>
+
+        <h2 v-else class="article-title h2">Extra info</h2>
       </header>
 
       <section class="about-text">
         <p>{{ t('extra[0]') }}</p>
+
         <p>{{ t('extra[1]') }}</p>
 
-        <div class="separator"></div>
+        <div class="separator" />
 
         <p v-if="$isRussian()">Мои увлечения и хобби:</p>
+
         <p v-else>My hobbies and interests:</p>
 
         <ul class="common-list">
           <li>{{ t('hobbies[0]') }}</li>
+
           <li>{{ t('hobbies[1]') }}</li>
+
           <li>{{ t('hobbies[2]') }}</li>
+
           <li>{{ t('hobbies[3]') }}</li>
+
           <li>{{ t('hobbies[4]') }}</li>
+
           <li>{{ t('hobbies[5]') }}</li>
+
           <li>{{ t('hobbies[6]') }}</li>
         </ul>
       </section>
@@ -627,6 +806,17 @@ header {
 
     @media (min-width: 580px) {
       font-size: var(--fs-1);
+    }
+  }
+}
+
+.about {
+  & .resume-list {
+    list-style: circle;
+    width: fit-content;
+
+    & a {
+      width: fit-content;
     }
   }
 }
@@ -758,9 +948,9 @@ header {
   }
 }
 
-.filterDiv > a.hover {
-  background: hsla(0, 0%, 0%, 0.5);
-}
+// .filterDiv > a.hover {
+//   background: hsla(0, 0%, 0%, 0.5);
+// }
 
 .overlay {
   position: fixed;
@@ -830,20 +1020,20 @@ header {
     box-shadow: var(--shadow-2);
   }
 
-  .modal-img-wrapper > img {
-    display: none;
-  }
+  // .modal-img-wrapper > img {
+  //   display: none;
+  // }
 
   .modal-title {
     margin-bottom: 4px;
   }
 
-  .modal-content time {
-    font-size: var(--fs-6);
-    color: var(--light-gray-70);
-    font-weight: var(--fw-300);
-    margin-bottom: 10px;
-  }
+  // .modal-content time {
+  //   font-size: var(--fs-6);
+  //   color: var(--light-gray-70);
+  //   font-weight: var(--fw-300);
+  //   margin-bottom: 10px;
+  // }
 
   .modal-content p {
     color: var(--light-gray);
@@ -1013,7 +1203,7 @@ header {
   }
 }
 
-.filter-item button.active,
+// .filter-item button.active,
 .active {
   color: var(--orange-yellow-crayola);
   // display: block;
@@ -1129,13 +1319,13 @@ header {
     height: 100%;
   }
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    -webkit-filter: grayscale(1) invert(1);
-    filter: grayscale(1) invert(1);
-  }
+  // iframe {
+  //   width: 100%;
+  //   height: 100%;
+  //   border: none;
+  //   -webkit-filter: grayscale(1) invert(1);
+  //   filter: grayscale(1) invert(1);
+  // }
 }
 
 .contact-form {
@@ -1360,9 +1550,9 @@ header {
     --fs-8: 12px;
   }
 
-  html {
-    margin-bottom: 5em;
-  }
+  // html {
+  //   margin-bottom: 5em;
+  // }
 
   /** REUSED STYLE */
   .sidebar,
@@ -1374,10 +1564,10 @@ header {
   }
 
   /** MAIN */
-  main {
-    margin-top: 60px;
-    margin-bottom: 100px;
-  }
+  // main {
+  //   margin-top: 60px;
+  //   margin-bottom: 100px;
+  // }
 
   /** ABOUT */
   .about-text {
@@ -1479,13 +1669,13 @@ header {
     width: 65px;
   }
 
-  .modal-img-wrapper > img {
-    display: block;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    width: 35px;
-  }
+  // .modal-img-wrapper > img {
+  //   display: block;
+  //   -webkit-box-flex: 1;
+  //   -ms-flex-positive: 1;
+  //   flex-grow: 1;
+  //   width: 35px;
+  // }
 
   /* clients */
   .clients-list {
@@ -1533,9 +1723,9 @@ header {
     padding: 15px 20px;
   }
 
-  textarea.form-input {
-    margin-bottom: 30px;
-  }
+  // textarea.form-input {
+  //   margin-bottom: 30px;
+  // }
 
   .form-btn {
     --fs-6: 16px;
@@ -1618,9 +1808,9 @@ header {
     color: var(--light-gray-70);
   }
 
-  .filter-item button.active {
-    color: var(--orange-yellow-crayola);
-  }
+  // .filter-item button.active {
+  //   color: var(--orange-yellow-crayola);
+  // }
 
   .project-list,
   .blog-posts-list {
@@ -1655,9 +1845,9 @@ header {
     box-shadow: var(--shadow-5);
   }
 
-  main {
-    margin-bottom: 60px;
-  }
+  // main {
+  //   margin-bottom: 60px;
+  // }
 
   .main-content {
     position: relative;

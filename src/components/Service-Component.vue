@@ -1,7 +1,10 @@
 <template>
   <!-- !! SERVICE !! -->
   <li class="service-item">
-    <div class="service-icon-box" v-if="id == 1">
+    <div
+      v-if="id === 1"
+      class="service-icon-box"
+    >
       <img
         src="../assets/images/ui/icons/about/coding.svg"
         alt="design icon"
@@ -9,9 +12,13 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
-    <div class="service-icon-box" v-else-if="id == 2">
+
+    <div
+      v-else-if="id === 2"
+      class="service-icon-box"
+    >
       <img
         src="../assets/images/ui/icons/about/layout.svg"
         alt="design icon"
@@ -19,9 +26,13 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
-    <div class="service-icon-box" v-else-if="id == 3">
+
+    <div
+      v-else-if="id === 3"
+      class="service-icon-box"
+    >
       <img
         src="../assets/images/ui/icons/about/vue.svg"
         alt="design icon"
@@ -29,9 +40,13 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
-    <div class="service-icon-box" v-else-if="id == 4">
+
+    <div
+      v-else-if="id === 4"
+      class="service-icon-box"
+    >
       <img
         src="../assets/images/ui/icons/about/folder-project-placeholder.svg"
         alt="design icon"
@@ -39,11 +54,13 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
 
     <div class="service-content-box">
-      <h4 class="h4 service-item-title">{{ name }}</h4>
+      <h4 class="h4 service-item-title">
+        {{ name }}
+      </h4>
 
       <p class="service-item-text">
         {{ description }}
@@ -53,7 +70,40 @@
 </template>
 
 <script setup>
-const { id, name, description } = defineProps(['id', 'name', 'description'])
+const props = defineProps({
+    /**
+     * Описание занятия
+     * @type {string}
+     * @required
+     */
+    description: {
+      required: true,
+      type: String,
+    },
+
+    /**
+     * ID занятия
+     * @type {number}
+     * @required
+     */
+    id: {
+      required: true,
+      type: Number,
+    },
+
+    /**
+     * Название занятия
+     * @type {string}
+     * @required
+     */
+    name: {
+      required: true,
+      type: String,
+    },
+  }),
+  { id } = props,
+  { name } = props,
+  { description } = props
 </script>
 
 <style lang="scss">

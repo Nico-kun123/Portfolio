@@ -1,5 +1,7 @@
 <template>
   <nav class="navbar">
+    <!-- ! СТРОЧКА НИЖЕ ВАЖНА ! -->
+    <!-- eslint-disable -->
     <ul class="navbar__list">
       <li class="navbar__item">
         <button class="navbar__link active" data-nav-link>About</button>

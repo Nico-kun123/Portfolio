@@ -1,7 +1,9 @@
 <template>
   <!-- !! TIMELINE ITEM !! -->
   <li class="timeline-item">
-    <h4 class="h3 timeline-item-title">{{ name }}</h4>
+    <h4 class="h3 timeline-item-title">
+      {{ name }}
+    </h4>
 
     <span>{{ years }}</span>
 
@@ -12,7 +14,39 @@
 </template>
 
 <script setup>
-const { name, years, description } = defineProps(['name', 'years', 'description'])
+const props = defineProps({
+    /**
+     * Описания пункта в резюме.
+     * @type {string}
+     * @required
+     */
+    description: {
+      required: true,
+      type: String,
+    },
+    /**
+     * Название пункта в резюме.
+     * @type {string}
+     * @required
+     */
+    name: {
+      required: true,
+      type: String,
+    },
+
+    /**
+     * Годы учёбы/работы/стажировки.
+     * @type {string}
+     * @required
+     */
+    years: {
+      required: true,
+      type: String,
+    },
+  }),
+  { name } = props,
+  { years } = props,
+  { description } = props
 </script>
 
 <style lang="scss">
@@ -88,11 +122,17 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
 @media (min-width: 320px) {
   /** client */
   .timeline-item {
+    &:not(:last-child)::before {
+      height: calc(100% + 3em);
+    }
+    &::after {
+      left: -1.7em;
+    }
     & .timeline-text {
       font-size: var(--fs-4);
     }
     & .timeline-item-title {
-      font-size: var(--fs-3);
+      font-size: var(--fs-4);
     }
 
     span {
@@ -139,6 +179,11 @@ const { name, years, description } = defineProps(['name', 'years', 'description'
 }
 
 @media (min-width: 1024px) {
+  .timeline-item {
+    &::after {
+      left: -2.3em;
+    }
+  }
   .title-wrapper {
     margin-left: 2px;
     & h3 {

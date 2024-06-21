@@ -1,13 +1,20 @@
 <template>
-  <Header />
-  <Main :projects="$isRussian() ? projectsRU : projects" />
+  <div>
+    <Header />
+
+    <Main
+      :projects="$isRussian()
+        ? projectsRU
+        : projects"
+    />
+  </div>
 </template>
 
 <script setup>
 import '../src/style.css'
 
 // Импорт компонентов
-import Header from './components/Header.vue'
+import Header from './components/Header-Component.vue'
 import Main from './components/MainWindow.vue'
 
 // Плагин для проверки языка локализации

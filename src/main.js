@@ -1,4 +1,4 @@
-'use strict'
+
 
 // import './style.css'
 
@@ -18,16 +18,16 @@ app.mount('#app')
 document.title = i18n.global.t('title')
 
 // NAVIGATION
-const toggleElement = (elem) => elem.classList.toggle('active')
+const toggleElement = (elem) => elem.classList.toggle('active'),
 
-const sidebar = document.querySelector('[data-sidebar]')
-const sidebarBtn = document.querySelector('[data-sidebar-btn]')
+ sidebar = document.querySelector('[data-sidebar]'),
+ sidebarBtn = document.querySelector('[data-sidebar-btn]')
 sidebarBtn.addEventListener('click', () => toggleElement(sidebar))
 
-const navigationLinks = document.querySelectorAll('[data-nav-link]')
-const pages = document.querySelectorAll('[data-page]')
+const navigationLinks = document.querySelectorAll('[data-nav-link]'),
+ pages = document.querySelectorAll('[data-page]')
 
-navigationLinks.forEach((link, index) => {
+navigationLinks.forEach((link) => {
   link.addEventListener('click', () => {
     pages.forEach((page, pageIndex) => {
       if (link.innerHTML.toLowerCase() === page.dataset.page) {
