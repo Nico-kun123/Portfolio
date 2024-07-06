@@ -37,10 +37,10 @@ const changeButtonText = () => {
       <!-- АВАТАРКА -->
       <figure class="avatar__box">
         <img
-          :src="ProfilePic"
+          src="../assets/images/ui/person.svg"
           alt="Nicolay Kudryavtsev"
-          width="100px"
-          height="100px"
+          width="50px"
+          height="50px"
           loading="eager"
           draggable="false"
         />
@@ -53,7 +53,7 @@ const changeButtonText = () => {
         <h1 v-else class="name" title="Nicolay Kudryavtsev">Nicolay Kudryavtsev</h1>
 
         <div class="title-box">
-          <label v-if="$isRussian()" class="title">Frontend разработчик</label>
+          <label v-if="$isRussian()" class="title">Frontend-разработчик</label>
 
           <label v-else class="title">Frontend developer</label>
 
@@ -255,6 +255,7 @@ svg {
 
 .portfolio__title {
   position: relative;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -269,7 +270,6 @@ svg {
 
 .avatar__box {
   img {
-    border-radius: 25px;
     width: 100px;
     height: auto;
   }
@@ -438,7 +438,7 @@ svg {
 \*-----------------------------------*/
 @media (min-width: 320px) {
   .portfolio__title {
-    height: 100px;
+    height: 6rem;
   }
   .sidebar {
     margin-inline: auto;
@@ -459,8 +459,8 @@ svg {
 
   .avatar__box {
     & img {
-      border-radius: 50%;
-      width: 80px;
+      // border-radius: 50%;
+      width: 3rem;
       height: auto;
     }
   }
@@ -515,7 +515,7 @@ svg {
 
 @media (min-width: 450px) {
   .portfolio__title {
-    height: fit-content;
+    // height: fit-content;
   }
   .sidebar {
     width: 100%;
@@ -536,7 +536,7 @@ svg {
   .avatar__box {
     border-radius: 25px;
     img {
-      width: 100px;
+      width: 4rem;
       height: auto;
     }
   }
@@ -578,6 +578,10 @@ svg {
 }
 
 @media (min-width: 580px) {
+  .portfolio__title {
+    height: 7rem;
+    padding-left: 1rem;
+  }
   .sidebar {
     width: 520px;
     margin-inline: auto;
@@ -602,8 +606,8 @@ svg {
 
   .avatar__box {
     img {
-      border-radius: 50%;
-      width: 120px;
+      // border-radius: 50%;
+      width: 5rem;
       height: auto;
     }
   }

@@ -1,5 +1,3 @@
-
-
 // import './style.css'
 
 import { createApp } from 'vue'
@@ -10,6 +8,13 @@ import i18n from './i18n'
 import checkLocale from './plugins/checkLocale'
 
 const app = createApp(App)
+
+// App config
+app.config.devtools = true
+app.config.performance = true
+app.config.productionTip = false
+app.config.silent = false
+
 app.use(i18n)
 app.use(checkLocale, { i18n })
 app.mount('#app')
@@ -18,16 +23,15 @@ app.mount('#app')
 document.title = i18n.global.t('title')
 
 // NAVIGATION
-const toggleElement = (elem) => elem.classList.toggle('active'),
-
- sidebar = document.querySelector('[data-sidebar]'),
- sidebarBtn = document.querySelector('[data-sidebar-btn]')
+const toggleElement = elem => elem.classList.toggle('active'),
+  sidebar = document.querySelector('[data-sidebar]'),
+  sidebarBtn = document.querySelector('[data-sidebar-btn]')
 sidebarBtn.addEventListener('click', () => toggleElement(sidebar))
 
 const navigationLinks = document.querySelectorAll('[data-nav-link]'),
- pages = document.querySelectorAll('[data-page]')
+  pages = document.querySelectorAll('[data-page]')
 
-navigationLinks.forEach((link) => {
+navigationLinks.forEach(link => {
   link.addEventListener('click', () => {
     pages.forEach((page, pageIndex) => {
       if (link.innerHTML.toLowerCase() === page.dataset.page) {

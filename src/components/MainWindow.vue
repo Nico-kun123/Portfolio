@@ -355,11 +355,11 @@ window.onclick = event => {
             :description="t('timelineItemDesc[1]')"
           />
 
-          <ResumeListItem
+          <!-- <ResumeListItem
             :name="t('timelineItemName[1]')"
             years="2008 — 2019"
             :description="t('timelineItemDesc[2]')"
-          />
+          /> -->
         </ol>
       </section>
 

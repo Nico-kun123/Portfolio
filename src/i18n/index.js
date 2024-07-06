@@ -19,14 +19,14 @@ const i18n = createI18n({
   // Переводы на языки: русский и английский
   messages: {
     en: english,
-    ru: russian
+    ru: russian,
   },
 
   // Отключить предупреждения о недостающих ключах
   missingWarn: false,
 
   // Устанавливаем флаг, чтобы не выдавало ошибку, если локаль не найдена
-  sync: true
+  sync: true,
 })
 
 export default i18n
