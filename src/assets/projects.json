@@ -10,76 +10,55 @@
     {
       "category": "Pet project, Vue.js",
       "id": "2",
-      "image": "/src/assets/images/projects/Calculator.png",
-      "link": "https://github.com/Nico-kun123/Simple-Vue-Calculator",
-      "title": "Simple Calculator"
-    },
-    {
-      "category": "Pet project, Vue.js",
-      "id": "3",
       "image": "/src/assets/images/projects/Weather.png",
       "link": "https://github.com/Nico-kun123/Simple-Weather-App",
       "title": "Simple Weather App"
     },
     {
-      "category": "Test task, Vue.js",
-      "id": "4",
-      "image": "/src/assets/images/projects/Form.png",
-      "link": "https://github.com/Nico-kun123/Simple-Form-Validation--Vue-Vuelidate-",
-      "title": "Client data form validation (Vuelidate)"
-    },
-    {
-      "category": "Test task, Vue.js",
-      "id": "5",
-      "image": "/src/assets/images/projects/Table.png",
-      "link": "https://github.com/Nico-kun123/Vue-Table",
-      "title": "Simple table sorting by column"
-    },
-    {
       "category": "Pet project, Typescript, Tests",
-      "id": "6",
+      "id": "3",
       "image": "/src/assets/images/projects/Typescript Jest.png",
       "link": "https://github.com/Nico-kun123/Jest-and-Typescript",
       "title": "Jest and Typescript code testing (ts-jest)"
     },
     {
       "category": "Test task, Layout, Vue.js, Typescript",
-      "id": "7",
+      "id": "4",
       "image": "/src/assets/images/projects/User Edit Form.png",
       "link": "https://github.com/Nico-kun123/user-edit-form",
       "title": "User data edit form (Vuelidate)"
     },
     {
       "category": "Pet project, Vue.js, PostgreSQL",
-      "id": "8",
+      "id": "5",
       "image": "/src/assets/images/projects/Connect DB to site.png",
       "link": "https://github.com/Nico-kun123/vue-pg-database",
       "title": "Database tables editing through web site with API requests"
     },
     {
       "category": "Pet project, Vue.js, Python, Flask, Neural Network",
-      "id": "9",
+      "id": "6",
       "image": "/src/assets/images/projects/GAN2.png",
       "link": "https://github.com/Nico-kun123/vue-python-gan2",
       "title": "GAN2 image generator"
     },
     {
       "category": "Test task, Vue.js, Firebase, Typescript",
-      "id": "10",
+      "id": "7",
       "image": "/src/assets/images/projects/Library.png",
       "link": "https://github.com/Nico-kun123/LibrarySPA",
       "title": "«Library» SPA"
     },
     {
       "category": "Test task, Layout, Typescript",
-      "id": "11",
+      "id": "8",
       "image": "/src/assets/images/projects/Layout 1.png",
       "link": "https://github.com/Nico-kun123/html-layout-1",
       "title": "Layout from Figma"
     },
     {
       "category": "Test task, Layout",
-      "id": "12",
+      "id": "9",
       "image": "/src/assets/images/projects/Chat Layout 1.png",
       "link": "https://github.com/Nico-kun123/chat-layout-vue",
       "title": "Chat layout"
@@ -96,76 +75,55 @@
     {
       "category": "Pet project, Vue.js",
       "id": "2",
-      "image": "/src/assets/images/projects/Calculator.png",
-      "link": "https://github.com/Nico-kun123/Simple-Vue-Calculator",
-      "title": "Простой калькулятор"
-    },
-    {
-      "category": "Pet project, Vue.js",
-      "id": "3",
       "image": "/src/assets/images/projects/Weather.png",
       "link": "https://github.com/Nico-kun123/Simple-Weather-App",
       "title": "Простой веб-сайт для просмотра прогноза погоды"
     },
     {
-      "category": "Test task, Vue.js",
-      "id": "4",
-      "image": "/src/assets/images/projects/Form.png",
-      "link": "https://github.com/Nico-kun123/Simple-Form-Validation--Vue-Vuelidate-",
-      "title": "Валидация формы для создания клиентов (Vuelidate)"
-    },
-    {
-      "category": "Test task, Vue.js",
-      "id": "5",
-      "image": "/src/assets/images/projects/Table.png",
-      "link": "https://github.com/Nico-kun123/Vue-Table",
-      "title": "Простая таблица с сортировкой по столбцу"
-    },
-    {
       "category": "Pet project, Typescript, Tests",
-      "id": "6",
+      "id": "3",
       "image": "/src/assets/images/projects/Typescript Jest.png",
       "link": "https://github.com/Nico-kun123/Jest-and-Typescript",
       "title": "Тестирование Typescript кода с помощью Jest (ts-jest)"
     },
     {
       "category": "Test task, Layout, Vue.js, Typescript",
-      "id": "7",
+      "id": "4",
       "image": "/src/assets/images/projects/User Edit Form.png",
       "link": "https://github.com/Nico-kun123/user-edit-form",
       "title": "Форма редактирования данных пользователя (Vuelidate)"
     },
     {
       "category": "Pet project, Vue.js, PostgreSQL",
-      "id": "8",
+      "id": "5",
       "image": "/src/assets/images/projects/Connect DB to site.png",
       "link": "https://github.com/Nico-kun123/vue-pg-database",
       "title": "Редактирование таблиц базы данных через веб-сайт с помощью API-запросов"
     },
     {
       "category": "Pet project, Vue.js, Python, Flask, Neural Network",
-      "id": "9",
+      "id": "6",
       "image": "/src/assets/images/projects/GAN2.png",
       "link": "https://github.com/Nico-kun123/vue-python-gan2",
       "title": "Генератор изображений GAN2"
     },
     {
       "category": "Test task, Vue.js, Firebase, Typescript",
-      "id": "10",
+      "id": "7",
       "image": "/src/assets/images/projects/Library.png",
       "link": "https://github.com/Nico-kun123/LibrarySPA",
       "title": "SPA «Каталог книг»"
     },
     {
       "category": "Test task, Layout, Typescript",
-      "id": "11",
+      "id": "8",
       "image": "/src/assets/images/projects/Layout 1.png",
       "link": "https://github.com/Nico-kun123/html-layout-1",
       "title": "Вёрстка макета из шаблона Figma"
     },
     {
       "category": "Test task, Layout",
-      "id": "12",
+      "id": "9",
       "image": "/src/assets/images/projects/Chat Layout 1.png",
       "link": "https://github.com/Nico-kun123/chat-layout-vue",
       "title": "Вёрстка простого макета чата"
