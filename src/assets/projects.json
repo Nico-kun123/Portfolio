@@ -62,6 +62,13 @@
       "image": "/src/assets/images/projects/Chat Layout 1.png",
       "link": "https://github.com/Nico-kun123/chat-layout-vue",
       "title": "Chat layout"
+    },
+    {
+      "category": "Test task, Layout",
+      "id": "10",
+      "image": "/src/assets/images/projects/Layout 2.png",
+      "link": "https://github.com/Nico-kun123/layout-INLINE",
+      "title": "Layout from Figma"
     }
   ],
   "projectsRU": [
@@ -127,6 +134,13 @@
       "image": "/src/assets/images/projects/Chat Layout 1.png",
       "link": "https://github.com/Nico-kun123/chat-layout-vue",
       "title": "Вёрстка простого макета чата"
+    },
+    {
+      "category": "Test task, Layout",
+      "id": "10",
+      "image": "/src/assets/images/projects/Layout 2.png",
+      "link": "https://github.com/Nico-kun123/layout-INLINE",
+      "title": "Вёрстка макета из шаблона Figma"
     }
   ]
 }
