@@ -57,7 +57,7 @@
       "title": "Layout from Figma"
     },
     {
-      "category": "Test task, Layout",
+      "category": "Test task, Layout, Vue.js",
       "id": "9",
       "image": "/src/assets/images/projects/Chat Layout 1.png",
       "link": "https://github.com/Nico-kun123/chat-layout-vue",
@@ -69,6 +69,13 @@
       "image": "/src/assets/images/projects/Layout 2.png",
       "link": "https://github.com/Nico-kun123/layout-INLINE",
       "title": "Layout from Figma"
+    },
+    {
+      "category": "Test task, Layout, Vue.js",
+      "id": "11",
+      "image": "/src/assets/images/projects/Product Editing.png",
+      "link": "https://github.com/Nico-kun123/product-list",
+      "title": "Product list editing web app"
     }
   ],
   "projectsRU": [
@@ -129,18 +136,25 @@
       "title": "Вёрстка макета из шаблона Figma"
     },
     {
-      "category": "Test task, Layout",
+      "category": "Test task, Layout, Vue.js",
       "id": "9",
       "image": "/src/assets/images/projects/Chat Layout 1.png",
       "link": "https://github.com/Nico-kun123/chat-layout-vue",
       "title": "Вёрстка простого макета чата"
     },
     {
-      "category": "Test task, Layout",
+      "category": "Test task, Layout, Vue.js",
       "id": "10",
       "image": "/src/assets/images/projects/Layout 2.png",
       "link": "https://github.com/Nico-kun123/layout-INLINE",
       "title": "Вёрстка макета из шаблона Figma"
+    },
+    {
+      "category": "Test task, Layout, Vue.js",
+      "id": "11",
+      "image": "/src/assets/images/projects/Product Editing.png",
+      "link": "https://github.com/Nico-kun123/product-list",
+      "title": "Веб-приложение для управления списком товаров"
     }
   ]
 }
