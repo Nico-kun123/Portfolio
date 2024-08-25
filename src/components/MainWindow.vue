@@ -528,6 +528,8 @@ window.onclick = event => {
             <!-- <a class="btn" @click="filterByClassName('react.js')">React.js</a> -->
             <a class="btn" @click="filterByClassName('vue.js')">Vue.js</a>
 
+            <a class="btn" @click="filterByClassName('react.js')">React.js</a>
+
             <a v-if="$isRussian()" class="btn" @click="filterByClassName('no react/vue')"
               >Без React/Vue</a
             >
@@ -627,6 +629,10 @@ window.onclick = event => {
 
           <li class="filter-item">
             <button class="btn" @click="filterByClassName('vue.js')">Vue.js</button>
+          </li>
+
+          <li class="filter-item">
+            <button class="btn" @click="filterByClassName('react.js')">React.js</button>
           </li>
 
           <li class="filter-item">
