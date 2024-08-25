@@ -37,7 +37,7 @@ const changeButtonText = () => {
       <!-- АВАТАРКА -->
       <figure class="avatar__box">
         <img
-          src="../assets/images/ui/person.svg"
+          src="../assets/images/ui/github logo.png"
           alt="Nicolay Kudryavtsev"
           width="50px"
           height="50px"
@@ -272,6 +272,7 @@ svg {
   img {
     width: 100px;
     height: auto;
+    border-radius: 50%;
   }
 }
 
@@ -516,6 +517,7 @@ svg {
 @media (min-width: 450px) {
   .portfolio__title {
     // height: fit-content;
+    gap: 10px;
   }
   .sidebar {
     width: 100%;
@@ -581,6 +583,7 @@ svg {
   .portfolio__title {
     height: 7rem;
     padding-left: 1rem;
+    gap: 20px;
   }
   .sidebar {
     width: 520px;
@@ -598,10 +601,6 @@ svg {
 
   .sidebar.active {
     max-height: 505px;
-  }
-
-  .portfolio__title {
-    gap: 25px;
   }
 
   .avatar__box {
