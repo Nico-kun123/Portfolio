@@ -13,8 +13,8 @@ const i18n = createI18n({
 
   // Устанавливаем локаль по умолчанию
   locale: navigator.language,
-  // Locale: 'ru',
-  // Locale: 'en',
+  // locale: 'ru',
+  // locale: 'en',
 
   // Переводы на языки: русский и английский
   messages: {
