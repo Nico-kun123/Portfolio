@@ -1,8 +1,8 @@
 {
   "aboutMe": [
-    "Dynamic, motivated Frontend Developer and Tester who is in search of internship/full-time employment to gain experience and enhance knowledge in developing modern, responsive and interactive websites.",
-    "Currently, I'm pursuing a Master's degree in Artificial Intelligence Engineering, driven by my passion for AI and Machine Learning. Proficient in HTML5, CSS3, JavaScript, TypeScript, Vue.js, Vite.js, scss/sass. Competent in PostgreSQL and Jest. Familiar with the use of AI tools such as ChatGPT for enhanced productivity and efficient problem-solving.",
-    "I'm eager to work in a team and I'm willing to collaborate in exciting projects! I'm confident that my strong interest in modern technology, my commitment and my dedication can help advance your organization's goal one step further!",
+    "I'm a motivated Frontend Developer and Tester who is interested in doing an internship/full-time job to build a career and enhance my skills in developing modern, responsive and interactive websites.",
+    "I'm currently pursuing a Master's degree in AI Engineering where I'm studying AI and Machine Learning. Proficient in HTML5, CSS3, JavaScript, TypeScript, Vue.js, Vite.js, SCSS/SASS. I have experience at PostgreSQL and Jest. Familiar with the use of AI tools such as ChatGPT for enhanced productivity and efficient problem-solving.",
+    "I'm eager to work in a team and I'm willing to collaborate in exciting projects! I'm confident that my passion in modern technologies, my commitment and my dedication can help advance your organization's goal one step further!",
     "My Soft-skills:"
   ],
   "extra": [
@@ -23,7 +23,7 @@
     "Walking, if the weather allows and if I have the time and motivation.",
     "Drawing, if it is possible and if I have time and motivation."
   ],
-  "resumeNames": ["Frontend Developer;", "Tester (QA/Manual)."],
+  "resumeNames": ["Frontend Developer;", "Tester (QA/Manual);", "Technical writer."],
   "serviceDesc": [
     "Creating websites that are visually appealing and function well on all devices and browsers.",
     "Manual testing, writing test scenarios. API testing using Insomnia/Postman. Writing unit tests with Jest.",
@@ -35,10 +35,10 @@
     "Web development on Vue.js"
   ],
   "softSkills": [
-    "Responsibility: I feel responsible for my actions and mistakes. I take responsibility for my commitments and make an effort to meet deadlines.",
-    "Ability to Focus: I'm a highly dedicated person. I can concentrate and complete my tasks on time without getting sidetracked.",
+    "Responsibility: I feel responsible for my actions and mistakes. I am accountable with my commitments and make an effort to meet deadlines.",
+    "Ability to Focus: I'm able to concentrate and complete my tasks on time without getting sidetracked.",
     "Accepting Criticism: In my opinion, receiving and giving constructive feedback is important for personal growth.",
-    "Communication Skills: When I communicate I try to express my thoughts and ideas clearly so that other people can understand what I'm trying to say. For example, I can express myself clearly using text messages and other forms of text communication.",
+    "Communication Skills: I try to express my thoughts and ideas clearly so that other people can understand what I'm trying to say. For example, I can express myself clearly using text messages and other forms of text communication.",
     "Conflict-free: I have no desire to engage in any conflicts with others. However, I'm always willing to provide help when necessary.",
     "Perseverance: I am open to learning new skills, exploring technologies and gaining valuable experience in the realm of modern web development."
   ],

@@ -164,7 +164,7 @@ window.onclick = event => {
 
         <p>{{ t('aboutMe[2]') }}</p>
 
-        <div class="separator" />
+        <div class="separator"></div>
 
         <p>{{ t('aboutMe[3]') }}</p>
 
@@ -182,7 +182,7 @@ window.onclick = event => {
         </ul>
       </section>
 
-      <div class="separator" />
+      <div class="separator"></div>
 
       <!-- ССЫЛКИ НА МОИ РЕЗЮМЕ -->
       <h3 v-if="$isRussian()" class="h2 service-title">Мои резюме:</h3>
@@ -192,7 +192,7 @@ window.onclick = event => {
       <ul class="resume-list">
         <li>
           <a
-            href="https://hh.ru/resume/62dedceaff0c831a7f0039ed1f3379466d4f53"
+            href="https://hh.ru/resume/2a9e4a36ff0d98e11d0039ed1f414338487457"
             target="_blank"
             rel="noopener noreferrer"
             >&#10148; {{ t('resumeNames[0]') }}</a
@@ -211,9 +211,22 @@ window.onclick = event => {
             >&#10148; {{ t('resumeNames[1]') }}</a
           >
         </li>
+
+        <li>
+          <br />
+        </li>
+
+        <li>
+          <a
+            href="https://hh.ru/resume/914ccdb3ff0dac3ddf0039ed1f51705a753542"
+            target="_blank"
+            rel="noopener noreferrer"
+            >&#10148; {{ t('resumeNames[2]') }}</a
+          >
+        </li>
       </ul>
 
-      <div class="separator" />
+      <div class="separator"></div>
 
       <!-- Раздел "Чем я занимаюсь" -->
       <section class="service">
@@ -427,7 +440,7 @@ window.onclick = event => {
         </ol>
       </section>
 
-      <div class="separator" />
+      <div class="separator"></div>
 
       <!-- ТЕХНИЧЕСКИЕ НАВЫКИ + ШКАЛА -->
       <!-- TODO: Можно попытаться как-то оценить свои знания в этих технологиях в процентах (хз как) -->
@@ -468,7 +481,7 @@ window.onclick = event => {
 
           <Skill skill-name="JQuery" :skill-value="40" />
 
-          <Skill skill-name="React.js" :skill-value="26" />
+          <Skill skill-name="React.js" :skill-value="36" />
         </div>
       </section>
     </article>
@@ -555,7 +568,7 @@ window.onclick = event => {
             <a v-else class="btn" @click="filterByClassName('neural network')">Neural Network</a>
           </div>
 
-          <div class="separator" />
+          <div class="separator"></div>
         </div>
 
         <!-- ФИЛЬТР ПРОЕКТОВ (ДРУГИЕ УСТРОЙСТВА) -->
@@ -773,7 +786,7 @@ window.onclick = event => {
 
         <p>{{ t('extra[1]') }}</p>
 
-        <div class="separator" />
+        <div class="separator"></div>
 
         <p v-if="$isRussian()">Мои увлечения и хобби:</p>
 
