@@ -164,9 +164,11 @@ window.onclick = event => {
 
         <p>{{ t('aboutMe[2]') }}</p>
 
+        <p>{{ t('aboutMe[3]') }}</p>
+
         <div class="separator"></div>
 
-        <p>{{ t('aboutMe[3]') }}</p>
+        <p>{{ t('aboutMe[4]') }}</p>
 
         <ul class="common-list">
           <li>{{ t('softSkills[0]') }}</li>
