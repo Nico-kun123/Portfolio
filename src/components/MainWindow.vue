@@ -201,9 +201,9 @@ window.onclick = event => {
           >
         </li>
 
-        <li>
+        <!-- <li>
           <br />
-        </li>
+        </li> -->
 
         <li>
           <a
@@ -213,10 +213,10 @@ window.onclick = event => {
             >&#10148; {{ t('resumeNames[1]') }}</a
           >
         </li>
-
+        <!-- 
         <li>
           <br />
-        </li>
+        </li> -->
 
         <li>
           <a
@@ -834,9 +834,11 @@ header {
 
     & a {
       width: fit-content;
+      line-height: 2;
     }
   }
 }
+
 /*-----------------------------------*\
 # SIDEBAR
 \*-----------------------------------*/
@@ -857,7 +859,7 @@ header {
   line-height: 1.6;
 
   p {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 
     &:first-letter {
       margin-left: 1em;
@@ -869,8 +871,11 @@ header {
   li {
     list-style: outside;
     list-style-position: inside;
-    padding-bottom: 0.5em;
+    // padding-bottom: 0.5em;
+    // line-height: 1.5;
   }
+
+  margin-bottom: 15px;
 }
 
 .testimonials {
@@ -1486,6 +1491,13 @@ header {
 
 /** responsive smaller than 320px screen */
 @media (min-width: 320px) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: smooth;
+    line-height: 1.5;
+  }
+
   #filter-menu {
     display: block;
   }
@@ -1565,6 +1577,13 @@ header {
     --fs-6: 15px;
     --fs-7: 15px;
     --fs-8: 12px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: smooth;
+    line-height: 1.7;
   }
 
   // html {
@@ -2074,6 +2093,7 @@ header {
   font-weight: var(--fw-400);
   text-transform: capitalize;
   line-height: normal;
+  margin-bottom: 8px;
 }
 
 .project-category {
@@ -2081,6 +2101,8 @@ header {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: normal;
+  display: block;
+  // height: auto;
 
   text-transform: capitalize;
 }

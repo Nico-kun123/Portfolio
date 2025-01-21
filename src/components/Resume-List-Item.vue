@@ -72,6 +72,8 @@ const props = defineProps({
 .timeline-item {
   position: relative;
   padding: 0;
+  line-height: normal;
+
   &:not(:last-child) {
     margin-bottom: 1.5em;
   }
@@ -112,6 +114,7 @@ const props = defineProps({
     color: var(--light-gray);
     font-weight: var(--fw-300);
     line-height: normal;
+    // margin-top: 0.5em;
   }
   & .timeline-item-title {
     font-size: var(--fs-3);
