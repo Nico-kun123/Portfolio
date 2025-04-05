@@ -1,10 +1,7 @@
 <template>
   <!-- !! SERVICE !! -->
   <li class="service-item">
-    <div
-      v-if="id === 1"
-      class="service-icon-box"
-    >
+    <div v-if="id === 1" class="service-icon-box">
       <img
         src="../assets/images/ui/icons/about/coding.svg"
         alt="design icon"
@@ -12,13 +9,10 @@
         height="40"
         loading="lazy"
         draggable="false"
-      >
+      />
     </div>
 
-    <div
-      v-else-if="id === 2"
-      class="service-icon-box"
-    >
+    <div v-else-if="id === 2" class="service-icon-box">
       <img
         src="../assets/images/ui/icons/about/layout.svg"
         alt="design icon"
@@ -26,13 +20,10 @@
         height="40"
         loading="lazy"
         draggable="false"
-      >
+      />
     </div>
 
-    <div
-      v-else-if="id === 3"
-      class="service-icon-box"
-    >
+    <div v-else-if="id === 3" class="service-icon-box">
       <img
         src="../assets/images/ui/icons/about/vue.svg"
         alt="design icon"
@@ -40,13 +31,10 @@
         height="40"
         loading="lazy"
         draggable="false"
-      >
+      />
     </div>
 
-    <div
-      v-else-if="id === 4"
-      class="service-icon-box"
-    >
+    <div v-else-if="id === 4" class="service-icon-box">
       <img
         src="../assets/images/ui/icons/about/folder-project-placeholder.svg"
         alt="design icon"
@@ -54,7 +42,7 @@
         height="40"
         loading="lazy"
         draggable="false"
-      >
+      />
     </div>
 
     <div class="service-content-box">
@@ -153,7 +141,7 @@ const props = defineProps({
         color: var(--light-gray);
         font-size: var(--fs-5);
         font-weight: var(--fw-3);
-        line-height: 1.6;
+        line-height: 1.3;
       }
     }
   }

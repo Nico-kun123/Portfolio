@@ -1,10 +1,11 @@
-import globals from 'globals'
 import pluginJs from '@eslint/js'
-import pluginVue from 'eslint-plugin-vue'
-
 import eslintConfigPrettier from 'eslint-config-prettier'
 import deprecate from 'eslint-plugin-deprecate'
+// ESLint Plugin Perfectionist
+import perfectionist from 'eslint-plugin-perfectionist'
+import pluginVue from 'eslint-plugin-vue'
 import eslintPluginVueScopedCSS from 'eslint-plugin-vue-scoped-css'
+import globals from 'globals'
 
 export default [
   // Configs (JS + Vue + Prettier)
@@ -12,13 +13,59 @@ export default [
   eslintConfigPrettier,
   ...pluginVue.configs['flat/recommended'],
 
+  // eslint-plugin-perfectionist
+  // perfectionist.configs['recommended-alphabetical'],
+
   // Configs (Vue-ScopedCSS)
   ...eslintPluginVueScopedCSS.configs['flat/recommended'],
   {
     files: ['**/*.{js,mjs,cjs,vue,html}'],
     plugins: {
       deprecate,
+      perfectionist,
       'vue-scoped-css': eslintPluginVueScopedCSS,
+    },
+    rules: {
+      'perfectionist/sort-array-includes': [
+        'error',
+        {
+          order: 'asc',
+          partitionByComment: true,
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-classes': [
+        'error',
+        {
+          order: 'asc',
+          partitionByComment: true,
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          order: 'asc',
+          partitionByComment: true,
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-objects': [
+        'error',
+        {
+          order: 'asc',
+          partitionByComment: true,
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-variable-declarations': [
+        'error',
+        {
+          order: 'asc',
+          partitionByComment: true,
+          type: 'alphabetical',
+        },
+      ],
     },
   },
   {
@@ -29,10 +76,10 @@ export default [
     },
     rules: {
       //? СПИСОК ПРАВИЛ: https://github.com/future-architect/eslint-plugin-vue-scoped-css
-      'vue-scoped-css/no-unused-selector': 'warn', // Предупреждение о неиспользуемых селекторах в scoped CSS
       'vue-scoped-css/enforce-style-type': 'off', //* Предупреждение о неиспользуемых селекторах в scoped CSS
       'vue-scoped-css/no-parsing-error': 'warn', // Предупреждение о неиспользуемых селекторах в scoped CSS
       'vue-scoped-css/no-unused-keyframes': 'warn', // Предупреждение о неиспользуемых селекторах в scoped CSS
+      'vue-scoped-css/no-unused-selector': 'warn', // Предупреждение о неиспользуемых селекторах в scoped CSS
 
       //? СПИСОК СТАНДАРТНЫХ ПРАВИЛ (ESLint): https://eslint.org/docs/rules/
       //! Possible Problems. These rules relate to possible logic errors in code
@@ -40,12 +87,12 @@ export default [
       'no-constructor-return': 'warn', // Предупреждение при использовании new
       'no-duplicate-imports': 'warn', // Предупреждение при повторном импорте
       'no-inner-declarations': 'warn', // Предупреждение при объявлении переменных внутри блока
-      'no-unused-expressions': 'warn', // Предупреждение о неиспользуемых выражениях
       'no-promise-executor-return': 'warn', // Предупреждение при использовании Promise executor
       'no-self-compare': 'warn', // Предупреждение при использовании ==
       'no-template-curly-in-string': 'warn', // Предупреждение при использовании ${}
       'no-unmodified-loop-condition': 'warn', // Предупреждение при использовании while
       'no-unreachable-loop': 'warn', // Предупреждение при использовании while
+      'no-unused-expressions': 'warn', // Предупреждение о неиспользуемых выражениях
       'no-use-before-define': 'warn', // Предупреждение при использовании define
       'no-useless-assignment': 'off',
       'require-atomic-updates': 'warn',
@@ -111,7 +158,7 @@ export default [
       'no-labels': 'warn', // Предупреждение при использовании labels
       'no-lone-blocks': 'warn', // Предупреждение при использовании blocks
       'no-loop-func': 'warn', // Предупреждение при использовании loop
-      'no-magic-numbers': 'warn', // Предупреждение при использовании magic numbers
+      // 'no-magic-numbers': 'warn', // Предупреждение при использовании magic numbers
       'no-multi-assign': 'warn', // Предупреждение при использовании multi
       'no-multi-str': 'warn', // Предупреждение при использовании multi
       'no-negated-condition': 'warn', // Предупреждение при использовании negated
@@ -194,9 +241,9 @@ export default [
       'vue/no-deprecated-dollar-listeners-api': 'error', // Предупреждение о использовании устаревшего API $listeners
       'vue/no-deprecated-dollar-scopedslots-api': 'error', // Предупреждение о использовании устаревшего API $scopedSlots
       'vue/no-deprecated-events-api': 'error', // Предупреждение о использовании устаревшего API $on
+      'vue/no-deprecated-filter': 'error', // Предупреждение о использовании устаревшего filtered
       'vue/no-deprecated-functional-template': 'error', // Предупреждение о использовании устаревшего функционального шаблона
       'vue/no-deprecated-html-element-is': 'error', // Предупреждение о использовании устаревшего API $is
-      'vue/no-deprecated-filter': 'error', // Предупреждение о использовании устаревшего filtered
       'vue/no-deprecated-inline-template': 'error', // Предупреждение о использовании устаревшего inline шаблона
       'vue/no-deprecated-props-default-this': 'error', // Предупреждение о использовании устаревшего this в props
       'vue/no-deprecated-router-link-tag-prop': 'error', // Предупреждение о использовании устаревшего router-link-tag-props
@@ -218,8 +265,8 @@ export default [
       'vue/no-textarea-mustache': 'error', // Предупреждение о использовании textarea в шаблоне
       'vue/no-use-computed-property-like-method': 'error', // Предупреждение о использовании вычислений в computed
       'vue/no-useless-template-attributes': 'error', // Предупреждение о использовании лишних атрибутов в шаблоне
-      'vue/no-v-for-template-key-on-child': 'error', // Предупреждение о использовании ключей в шаблоне внутри дочерних элементов
       'vue/no-v-for-template-key': 'error', // Предупреждение о использовании ключей в шаблоне
+      'vue/no-v-for-template-key-on-child': 'error', // Предупреждение о использовании ключей в шаблоне внутри дочерних элементов
       'vue/no-v-model-argument': 'error', // Предупреждение о использовании аргумента v-model
       'vue/no-v-text-v-html-on-component': 'error', // Предупреждение о использовании v-text или v-html внутри компонента
       'vue/require-component-is': 'error', // Предупреждение о необходимости использования компонента is
@@ -235,11 +282,11 @@ export default [
       'vue/valid-model-definition': 'error', // Предупреждение о недопустимых model
       'vue/valid-next-tick': 'error', // Предупреждение о недопустимых nextTick
       'vue/valid-template-root': 'error', // Предупреждение о недопустимых корневых элементах
-      'vue/valid-v-bind-sync': 'error', // Предупреждение о недопустимых v-bind.sync
       'vue/valid-v-bind': 'error', // Предупреждение о недопустимых v-bind
+      'vue/valid-v-bind-sync': 'error', // Предупреждение о недопустимых v-bind.sync
       'vue/valid-v-cloak': 'error', // Предупреждение о недопустимых v-cloak
-      'vue/valid-v-else-if': 'error', // Предупреждение о недопустимых v-else-if
       'vue/valid-v-else': 'error', // Предупреждение о недопустимых v-else
+      'vue/valid-v-else-if': 'error', // Предупреждение о недопустимых v-else-if
       'vue/valid-v-for': 'error', // Предупреждение о недопустимых v-for
       'vue/valid-v-html': 'error', // Предупреждение о недопустимых v-html
       'vue/valid-v-if': 'error', // Предупреждение о недопустимых v-if

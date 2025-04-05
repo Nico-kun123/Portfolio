@@ -13,6 +13,10 @@ const props = defineProps({
   }),
   { projects } = props
 
+// Импорт i18n (такой подход лучше годится для Composition API)
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 /* COMPONENTS */
 import Blog from './Blog-List-Item.vue'
 import Navbar from './NavBar.vue'
@@ -25,9 +29,9 @@ import Skill from './Skill-List-Item.vue'
 // import Client from "./Client Logo.vue";
 // import TestimonialItem from "./Testimonial Item.vue";
 
-// Импорт i18n (такой подход лучше годится для Composition API)
-import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
+
+const isRussian = computed(() => t('locale') === 'ru-RU' || t('locale') === 'ru')
 
 // Изменяем ссылки на изображения, чтобы в production всё корректно отображалось
 projects.forEach(project => {
@@ -151,14 +155,14 @@ window.onclick = event => {
     <!-- !! ABOUT !! -->
     <article class="about active" data-page="about">
       <header>
-        <h2 v-if="$isRussian()" class="article-title h2">Обо мне</h2>
+        <h2 v-if="isRussian" class="article-title h2">Обо мне</h2>
 
         <h2 v-else class="article-title h2">About me</h2>
       </header>
 
       <!-- ОБО МНЕ -->
       <section class="about-text">
-        <p>{{ t('aboutMe[0]') }}</p>
+        <!-- <p>{{ t('aboutMe[0]') }}</p> -->
 
         <p>{{ t('aboutMe[1]') }}</p>
 
@@ -187,7 +191,7 @@ window.onclick = event => {
       <div class="separator"></div>
 
       <!-- ССЫЛКИ НА МОИ РЕЗЮМЕ -->
-      <h3 v-if="$isRussian()" class="h2 service-title">Мои резюме:</h3>
+      <h3 v-if="isRussian" class="h2 service-title">Мои резюме:</h3>
 
       <h3 v-else class="h2 service-title">My resume:</h3>
 
@@ -232,7 +236,7 @@ window.onclick = event => {
 
       <!-- Раздел "Чем я занимаюсь" -->
       <section class="service">
-        <h4 v-if="$isRussian()" class="h2 service-title">Чем я занимаюсь:</h4>
+        <h4 v-if="isRussian" class="h2 service-title">Чем я занимаюсь:</h4>
 
         <h4 v-else class="h2 service-title">What do I do:</h4>
 
@@ -251,7 +255,7 @@ window.onclick = event => {
       <!--
         <section class="testimonials">
         <h3
-        v-if="$isRussian()"
+        v-if="isRussian"
         class="h3 testimonials-title"
         >
         Отзывы:
@@ -260,7 +264,7 @@ window.onclick = event => {
 
         <ul class="testimonials-list has-scrollbar">
         <TestimonialItem
-        v-if="$isRussian()"
+        v-if="isRussian"
         id="1"
         name="Пример отзыва"
         description="Содержание отзыва"
@@ -319,7 +323,7 @@ window.onclick = event => {
       <!--
         <section class="clients">
         <h3
-        v-if="$isRussian()"
+        v-if="isRussian"
         class="h3 clients-title"
         >
         Клиенты:
@@ -336,7 +340,7 @@ window.onclick = event => {
     <!-- !! RESUME !! -->
     <article class="resume" data-page="resume">
       <header>
-        <h2 v-if="$isRussian()" class="article-title h2">Резюме</h2>
+        <h2 v-if="isRussian" class="article-title h2">Резюме</h2>
 
         <h2 v-else class="article-title h2">Resume</h2>
       </header>
@@ -352,7 +356,7 @@ window.onclick = event => {
             />
           </div>
 
-          <h3 v-if="$isRussian()" class="h3">Образование:</h3>
+          <h3 v-if="isRussian" class="h3">Образование:</h3>
 
           <h3 v-else class="h3">Education:</h3>
         </div>
@@ -389,14 +393,14 @@ window.onclick = event => {
             />
           </div>
 
-          <h3 v-if="$isRussian()" class="h3">Стажировки:</h3>
+          <h3 v-if="isRussian" class="h3">Стажировки:</h3>
 
           <h3 v-else class="h3">Internships:</h3>
         </div>
 
         <ol class="timeline-list">
           <ResumeListItem
-            v-if="$isRussian()"
+            v-if="isRussian"
             key="resume-list-item-1"
             name=""
             years="Нет стажировок."
@@ -424,13 +428,13 @@ window.onclick = event => {
             />
           </div>
 
-          <h3 v-if="$isRussian()" class="h3">Опыт работы:</h3>
+          <h3 v-if="isRussian" class="h3">Опыт работы:</h3>
 
           <h3 v-else class="h3">Work experience:</h3>
         </div>
 
         <ol class="timeline-list">
-          <ResumeListItem v-if="$isRussian()" name="" years="Нет опыта работы." description="" />
+          <!-- <ResumeListItem v-if="isRussian" name="" years="Нет опыта работы." description="" />
 
           <ResumeListItem
             v-else
@@ -438,6 +442,21 @@ window.onclick = event => {
             name=""
             years="No work experience."
             description=""
+          /> -->
+
+          <ResumeListItem
+            v-if="isRussian"
+            key="resume-list-item-1"
+            :name="t('timelineItemName[2]')"
+            years="2025 — Настоящее время"
+            :description="t('timelineItemDesc[3]')"
+          />
+          <ResumeListItem
+            v-else
+            key="resume-list-item-2"
+            :name="t('timelineItemName[2]')"
+            years="2025 — Present"
+            :description="t('timelineItemDesc[3]')"
           />
         </ol>
       </section>
@@ -447,7 +466,7 @@ window.onclick = event => {
       <!-- ТЕХНИЧЕСКИЕ НАВЫКИ + ШКАЛА -->
       <!-- TODO: Можно попытаться как-то оценить свои знания в этих технологиях в процентах (хз как) -->
       <section class="skill">
-        <h3 v-if="$isRussian()" class="h3 skills-title">Мои технические навыки (hard-skills)</h3>
+        <h3 v-if="isRussian" class="h3 skills-title">Мои технические навыки (hard-skills)</h3>
 
         <h3 v-else class="h3 skills-title">My technical skills (hard-skills)</h3>
 
@@ -455,7 +474,7 @@ window.onclick = event => {
 
         <div class="content-card skills-list">
           <Skill
-            v-if="$isRussian()"
+            v-if="isRussian"
             key="skill-ru"
             skill-name="Английский язык (C1)"
             :skill-value="78"
@@ -491,7 +510,7 @@ window.onclick = event => {
     <!-- !! PORTFOLIO !! -->
     <article class="portfolio" data-page="portfolio">
       <header>
-        <h2 v-if="$isRussian()" class="article-title h2">Портфолио</h2>
+        <h2 v-if="isRussian" class="article-title h2">Портфолио</h2>
 
         <h2 v-else class="article-title h2">Portfolio</h2>
       </header>
@@ -504,7 +523,7 @@ window.onclick = event => {
         <!-- ФИЛЬТР ПРОЕКТОВ (МОБИЛЬНЫЕ УСТРОЙСТВА) -->
         <!-- TODO: Если нужно добавить новые фильтры, то нужно добавить их здесь (Desktop) -->
         <div id="filter-menu">
-          <button v-if="$isRussian()" class="dropbtn" type="button" @click="showDropdown">
+          <button v-if="isRussian" class="dropbtn" type="button" @click="showDropdown">
             Выберите фильтр
           </button>
 
@@ -513,29 +532,29 @@ window.onclick = event => {
           </button>
 
           <div id="myDropdown" class="dropdown-content">
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('all')">Все проекты</a>
+            <a v-if="isRussian" class="btn" @click="filterByClassName('all')">Все проекты</a>
 
             <a v-else class="btn" @click="filterByClassName('all')">All Projects</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('Big project')"
+            <a v-if="isRussian" class="btn" @click="filterByClassName('Big project')"
               >Большие Проекты</a
             >
 
             <a v-else class="btn" @click="filterByClassName('Big project')">Big Projects</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('Pet project')"
+            <a v-if="isRussian" class="btn" @click="filterByClassName('Pet project')"
               >Пет-проекты</a
             >
 
             <a v-else class="btn" @click="filterByClassName('Pet project')">Pet projects</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('Test task')"
+            <a v-if="isRussian" class="btn" @click="filterByClassName('Test task')"
               >Тестовые задания</a
             >
 
             <a v-else class="btn" @click="filterByClassName('Test task')">Test Tasks</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('layout')">Вёрстка</a>
+            <a v-if="isRussian" class="btn" @click="filterByClassName('layout')">Вёрстка</a>
 
             <a v-else class="btn" @click="filterByClassName('layout')">Layouts</a>
 
@@ -545,15 +564,13 @@ window.onclick = event => {
 
             <a class="btn" @click="filterByClassName('react.js')">React.js</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('no react/vue')"
+            <a v-if="isRussian" class="btn" @click="filterByClassName('no react/vue')"
               >Без React/Vue</a
             >
 
             <a v-else class="btn" @click="filterByClassName('no react/vue')">No React/Vue</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('tests')"
-              >Написание тестов</a
-            >
+            <a v-if="isRussian" class="btn" @click="filterByClassName('tests')">Написание тестов</a>
 
             <a v-else class="btn" @click="filterByClassName('tests')">Tests</a>
             <!-- <a class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</a> -->
@@ -563,7 +580,7 @@ window.onclick = event => {
 
             <a class="btn" @click="filterByClassName('python')">Python</a>
 
-            <a v-if="$isRussian()" class="btn" @click="filterByClassName('neural network')"
+            <a v-if="isRussian" class="btn" @click="filterByClassName('neural network')"
               >Нейросеть</a
             >
 
@@ -577,14 +594,14 @@ window.onclick = event => {
         <!-- TODO: Если нужно добавить новые фильтры, то нужно добавить их здесь (Mobile) -->
         <ul class="filter-list">
           <li class="filter-item">
-            <button v-if="$isRussian()" class="btn" @click="filterByClassName('all')">Все</button>
+            <button v-if="isRussian" class="btn" @click="filterByClassName('all')">Все</button>
 
             <button v-else class="btn" @click="filterByClassName('all')">All</button>
           </li>
 
           <li class="filter-item">
             <button
-              v-if="$isRussian()"
+              v-if="isRussian"
               class="btn"
               type="button"
               @click="filterByClassName('Big project')"
@@ -599,7 +616,7 @@ window.onclick = event => {
 
           <li class="filter-item">
             <button
-              v-if="$isRussian()"
+              v-if="isRussian"
               class="btn"
               type="button"
               @click="filterByClassName('Pet project')"
@@ -614,7 +631,7 @@ window.onclick = event => {
 
           <li class="filter-item">
             <button
-              v-if="$isRussian()"
+              v-if="isRussian"
               class="btn"
               type="button"
               @click="filterByClassName('Test task')"
@@ -626,12 +643,7 @@ window.onclick = event => {
           </li>
 
           <li class="filter-item">
-            <button
-              v-if="$isRussian()"
-              class="btn"
-              type="button"
-              @click="filterByClassName('layout')"
-            >
+            <button v-if="isRussian" class="btn" type="button" @click="filterByClassName('layout')">
               Вёрстка из Figma
             </button>
 
@@ -652,7 +664,7 @@ window.onclick = event => {
 
           <li class="filter-item">
             <button
-              v-if="$isRussian()"
+              v-if="isRussian"
               class="btn"
               type="button"
               @click="filterByClassName('no react/vue')"
@@ -666,12 +678,7 @@ window.onclick = event => {
           </li>
 
           <li class="filter-item">
-            <button
-              v-if="$isRussian()"
-              class="btn"
-              type="button"
-              @click="filterByClassName('tests')"
-            >
+            <button v-if="isRussian" class="btn" type="button" @click="filterByClassName('tests')">
               Написание тестов
             </button>
 
@@ -708,7 +715,7 @@ window.onclick = event => {
 
           <li class="filter-item">
             <button
-              v-if="$isRussian()"
+              v-if="isRussian"
               class="btn"
               type="button"
               @click="filterByClassName('neural network')"
@@ -752,7 +759,7 @@ window.onclick = event => {
     <!-- !! BLOG !! -->
     <article class="blog" data-page="blog">
       <header>
-        <h2 v-if="$isRussian()" class="article-title h2">Блог</h2>
+        <h2 v-if="isRussian" class="article-title h2">Блог</h2>
 
         <h2 v-else class="article-title h2">Blog</h2>
       </header>
@@ -778,7 +785,7 @@ window.onclick = event => {
     <!-- !! EXTRA !! -->
     <article class="extra" data-page="extra">
       <header>
-        <h2 v-if="$isRussian()" class="article-title h2">Доп. информация</h2>
+        <h2 v-if="isRussian" class="article-title h2">Доп. информация</h2>
 
         <h2 v-else class="article-title h2">Extra info</h2>
       </header>
@@ -790,7 +797,7 @@ window.onclick = event => {
 
         <div class="separator"></div>
 
-        <p v-if="$isRussian()">Мои увлечения и хобби:</p>
+        <p v-if="isRussian">Мои увлечения и хобби:</p>
 
         <p v-else>My hobbies and interests:</p>
 
@@ -859,7 +866,7 @@ header {
   line-height: 1.6;
 
   p {
-    margin-bottom: 5px;
+    margin-bottom: 12px;
 
     &:first-letter {
       margin-left: 1em;
@@ -873,6 +880,10 @@ header {
     list-style-position: inside;
     // padding-bottom: 0.5em;
     // line-height: 1.5;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
 
   margin-bottom: 15px;
@@ -1583,7 +1594,7 @@ header {
   *::before,
   *::after {
     scroll-behavior: smooth;
-    line-height: 1.7;
+    line-height: 1.4;
   }
 
   // html {

@@ -8,7 +8,7 @@
           alt="Design conferences in 2022"
           loading="lazy"
           draggable="false"
-        >
+        />
       </figure>
 
       <div class="blog-content">
@@ -35,95 +35,90 @@
 import PlaceholderImg from '../assets/images/blogs/placeholder.svg'
 
 const props = defineProps({
-        /**
-         * Категория статьи
-         * @type {String}
-         * @required
-         */
-        category: {
-          required: true,
-          type: String
-        },
+    /**
+     * Категория статьи
+     * @type {String}
+     * @required
+     */
+    category: {
+      required: true,
+      type: String,
+    },
 
-        /**
-         * Дата публикации статьи
-         * @type {String}
-         * @required
-         */
-        date: {
-          required: true,
-          type: String
-        },
+    /**
+     * Дата публикации статьи
+     * @type {String}
+     * @required
+     */
+    date: {
+      required: true,
+      type: String,
+    },
 
-        /**
-         * Краткое описание статьи
-         * @type {String}
-         * @required
-         */
-        description: {
-          required: true,
-          type: String
-        },
+    /**
+     * Краткое описание статьи
+     * @type {String}
+     * @required
+     */
+    description: {
+      required: true,
+      type: String,
+    },
 
-        /**
-         * ID статьи (для отображения)
-         * @type {Number}
-         * @required
-         */
-        id: {
-          required: true,
-          type: Number
-        },
+    /**
+     * ID статьи (для отображения)
+     * @type {Number}
+     * @required
+     */
+    id: {
+      required: true,
+      type: Number,
+    },
 
-        /**
-         * Ссылка на статью
-         * @type {String}
-         * @required
-         */
-        link: {
-          required: true,
-          type: String
-        },
+    /**
+     * Ссылка на статью
+     * @type {String}
+     * @required
+     */
+    link: {
+      required: true,
+      type: String,
+    },
 
-        /**
-         * Название статьи
-         * @type {String}
-         * @required
-         */
-        name: {
-          required: true,
-          type: String
-        }
-      }),
-
-      // Получаем значения из props
-      {category} = props,
-      {date} = props,
-      {description} = props,
-      {id} = props,
-      {link} = props,
-      {name} = props,
-
-      // Если у статьи нет изображения, то показываем картинку по умолчанию
-      placeholderImage = PlaceholderImg,
-
-      /**
-       * Получает значение из props. Если какое-то значение не передано, возвращает значение по умолчанию.
-       * @param {String} value
-       * @param {String} defaultValue
-       * @return {String}
-       */
-      getValue = (value, defaultValue) => (value ? value : defaultValue),
-
-      // Обработка значений, переданных из props
-      placeholderName = getValue(name, 'PLACEHOLDER TITLE'),
-      placeholderDescription = getValue(description, 'PLACEHOLDER DESCRIPTION'),
-      placeholderCategory = getValue(category, 'NO CATEGORY'),
-      placeholderDate = getValue(date, 'NO DATE'),
-      placeholderLink = getValue(link, '/'),
-
-      // TODO: Добавить картинки для блогов, если такие есть. Условие нужно будет изменить.
-      projectImage = id === '1' ? '../assets/images/blogs/1.png' : placeholderImage
+    /**
+     * Название статьи
+     * @type {String}
+     * @required
+     */
+    name: {
+      required: true,
+      type: String,
+    },
+  }),
+  // Получаем значения из props
+  { category } = props,
+  { date } = props,
+  { description } = props,
+  { id } = props,
+  { link } = props,
+  { name } = props,
+  // Если у статьи нет изображения, то показываем картинку по умолчанию
+  placeholderImage = PlaceholderImg,
+  /**
+   * Получает значение из props. Если какое-то значение не передано, возвращает значение по умолчанию.
+   * @param {String} value
+   * @param {String} defaultValue
+   * @return {String}
+   */
+  getValue = (value, defaultValue) => (value ? value : defaultValue),
+  // Обработка значений, переданных из props
+  placeholderName = getValue(name, 'PLACEHOLDER TITLE'),
+  placeholderDescription = getValue(description, 'PLACEHOLDER DESCRIPTION'),
+  placeholderCategory = getValue(category, 'NO CATEGORY'),
+  placeholderDate = getValue(date, 'NO DATE'),
+  placeholderLink = getValue(link, '/'),
+  // TODO: Добавить картинки для блогов, если такие есть. Условие нужно будет изменить.
+  projectImage = id === '1' ? '../assets/images/blogs/1.png' : placeholderImage
 </script>
 
 <style lang="scss" scoped>

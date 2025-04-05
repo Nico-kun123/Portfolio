@@ -1,16 +1,16 @@
 <script setup>
-import ProfilePic from '../assets/images/profile.jpeg'
-
 // Проверка языка браузера (i18n.locale)
 import { getCurrentInstance } from 'vue'
+
+// import ProfilePic from '../assets/images/profile.jpeg'
 const { proxy } = getCurrentInstance(),
   isRussian = proxy.$isRussian() // true || false
 
 // ICONS
-import IconEmail from '../assets/images/ui/icons/header/mail-icon.vue'
-import IconPhone from '../assets/images/ui/icons/header/phone-icon.vue'
 import IconBirthday from '../assets/images/ui/icons/header/birthday-icon.vue'
 import IconLocation from '../assets/images/ui/icons/header/location-icon.vue'
+import IconEmail from '../assets/images/ui/icons/header/mail-icon.vue'
+import IconPhone from '../assets/images/ui/icons/header/phone-icon.vue'
 
 /**
  * Изменение текста кнопки "Показать контакты" -> "Скрыть контакты" и наоборот.
@@ -48,16 +48,16 @@ const changeButtonText = () => {
 
       <!-- ФАМИЛИЯ, ИМЯ И ЗАНЯТИЯ -->
       <div class="info__content">
-        <h1 v-if="$isRussian()" class="name" title="Nicolay Kudryavtsev">Николай Кудрявцев</h1>
+        <h1 v-if="isRussian" class="name" title="Nicolay Kudryavtsev">Николай Кудрявцев</h1>
 
         <h1 v-else class="name" title="Nicolay Kudryavtsev">Nicolay Kudryavtsev</h1>
 
         <div class="title-box">
-          <label v-if="$isRussian()" class="title">Frontend-разработчик</label>
+          <label v-if="isRussian" class="title">Frontend-разработчик</label>
 
           <label v-else class="title">Frontend developer</label>
 
-          <label v-if="$isRussian()" class="title">Тестировщик</label>
+          <label v-if="isRussian" class="title">Тестировщик</label>
 
           <label v-else class="title">Tester</label>
         </div>
@@ -65,7 +65,7 @@ const changeButtonText = () => {
 
       <!-- КНОПКА ПОКАЗАТЬ/СКРЫТЬ КОНТАКТЫ -->
       <button class="info__more-btn" data-sidebar-btn type="button" @click="changeButtonText">
-        <span v-if="$isRussian()">Показать контакты</span>
+        <span v-if="isRussian">Показать контакты</span>
 
         <span v-else>Show contacts</span>
       </button>
@@ -82,7 +82,7 @@ const changeButtonText = () => {
           </div>
 
           <div class="contact-info">
-            <p v-if="$isRussian()" class="contact-title">Электронная Почта</p>
+            <p v-if="isRussian" class="contact-title">Электронная Почта</p>
 
             <p v-else class="contact-title">Email</p>
 
@@ -98,7 +98,7 @@ const changeButtonText = () => {
           </div>
 
           <div class="contact-info">
-            <p v-if="$isRussian()" class="contact-title">Телефон</p>
+            <p v-if="isRussian" class="contact-title">Телефон</p>
 
             <p v-else class="contact-title">Phone</p>
 
@@ -112,11 +112,11 @@ const changeButtonText = () => {
           </div>
 
           <div class="contact-info">
-            <p v-if="$isRussian()" class="contact-title">Дата рождения</p>
+            <p v-if="isRussian" class="contact-title">Дата рождения</p>
 
             <p v-else class="contact-title">birthday</p>
 
-            <time v-if="$isRussian()" datetime="dd.mm.yyyy">19.12.2001</time>
+            <time v-if="isRussian" datetime="dd.mm.yyyy">19.12.2001</time>
 
             <time v-else datetime="mm-dd-yyyy">12-19-2001</time>
           </div>
@@ -128,11 +128,11 @@ const changeButtonText = () => {
           </div>
 
           <div class="contact-info">
-            <p v-if="$isRussian()" class="contact-title">Местоположение</p>
+            <p v-if="isRussian" class="contact-title">Местоположение</p>
 
             <p v-else class="contact-title">Location</p>
 
-            <address v-if="$isRussian()">Россия, г. Красноярск</address>
+            <address v-if="isRussian">Россия, г. Красноярск</address>
 
             <address v-else>Russia, Krasnoyarsk</address>
           </div>
@@ -277,6 +277,10 @@ svg {
 }
 
 .info__content {
+  -webkit-transition: var(--transition-2);
+  -o-transition: var(--transition-2);
+  transition: var(--transition-2);
+
   .name {
     color: var(--white-2);
     // font-size: var(--fs-4);
@@ -473,8 +477,8 @@ svg {
     }
 
     .title {
-      padding: 1px 12px;
-      font-size: var(--fs-6);
+      padding: 1px 8px;
+      font-size: var(--fs-5);
       background-color: var(--orange-yellow-crayola);
       color: black;
       font-weight: bold;

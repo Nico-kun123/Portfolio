@@ -2,31 +2,27 @@
   <div>
     <Header />
 
-    <Main
-      :projects="$isRussian()
-        ? projectsRU
-        : projects"
-    />
+    <Main :projects="$isRussian() ? projectsRU : projects" />
   </div>
 </template>
 
 <script setup>
 import '../src/style.css'
-
-// Импорт компонентов
-import Header from './components/Header-Component.vue'
-import Main from './components/MainWindow.vue'
-
-// Плагин для проверки языка локализации
-// import isRussian from './plugins/checkLocale'
-
 // Информация о проектах
 /*
   TODO: Если нужно добавить новые проекты, то нужно их добавить в assets/projects.json.
   Только делай так, чтобы category у проекта соответствовал добавленному фильтру (в "MainWindow.vue").
   И сами фильтры тоже надо добавить в тот же vue-файл.
 */
+
+// Импорт компонентов
 import MyProjects from './assets/projects.json'
+import Header from './components/Header-Component.vue'
+import Main from './components/MainWindow.vue'
+
+// Плагин для проверки языка локализации
+// import isRussian from './plugins/checkLocale'
+
 const { projects, projectsRU } = MyProjects
 </script>
 

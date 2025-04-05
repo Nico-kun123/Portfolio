@@ -63,8 +63,7 @@ const props = defineProps({
     <div class="skill-progress-bg">
       <div
         class="skill-progress-fill"
-        :style="{'width': `${skillValue}%`,
-                 'background': progressColor}"
+        :style="{ width: `${skillValue}%`, background: progressColor }"
       />
     </div>
   </li>
