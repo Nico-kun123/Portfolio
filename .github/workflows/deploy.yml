@@ -41,7 +41,6 @@ jobs:
       - name: Install dependencies 💅
         run: |
           npm ci
-          npm audit fix
 
       - name: Build the app 😤
         run: npm run build
