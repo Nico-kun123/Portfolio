@@ -22,7 +22,7 @@
   "devDependencies": {
     "@eslint/js": "^9.5.0",
     "@mojojoejo/vite-plugin-purgecss": "^1.1.0",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue": "^5.2.3",
     "eslint": "^9.5.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-deprecate": "^0.8.5",
