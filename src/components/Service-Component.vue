@@ -9,7 +9,7 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
 
     <div v-else-if="id === 2" class="service-icon-box">
@@ -20,7 +20,7 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
 
     <div v-else-if="id === 3" class="service-icon-box">
@@ -31,7 +31,7 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
 
     <div v-else-if="id === 4" class="service-icon-box">
@@ -42,7 +42,7 @@
         height="40"
         loading="lazy"
         draggable="false"
-      />
+      >
     </div>
 
     <div class="service-content-box">
@@ -89,9 +89,9 @@ const props = defineProps({
       type: String,
     },
   }),
+  { description } = props,
   { id } = props,
-  { name } = props,
-  { description } = props
+  { name } = props
 </script>
 
 <style lang="scss">

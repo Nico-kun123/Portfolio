@@ -1,8 +1,8 @@
 {
   "aboutMe": [
-    "I'm a Frontend Developer and Tester who wants to pursue a professional growth and development. I'm looking for a full-time job or an internship to enhance my skills in developing modern, responsive and interactive websites.",
-    "Currently I'm studying in the Master's degree program in Artificial Intelligence Engineering, where I'm actively learning machine learning and AI.",
-    "My technical skills include: HTML5, CSS3, JavaScript, TypeScript, Vue.js, Vite.js, SASS/SCSS. I also have experience with databases (PostgreSQL, Firebase) and with Jest framework. I'm familiar with using ChatGPT to improve my productivity and speed up the process of solving tasks. In addition to my technical skills, I also have experience in manual testing and creating technical documentation.",
+    "I'm a Frontend Developer who wants to pursue a professional growth and development. I'm looking for a full-time job to enhance my skills in developing modern, responsive and interactive websites.",
+    "Currently pursuing a Postgraduate Diploma in \"Systems Analysis, Management and Information Processing, Statistics\" and actively working on a dissertation topic related to machine learning and AI.",
+    "My technical skills include: HTML5, CSS3, JavaScript, TypeScript, Vue.js, Vite.js, SASS/SCSS. I also have experience with PHP, databases (MySQL, PostgreSQL, Firebase) and frameworks for writing tests (Jest, Vitest). I'm familiar with using LLM as a tool to improve my productivity and speed up the process of solving tasks. In addition to my technical skills, I also have experience in manual testing and creating technical documentation.",
     "I'm eager to work in a team to develop interesting projects! I'm ready to contribute to the development of your products thanks to my enthusiasm and dedication to learning new, modern technologies.",
     "My Soft-skills:"
   ],
@@ -17,7 +17,7 @@
   ],
   "hobbies": [
     "Listening to music. I mostly listen to video game soundtracks.",
-    "Learning Japanese on my free time using the Duolingo app.",
+    "Learning Japanese language using the Duolingo app.",
     "Playing video games from time to time.",
     "Creating UI for my projects. I like this 'creative aspect' of Frontend development.",
     "Making videos on YouTube.",
@@ -26,14 +26,14 @@
   ],
   "resumeNames": ["Frontend Developer;", "Tester (QA/Manual);", "Technical writer."],
   "serviceDesc": [
-    "Creating websites that are visually appealing and function well on all devices and browsers.",
+    "Creating visually appealing websites that function well on all devices and browsers.",
     "Manual testing, writing test scenarios. API testing using Insomnia/Postman. Writing unit tests with Jest.",
     "Creating SPA web applications, using Vue.js (Vite.js, Vue Router, i18n)."
   ],
   "serviceName": [
     "Adaptive & cross-browser web design",
-    "Manual testing, API testing, writing test scenarios and unit tests",
-    "Web development on Vue.js"
+    "Manual testing, API testing",
+    "Web development (Vue.js)"
   ],
   "softSkills": [
     "Responsibility: I feel responsible for my actions and mistakes. I am accountable with my commitments and make an effort to meet deadlines.",
@@ -47,7 +47,8 @@
     "Master's degree, majoring in «Artificial Intelligence Engineering».",
     "Bachelor's degree, majoring in «Informatics and Computer Science».",
     "School where I studied from grades 1 to 11. Graduated with a gold medal.",
-    "Full-time employment as 'Central Dispatch Service Engineer' (CDS Engineer)."
+    "Full-time employment as 'Central Dispatch Service Engineer' (CDS Engineer).",
+    "Postgraduate Diploma in «Systems Analysis, Management and Information Processing, Statistics»."
   ],
   "timelineItemName": [
     "Siberian Federal University. Institute of Space and Information Technologies",

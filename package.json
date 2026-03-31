@@ -16,26 +16,33 @@
     "eslint:fix": "eslint ./src --fix"
   },
   "dependencies": {
-    "vue": "^3.3.4",
-    "vue-i18n": "^9.6.1"
+    "vue": "^3.5.29",
+    "vue-i18n": "^11.2.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.5.0",
-    "@vitejs/plugin-vue": "^5.2.3",
-    "eslint": "^9.5.0",
-    "eslint-config-prettier": "^9.1.0",
+    "@vitejs/plugin-vue": "^6.0.4",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-deprecate": "^0.8.5",
-    "eslint-plugin-perfectionist": "^4.8.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-no-secrets": "^2.3.3",
+    "eslint-plugin-perfectionist": "^5.6.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-security": "^4.0.0",
+    "eslint-plugin-unicorn": "^63.0.0",
     "eslint-plugin-vue": "^9.26.0",
     "eslint-plugin-vue-scoped-css": "^2.8.0",
+    "eslint-plugin-vuejs-accessibility": "^2.5.0",
     "gh-pages": "^6.1.0",
     "globals": "^15.6.0",
-    "prettier": "^3.2.5",
-    "sass": "^1.69.5",
-    "typescript": "^5.0.2",
+    "prettier": "^3.8.1",
+    "sass": "^1.97.3",
+    "typescript": "^5.9.3",
     "vite": "^6.2.5",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-minify": "^2.1.0",
-    "vite-plugin-purgecss-updated-v5": "^1.2.4",
+    "vite-plugin-purgecss-updated-v5": "^1.2.6",
     "vue-eslint-parser": "^9.4.3"
   }
 }

@@ -24,9 +24,9 @@ app.mount('#app')
 document.title = i18n.global.t('title')
 
 // NAVIGATION
-const toggleElement = elem => elem.classList.toggle('active'),
-  sidebar = document.querySelector('[data-sidebar]'),
-  sidebarBtn = document.querySelector('[data-sidebar-btn]')
+const sidebar = document.querySelector('[data-sidebar]'),
+  sidebarBtn = document.querySelector('[data-sidebar-btn]'),
+  toggleElement = elem => elem.classList.toggle('active')
 sidebarBtn.addEventListener('click', () => toggleElement(sidebar))
 
 const navigationLinks = document.querySelectorAll('[data-nav-link]'),

@@ -31,6 +31,8 @@
 </template>
 
 <script setup>
+import { defineProps } from 'vue'
+
 // TODO: Добавлять ссылки на картинки для блогов, чтобы потом их использовать
 import PlaceholderImg from '../assets/images/blogs/placeholder.svg'
 
@@ -110,13 +112,15 @@ const props = defineProps({
    * @param {String} defaultValue
    * @return {String}
    */
-  getValue = (value, defaultValue) => (value ? value : defaultValue),
-  // Обработка значений, переданных из props
-  placeholderName = getValue(name, 'PLACEHOLDER TITLE'),
-  placeholderDescription = getValue(description, 'PLACEHOLDER DESCRIPTION'),
-  placeholderCategory = getValue(category, 'NO CATEGORY'),
+  getValue = (value, defaultValue) => (value ? value : defaultValue)
+
+// Обработка значений, переданных из props
+const placeholderCategory = getValue(category, 'NO CATEGORY'),
   placeholderDate = getValue(date, 'NO DATE'),
+  placeholderDescription = getValue(description, 'PLACEHOLDER DESCRIPTION'),
   placeholderLink = getValue(link, '/'),
+  placeholderName = getValue(name, 'PLACEHOLDER TITLE'),
+  
   // TODO: Добавить картинки для блогов, если такие есть. Условие нужно будет изменить.
   projectImage = id === '1' ? '../assets/images/blogs/1.png' : placeholderImage
 </script>

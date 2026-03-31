@@ -44,9 +44,9 @@ const props = defineProps({
       type: String,
     },
   }),
+  { description } = props,
   { name } = props,
-  { years } = props,
-  { description } = props
+  { years } = props
 </script>
 
 <style lang="scss">
@@ -86,6 +86,7 @@ const props = defineProps({
     color: var(--vegas-gold);
     line-height: 1.6;
     font-size: var(--fs-4);
+    margin-bottom: 0.5em;
   }
   &:not(:last-child)::before {
     content: '';
@@ -93,7 +94,7 @@ const props = defineProps({
     top: -25px;
     left: -30px;
     width: 2px;
-    height: calc(100% + 50px);
+    height: calc(100% + 85px) !important;
     background: var(--jet);
   }
 
@@ -114,7 +115,7 @@ const props = defineProps({
     color: var(--light-gray);
     font-weight: var(--fw-300);
     line-height: normal;
-    // margin-top: 0.5em;
+    margin-bottom: 3em;
   }
   & .timeline-item-title {
     font-size: var(--fs-3);

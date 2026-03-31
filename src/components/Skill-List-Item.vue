@@ -1,5 +1,7 @@
 <script setup>
 import { computed } from 'vue'
+import { defineProps } from 'vue'
+
 const props = defineProps({
     /**
      * Название навыка
@@ -24,10 +26,10 @@ const props = defineProps({
   { skillName } = props,
   { skillValue } = props,
   // No magic numbers.
-  MIN_VALUE_ORANGE = 80,
   MIN_VALUE_GREEN = 60,
-  MIN_VALUE_YELLOW = 40,
+  MIN_VALUE_ORANGE = 80,
   MIN_VALUE_RED = 20,
+  MIN_VALUE_YELLOW = 40,
   progressColor = computed(() => {
     // orange
     if (skillValue >= MIN_VALUE_ORANGE) {

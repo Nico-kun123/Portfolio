@@ -162,7 +162,7 @@ window.onclick = event => {
 
       <!-- ОБО МНЕ -->
       <section class="about-text">
-        <!-- <p>{{ t('aboutMe[0]') }}</p> -->
+        <p>{{ t('aboutMe[0]') }}</p>
 
         <p>{{ t('aboutMe[1]') }}</p>
 
@@ -170,9 +170,9 @@ window.onclick = event => {
 
         <p>{{ t('aboutMe[3]') }}</p>
 
-        <div class="separator"></div>
+        <div class="separator" />
 
-        <p>{{ t('aboutMe[4]') }}</p>
+        <p style="font-weight: bold">{{ t('aboutMe[4]') }}</p>
 
         <ul class="common-list">
           <li>{{ t('softSkills[0]') }}</li>
@@ -188,7 +188,7 @@ window.onclick = event => {
         </ul>
       </section>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <!-- ССЫЛКИ НА МОИ РЕЗЮМЕ -->
       <h3 v-if="isRussian" class="h2 service-title">Мои резюме:</h3>
@@ -232,7 +232,7 @@ window.onclick = event => {
         </li>
       </ul>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <!-- Раздел "Чем я занимаюсь" -->
       <section class="service">
@@ -351,6 +351,7 @@ window.onclick = event => {
           <div class="icon-box">
             <img
               src="../assets/images/ui/icons/resume/education.svg"
+              alt="Education"
               loading="lazy"
               draggable="false"
             />
@@ -363,12 +364,21 @@ window.onclick = event => {
 
         <ol class="timeline-list">
           <ResumeListItem
+            style="opacity: 1"
+            :name="t('timelineItemName[0]')"
+            years="2025 — 2028"
+            :description="t('timelineItemDesc[4]')"
+          />
+
+          <ResumeListItem
+            style="opacity: 0.6"
             :name="t('timelineItemName[0]')"
             years="2023 — 2025"
             :description="t('timelineItemDesc[0]')"
           />
 
           <ResumeListItem
+            style="opacity: 0.3"
             :name="t('timelineItemName[0]')"
             years="2019 — 2023"
             :description="t('timelineItemDesc[1]')"
@@ -388,6 +398,7 @@ window.onclick = event => {
           <div class="icon-box">
             <img
               src="../assets/images/ui/icons/resume/internship.svg"
+              alt="Internship"
               loading="lazy"
               draggable="false"
             />
@@ -423,6 +434,7 @@ window.onclick = event => {
           <div class="icon-box">
             <img
               src="../assets/images/ui/icons/resume/experience.svg"
+              alt="Work Experience"
               loading="lazy"
               draggable="false"
             />
@@ -461,7 +473,7 @@ window.onclick = event => {
         </ol>
       </section>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <!-- ТЕХНИЧЕСКИЕ НАВЫКИ + ШКАЛА -->
       <!-- TODO: Можно попытаться как-то оценить свои знания в этих технологиях в процентах (хз как) -->
@@ -532,62 +544,66 @@ window.onclick = event => {
           </button>
 
           <div id="myDropdown" class="dropdown-content">
-            <a v-if="isRussian" class="btn" @click="filterByClassName('all')">Все проекты</a>
+            <div v-if="isRussian" class="btn" @click="filterByClassName('all')">Все проекты</div>
 
-            <a v-else class="btn" @click="filterByClassName('all')">All Projects</a>
+            <div v-else class="btn" @click="filterByClassName('all')">All Projects</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('Big project')"
-              >Большие Проекты</a
-            >
+            <div v-if="isRussian" class="btn" @click="filterByClassName('Big project')">
+              Большие Проекты
+            </div>
 
-            <a v-else class="btn" @click="filterByClassName('Big project')">Big Projects</a>
+            <div v-else class="btn" @click="filterByClassName('Big project')">Big Projects</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('Pet project')"
-              >Пет-проекты</a
-            >
+            <div v-if="isRussian" class="btn" @click="filterByClassName('Pet project')">
+              Пет-проекты
+            </div>
 
-            <a v-else class="btn" @click="filterByClassName('Pet project')">Pet projects</a>
+            <div v-else class="btn" @click="filterByClassName('Pet project')">Pet projects</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('Test task')"
-              >Тестовые задания</a
-            >
+            <div v-if="isRussian" class="btn" @click="filterByClassName('Test task')">
+              Тестовые задания
+            </div>
 
-            <a v-else class="btn" @click="filterByClassName('Test task')">Test Tasks</a>
+            <div v-else class="btn" @click="filterByClassName('Test task')">Test Tasks</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('layout')">Вёрстка</a>
+            <div v-if="isRussian" class="btn" @click="filterByClassName('layout')">Вёрстка</div>
 
-            <a v-else class="btn" @click="filterByClassName('layout')">Layouts</a>
+            <div v-else class="btn" @click="filterByClassName('layout')">Layouts</div>
 
-            <a class="btn" @click="filterByClassName('typescript')">Typescript</a>
-            <!-- <a class="btn" @click="filterByClassName('react.js')">React.js</a> -->
-            <a class="btn" @click="filterByClassName('vue.js')">Vue.js</a>
+            <div class="btn" @click="filterByClassName('typescript')">Typescript</div>
+            <!-- <div class="btn" @click="filterByClassName('react.js')">React.js</div> -->
+            <div class="btn" @click="filterByClassName('vue.js')">Vue.js</div>
 
-            <a class="btn" @click="filterByClassName('react.js')">React.js</a>
+            <div class="btn" @click="filterByClassName('react.js')">React.js</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('no react/vue')"
-              >Без React/Vue</a
-            >
+            <div v-if="isRussian" class="btn" @click="filterByClassName('no react/vue')">
+              Без React/Vue
+            </div>
 
-            <a v-else class="btn" @click="filterByClassName('no react/vue')">No React/Vue</a>
+            <div v-else class="btn" @click="filterByClassName('no react/vue')">No React/Vue</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('tests')">Написание тестов</a>
+            <div v-if="isRussian" class="btn" @click="filterByClassName('tests')">
+              Написание тестов
+            </div>
 
-            <a v-else class="btn" @click="filterByClassName('tests')">Tests</a>
-            <!-- <a class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</a> -->
-            <a class="btn" @click="filterByClassName('postgresql')">PostgreSQL</a>
+            <div v-else class="btn" @click="filterByClassName('tests')">Tests</div>
+            <!-- <div class="btn" @click="filterByClassName('nuxt.js')">Nuxt.js</div> -->
+            <div class="btn" @click="filterByClassName('postgresql')">PostgreSQL</div>
 
-            <a class="btn" @click="filterByClassName('firebase')">Firebase</a>
+            <div class="btn" @click="filterByClassName('firebase')">Firebase</div>
 
-            <a class="btn" @click="filterByClassName('python')">Python</a>
+            <div class="btn" @click="filterByClassName('python')">Python</div>
 
-            <a v-if="isRussian" class="btn" @click="filterByClassName('neural network')"
-              >Нейросеть</a
-            >
+            <div v-if="isRussian" class="btn" @click="filterByClassName('neural network')">
+              Нейросеть
+            </div>
 
-            <a v-else class="btn" @click="filterByClassName('neural network')">Neural Network</a>
+            <div v-else class="btn" @click="filterByClassName('neural network')">
+              Neural Network
+            </div>
           </div>
 
-          <div class="separator"></div>
+          <div class="separator" />
         </div>
 
         <!-- ФИЛЬТР ПРОЕКТОВ (ДРУГИЕ УСТРОЙСТВА) -->
@@ -749,7 +765,7 @@ window.onclick = event => {
 
               <h3 class="project-title">{{ project.title }}</h3>
 
-              <label class="project-category">{{ project.category }}</label>
+              <span class="project-category">{{ project.category }}</span>
             </a>
           </li>
         </ul>
@@ -795,7 +811,7 @@ window.onclick = event => {
 
         <p>{{ t('extra[1]') }}</p>
 
-        <div class="separator"></div>
+        <div class="separator" />
 
         <p v-if="isRussian">Мои увлечения и хобби:</p>
 
@@ -876,8 +892,12 @@ header {
 
 .common-list {
   li {
-    list-style: outside;
-    list-style-position: inside;
+    // list-style: outside;
+    // list-style-position: inside;
+
+    list-style-type: auto;
+    margin-left: 2em;
+
     // padding-bottom: 0.5em;
     // line-height: 1.5;
 
@@ -1165,7 +1185,8 @@ header {
   margin: 0 15px;
   border-radius: 0 0 15px 15px;
 
-  a {
+  a,
+  div {
     color: black;
     padding: 10px;
     text-decoration: none;
